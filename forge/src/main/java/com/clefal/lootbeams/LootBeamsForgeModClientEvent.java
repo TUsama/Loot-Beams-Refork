@@ -1,5 +1,8 @@
 package com.clefal.lootbeams;
 
+import com.clefal.lootbeams.compat.apothesis.ApotheosisCompatModule;
+import com.clefal.lootbeams.compat.mine_and_slash.MineAndSlashCompatModule;
+import com.clefal.lootbeams.compat.obscuretooltips.ObscureTooltipsCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
 import com.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -24,6 +27,10 @@ public class LootBeamsForgeModClientEvent {
     public static void registerModules(FMLClientSetupEvent event) {
         Constants.LOGGER.info("register all modules");
         ModulesManager.registerAll();
+        ModulesManager.registerModules(
+                new ApotheosisCompatModule(),
+                MineAndSlashCompatModule.INSTANCE,
+                ObscureTooltipsCompatModule.INSTANCE);
         ConfigHandlers.init();
     }
 

@@ -15,6 +15,6 @@ public record LBRarity(Component name, Color color, int absoluteOrdinal) {
 
     public static LBRarity of(Rarity rarity){
         Component translatable = Component.translatable(vanillaRarityKeFormat + rarity.name().toLowerCase());
-        return new LBRarity(translatable, new Color(rarity.getStyleModifier().apply(Style.EMPTY).getColor().getValue()), rarity.ordinal());
+        return new LBRarity(translatable, new Color(rarity.color.getColor()), rarity.ordinal());
     }
 }

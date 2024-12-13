@@ -73,7 +73,7 @@ public enum Config {
     TRAIL_LENGTH(Integer.class),
     TRAIL_FREQUENCY(Integer.class),
 
-    SOUND(Boolean.class),
+    ENABLE_SOUND(Boolean.class),
     SOUND_VOLUME(Double.class),
     SOUND_ONLY_RARE(Boolean.class),
     SOUND_ONLY_EQUIPMENT(Boolean.class),

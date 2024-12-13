@@ -3,6 +3,7 @@ package com.clefal.lootbeams.modules.sound;
 import com.clefal.lootbeams.Constants;
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
+import com.clefal.lootbeams.config.services.StringListHandler;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.modules.ILBModule;
 import com.clefal.lootbeams.utils.Checker;
@@ -25,10 +26,10 @@ public class SoundModule implements ILBModule {
         ItemEntity itemEntity = event.LBItemEntity.item();
         Item item = itemEntity.getItem().getItem();
 
-        if ((ConfigurationManager.<Boolean>request(Config.SOUND_ALL_ITEMS) && !Checker.isItemInRegistryList(ConfigurationManager.request(Config.BLACKLIST), item))
+        if (!StringListHandler.SoundList.checkInBlackList(event.LBItemEntity) && (ConfigurationManager.<Boolean>request(Config.SOUND_ALL_ITEMS)
                 || (ConfigurationManager.<Boolean>request(Config.SOUND_ONLY_EQUIPMENT) && Checker.isEquipmentItem(item))
                 || (ConfigurationManager.<Boolean>request(Config.SOUND_ONLY_RARE) && event.LBItemEntity.isRare())
-                || Checker.isItemInRegistryList(ConfigurationManager.request(Config.SOUND_ONLY_WHITELIST), item)
+                || StringListHandler.SoundList.checkInWhiteList(event.LBItemEntity))
         ) {
 
             WeighedSoundEvents sound = Minecraft.getInstance().getSoundManager().getSoundEvent(Constants.LOOT_DROP);
@@ -43,7 +44,7 @@ public class SoundModule implements ILBModule {
 
     @Override
     public void tryEnable() {
-        if (ConfigurationManager.<Boolean>request(Config.SOUND)){
+        if (ConfigurationManager.<Boolean>request(Config.ENABLE_SOUND)){
             Constants.EVENT_BUS.register(INSTANCE);
         }
     }

@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle'
     id 'org.spongepowered.mixin'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 base {
     archivesName = "${mod_name}-forge-${minecraft_version}"
@@ -15,7 +16,7 @@ mixin {
 }
 
 minecraft {
-    mappings channel: 'official', version: minecraft_version
+    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
 
     copyIdeResources = true //Calls processResources when in dev
 
@@ -78,6 +79,12 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     compileOnly fg.deobf("curse.maven:apotheosis-313970:5753183")
     compileOnly fg.deobf("curse.maven:placebo-283644:5414631")

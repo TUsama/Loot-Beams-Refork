@@ -34,7 +34,7 @@ public class AdvanceTooltipOverlay {
 
     public static EntityHitResult getEntityItem(Player player) {
         Minecraft mc = Minecraft.getInstance();
-        double distance = player.getBlockReach();
+        double distance = 6.0d;
         float partialTicks = mc.getDeltaFrameTime();
         Vec3 position = player.getEyePosition(partialTicks);
         Vec3 view = player.getViewVector(partialTicks);
@@ -68,7 +68,7 @@ public class AdvanceTooltipOverlay {
 
     public Vector2f transformToScreenCoordinate(Vector3f worldCoordinate, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
-        Camera camera = mc.gameRenderer.getMainCamera();
+        /*Camera camera = mc.gameRenderer.getMainCamera();
         Vec3 cameraPosition = camera.getPosition();
 
         Vector3f position = new Vector3f((float) (cameraPosition.x - worldCoordinate.x), (float) (cameraPosition.y - worldCoordinate.y), (float) (cameraPosition.z - worldCoordinate.z));
@@ -77,7 +77,7 @@ public class AdvanceTooltipOverlay {
         cameraRotation.transform(position);
 
         // Account for view bobbing
-        if (mc.options.bobView.get() && mc.getCameraEntity() instanceof Player) {
+        if (mc.options.bobView().get() && mc.getCameraEntity() instanceof Player) {
             Player player = (Player) mc.getCameraEntity();
             float playerStep = player.walkDist - player.walkDistO;
             float stepSize = -(player.walkDist + playerStep * partialTicks);
@@ -95,9 +95,9 @@ public class AdvanceTooltipOverlay {
         Window window = mc.getWindow();
         float screenSize = window.getGuiScaledHeight() / 2f / position.z() / (float) Math.tan(Math.toRadians(mc.gameRenderer.getFov(camera, partialTicks, true) / 2f));
         position.mul(-screenSize, -screenSize, 1f);
-        position.add(window.getGuiScaledWidth() / 2f, window.getGuiScaledHeight() / 2f, 0f);
-
-        return new Vector2f(position.x, position.y);
+        position.add(window.getGuiScaledWidth() / 2f, window.getGuiScaledHeight() / 2f, 0f);*/
+        Window window = mc.getWindow();
+        return new Vector2f(window.getGuiScaledWidth() / 2f, window.getGuiScaledHeight() / 2f);
     }
 
     public void render(GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
@@ -118,7 +118,7 @@ public class AdvanceTooltipOverlay {
             Constants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
             List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
 
-            guiGraphics.renderTooltip(Minecraft.getInstance().font, nameAndRarity, itemEntity.getItem().getTooltipImage(), itemEntity.getItem(), (int) vector2f.x, (int) vector2f.y);
+            guiGraphics.renderTooltip(Minecraft.getInstance().font, nameAndRarity, itemEntity.getItem().getTooltipImage(), (int) vector2f.x, (int) vector2f.y);
         }
 
     }

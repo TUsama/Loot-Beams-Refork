@@ -1,11 +1,10 @@
 package com.clefal.lootbeams.modules.tooltip.nametag;
 
-import com.clefal.lootbeams.Configuration;
 import com.clefal.lootbeams.Constants;
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -25,7 +24,7 @@ public class NameTagRenderer {
 
     public static void renderNameTag(PoseStack stack, MultiBufferSource buffer, LBItemEntity LBItemEntity) {
         ItemEntity item = LBItemEntity.item();
-        if (Minecraft.getInstance().player.isCrouching() || ((((Boolean) ConfigurationManager.request(Config.RENDER_NAMETAGS_ONLOOK)) && isLookingAt(Minecraft.getInstance().player, item, Configuration.NAMETAG_LOOK_SENSITIVITY.get())))) {
+        if (Minecraft.getInstance().player.isCrouching() || ((((Boolean) ConfigurationManager.request(Config.RENDER_NAMETAGS_ONLOOK)) && isLookingAt(Minecraft.getInstance().player, item, ConfigurationManager.request(Config.NAMETAG_LOOK_SENSITIVITY))))) {
 
             Color color = LBItemEntity.rarity().color();
 
@@ -42,7 +41,7 @@ public class NameTagRenderer {
                 stack.translate(0.0D, Math.min(1D, Minecraft.getInstance().player.distanceToSqr(item) * 0.025D) + yOffset, 0.0D);
                 stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
 
-                float nametagScale = Configuration.NAMETAG_SCALE.get().floatValue();
+                float nametagScale = ConfigurationManager.<Double>request(Config.NAMETAG_SCALE).floatValue();
                 stack.scale(-0.02F * nametagScale, -0.02F * nametagScale, 0.02F * nametagScale);
 
                 //Render stack counts on nametag

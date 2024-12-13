@@ -75,7 +75,7 @@ public class Configuration implements IConfigurationProvider {
 	public static ForgeConfigSpec.IntValue TRAIL_LENGTH;
 	public static ForgeConfigSpec.IntValue TRAIL_FREQUENCY;
 
-	public static ForgeConfigSpec.BooleanValue SOUND;
+	public static ForgeConfigSpec.BooleanValue ENABLE_SOUND;
 	public static ForgeConfigSpec.DoubleValue SOUND_VOLUME;
 	public static ForgeConfigSpec.BooleanValue SOUND_ONLY_RARE;
 	public static ForgeConfigSpec.BooleanValue SOUND_ONLY_EQUIPMENT;
@@ -271,7 +271,7 @@ public class Configuration implements IConfigurationProvider {
 		clientBuilder.pop();
 
 		clientBuilder.comment("Sounds").push("Sounds");
-		SOUND = clientBuilder.comment("If sounds should be played when items are dropped up.").define("play_sounds", true);
+		ENABLE_SOUND = clientBuilder.comment("If sounds should be played when items are dropped up.").define("play_sounds", true);
 
 
 		SOUND_VOLUME = clientBuilder.comment("The volume of the sound.").defineInRange("sound_volume", 1D, 0D, 1D);
@@ -361,7 +361,7 @@ public class Configuration implements IConfigurationProvider {
 
 		ConfigurationManager.insert(Config.CUSTOM_RARITIES, () -> CUSTOM_RARITIES.get());
 
-		ConfigurationManager.insert(Config.SOUND, () -> SOUND.get());
+		ConfigurationManager.insert(Config.ENABLE_SOUND, () -> ENABLE_SOUND.get());
 		ConfigurationManager.insert(Config.SOUND_VOLUME, () -> SOUND_VOLUME.get());
 		ConfigurationManager.insert(Config.SOUND_ALL_ITEMS, () -> SOUND_ALL_ITEMS.get());
 		ConfigurationManager.insert(Config.SOUND_ONLY_RARE, () -> SOUND_ONLY_RARE.get());

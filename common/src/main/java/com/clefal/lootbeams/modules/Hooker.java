@@ -13,9 +13,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.function.Supplier;
 
 public class Hooker {
 
@@ -25,13 +24,7 @@ public class Hooker {
         LBItemEntity lbItemEntity1 = LBItemEntityCache.ask(itemEntity);
 
 
-        Supplier<Boolean> shouldRender = () -> ConfigurationManager.<Boolean>request(Config.ALL_ITEMS)
-                || (ConfigurationManager.<Boolean>request(Config.ONLY_EQUIPMENT) && Checker.isEquipmentItem(itemEntity.getItem().getItem()))
-                || (ConfigurationManager.<Boolean>request(Config.ONLY_RARE) && lbItemEntity1.isRare())
-                || (StringListHandler.RenderList.checkInWhiteList(lbItemEntity1)
-                && !StringListHandler.RenderList.checkInBlackList(lbItemEntity1));
-
-        if (lbItemEntity1.canBeRender() || shouldRender.get() && (!(ConfigurationManager.<Boolean>request(Config.REQUIRE_ON_GROUND)) || itemEntity.onGround())){
+        if (lbItemEntity1.canBeRender() || (checkRenderable(itemEntity, lbItemEntity1) && (!(ConfigurationManager.<Boolean>request(Config.REQUIRE_ON_GROUND)) || itemEntity.onGround()))) {
             if (ConfigurationManager.request(Config.ENABLE_BEAM)) {
 
                 EntityRenderDispatcherHookEvent.RenderLootBeamEvent renderLootBeamEvent = new EntityRenderDispatcherHookEvent.RenderLootBeamEvent(lbItemEntity1, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light);
@@ -45,5 +38,18 @@ public class Hooker {
             }
             lbItemEntity1.updateCanBeRender();
         }
+    }
+
+    private static @NotNull Boolean checkRenderable(ItemEntity itemEntity, LBItemEntity lbItemEntity1) {
+        boolean onlyEquipment = ConfigurationManager.<Boolean>request(Config.ONLY_EQUIPMENT) && Checker.isEquipmentItem(itemEntity.getItem().getItem());
+        boolean isRare = ConfigurationManager.<Boolean>request(Config.ONLY_RARE) && lbItemEntity1.isRare();
+        System.out.println("onlyEquipment? " + onlyEquipment);
+        System.out.println("isRare? " + isRare);
+        System.out.println(itemEntity.getItem().getItem().getClass());
+        return ConfigurationManager.<Boolean>request(Config.ALL_ITEMS)
+                || onlyEquipment
+                || isRare
+                || (StringListHandler.RenderList.checkInWhiteList(lbItemEntity1)
+                && !StringListHandler.RenderList.checkInBlackList(lbItemEntity1));
     }
 }

@@ -1,0 +1,8 @@
+{
+  "_comment": "按照wiki应该是“常见”，但是似乎很少有模组会使用“常见”作为“Common”的译名，并且其他游戏也多用“普通”，遂此处选用普通而非常见。",
+  "lootbeams.vanilla_rarity.common": "普通",
+  "lootbeams.vanilla_rarity.uncommon": "少见",
+  "lootbeams.vanilla_rarity.rare": "稀有",
+  "lootbeams.vanilla_rarity.epic": "史诗",
+  "lootbeams.mod_rarity.non_soul": "缺少灵魂"
+}

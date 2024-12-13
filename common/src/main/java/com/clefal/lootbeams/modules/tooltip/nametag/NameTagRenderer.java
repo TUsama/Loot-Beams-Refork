@@ -50,6 +50,7 @@ public class NameTagRenderer {
                 Constants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
                 List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
 
+                System.out.println(nameAndRarity);
                 stack.translate(0, 2, -10);
 
                 for (Component c : nameAndRarity) {

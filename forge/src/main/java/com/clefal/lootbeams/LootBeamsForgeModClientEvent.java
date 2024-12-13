@@ -26,11 +26,11 @@ public class LootBeamsForgeModClientEvent {
     @SubscribeEvent
     public static void registerModules(FMLClientSetupEvent event) {
         Constants.LOGGER.info("register all modules");
-        ModulesManager.registerAll();
         ModulesManager.registerModules(
                 new ApotheosisCompatModule(),
                 MineAndSlashCompatModule.INSTANCE,
                 ObscureTooltipsCompatModule.INSTANCE);
+        ModulesManager.enableAll();
         ConfigHandlers.init();
     }
 

@@ -35,7 +35,7 @@ public class SoundModule implements ILBModule {
             WeighedSoundEvents sound = Minecraft.getInstance().getSoundManager().getSoundEvent(Constants.LOOT_DROP);
 
             if (sound != null && Minecraft.getInstance().level != null) {
-                Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), SoundEvent.createFixedRangeEvent(Constants.LOOT_DROP, 8.0f), SoundSource.AMBIENT, 0.1f * ConfigurationManager.<Float>request(Config.SOUND_VOLUME), 1.0f);
+                Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), SoundEvent.createFixedRangeEvent(Constants.LOOT_DROP, 8.0f), SoundSource.AMBIENT, 0.1f * ConfigurationManager.<Double>request(Config.SOUND_VOLUME).floatValue(), 1.0f);
                 event.LBItemEntity.updateSounded();
             }
         }

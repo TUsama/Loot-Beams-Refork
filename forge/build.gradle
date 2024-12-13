@@ -4,6 +4,8 @@ plugins {
     id 'net.minecraftforge.gradle'
     id 'org.spongepowered.mixin'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'com.github.johnrengelman.shadow' version '7.1.1'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
 }
 base {
     archivesName = "${mod_name}-forge-${minecraft_version}"
@@ -13,6 +15,11 @@ mixin {
 
     config("${mod_id}.mixins.json")
     config("${mod_id}.forge.mixins.json")
+}
+
+configurations {
+    shade.extendsFrom(minecraftLibrary)
+    implementation.extendsFrom shade
 }
 
 minecraft {
@@ -128,6 +135,34 @@ processResources {
 }
 
 jar.finalizedBy('reobfJar')
+
+//https://gist.github.com/SizableShrimp/949e7c219bfc94487a45226b64ac7749
+shadowJar {
+    archiveClassifier = ''
+    configurations = [project.configurations.shade]
+    relocate 'net.neoforged.bus', "${project.group}.relocated.net.neoforged.bus"
+    finalizedBy 'reobfShadowJar'
+}
+
+assemble.dependsOn shadowJar
+
+reobf {
+    shadowJar {}
+}
+
+publishMods {
+    file = tasks.shadowJar.archiveFile
+    displayName = "${mod_name}-forge-${minecraft_version}-${version}"
+    changelog = file("..\\changelog.md").text
+    type = STABLE
+    modLoaders.add("forge")
+    curseforge {
+        accessToken = file("D:\\curseforge-key.txt").text
+        projectId = "1150640"
+        clientRequired = true
+        minecraftVersions.add("1.20.1")
+    }
+}
 
 publishing {
     publications {

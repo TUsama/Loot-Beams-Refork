@@ -19,7 +19,7 @@ public class ModulesManager {
 
     }
 
-    public static void registerAll() {
+    public static void enableAll() {
         list.forEach(ILBModule::tryEnable);
     }
 

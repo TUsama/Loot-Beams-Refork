@@ -4,9 +4,9 @@ import com.clefal.lootbeams.Constants;
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
 import com.clefal.lootbeams.config.services.StringListHandler;
+import com.clefal.lootbeams.data.equipment.EquipmentConditions;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.modules.ILBModule;
-import com.clefal.lootbeams.utils.Checker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.sounds.SoundEvent;
@@ -27,7 +27,7 @@ public class SoundModule implements ILBModule {
         Item item = itemEntity.getItem().getItem();
 
         if (!StringListHandler.SoundList.checkInBlackList(event.LBItemEntity) && (ConfigurationManager.<Boolean>request(Config.SOUND_ALL_ITEMS)
-                || (ConfigurationManager.<Boolean>request(Config.SOUND_ONLY_EQUIPMENT) && Checker.isEquipmentItem(item))
+                || (ConfigurationManager.<Boolean>request(Config.SOUND_ONLY_EQUIPMENT) && EquipmentConditions.isEquipment(itemEntity.getItem()))
                 || (ConfigurationManager.<Boolean>request(Config.SOUND_ONLY_RARE) && event.LBItemEntity.isRare())
                 || StringListHandler.SoundList.checkInWhiteList(event.LBItemEntity))
         ) {

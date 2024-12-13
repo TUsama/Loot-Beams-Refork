@@ -2,7 +2,7 @@ package com.clefal.lootbeams.config.services;
 
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 

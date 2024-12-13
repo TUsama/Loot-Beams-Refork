@@ -1,4 +1,4 @@
-package com.clefal.lootbeams.data;
+package com.clefal.lootbeams.data.lbitementity;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

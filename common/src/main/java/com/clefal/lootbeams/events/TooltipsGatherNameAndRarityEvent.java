@@ -1,13 +1,11 @@
 package com.clefal.lootbeams.events;
 
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import net.minecraft.network.chat.Component;
 import net.neoforged.bus.api.Event;
 
-import java.awt.*;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class TooltipsGatherNameAndRarityEvent extends Event {
 

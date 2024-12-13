@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.events;
 
-import com.clefal.lootbeams.data.rarity.ILBRarityApplier;
+import com.clefal.lootbeams.data.lbitementity.rarity.ILBRarityApplier;
 import lombok.Getter;
 import net.neoforged.bus.api.Event;
 

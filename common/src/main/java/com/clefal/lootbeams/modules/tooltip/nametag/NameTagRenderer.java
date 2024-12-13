@@ -3,7 +3,7 @@ package com.clefal.lootbeams.modules.tooltip.nametag;
 import com.clefal.lootbeams.Constants;
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -50,7 +50,6 @@ public class NameTagRenderer {
                 Constants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
                 List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
 
-                System.out.println(nameAndRarity);
                 stack.translate(0, 2, -10);
 
                 for (Component c : nameAndRarity) {

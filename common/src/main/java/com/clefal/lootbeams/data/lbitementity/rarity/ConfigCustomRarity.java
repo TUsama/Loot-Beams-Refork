@@ -1,9 +1,9 @@
-package com.clefal.lootbeams.data.rarity;
+package com.clefal.lootbeams.data.lbitementity.rarity;
 
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
 import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;

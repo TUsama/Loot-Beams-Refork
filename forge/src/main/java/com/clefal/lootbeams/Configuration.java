@@ -4,8 +4,8 @@ import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
 import com.clefal.lootbeams.config.IConfigurationProvider;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
-import com.clefal.lootbeams.data.rarity.ConfigCustomRarity;
-import com.clefal.lootbeams.data.rarity.Order;
+import com.clefal.lootbeams.data.lbitementity.rarity.ConfigCustomRarity;
+import com.clefal.lootbeams.data.lbitementity.rarity.Order;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.ArrayList;

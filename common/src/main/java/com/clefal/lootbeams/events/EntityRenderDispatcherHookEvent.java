@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.events;
 
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.neoforged.bus.api.Event;

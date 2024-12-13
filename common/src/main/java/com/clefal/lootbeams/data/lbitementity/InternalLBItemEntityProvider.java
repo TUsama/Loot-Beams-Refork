@@ -1,8 +1,8 @@
-package com.clefal.lootbeams.data;
+package com.clefal.lootbeams.data.lbitementity;
 
 import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.data.rarity.ILBRarityApplier;
-import com.clefal.lootbeams.data.rarity.LBRarity;
+import com.clefal.lootbeams.data.lbitementity.rarity.ILBRarityApplier;
+import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.clefal.lootbeams.modules.ILBModulePersistentData;
 import io.vavr.control.Option;

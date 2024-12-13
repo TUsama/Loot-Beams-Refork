@@ -1,7 +1,7 @@
-package com.clefal.lootbeams.data.rarity;
+package com.clefal.lootbeams.data.lbitementity.rarity;
 
 import com.clefal.lootbeams.config.services.PlatformChecker;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.mojang.datafixers.util.Pair;
 
 import java.awt.*;

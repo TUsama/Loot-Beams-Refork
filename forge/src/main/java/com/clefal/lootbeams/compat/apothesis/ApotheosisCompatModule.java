@@ -1,8 +1,8 @@
 package com.clefal.lootbeams.compat.apothesis;
 
 import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.data.LBItemEntity;
-import com.clefal.lootbeams.data.rarity.LBRarity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.clefal.lootbeams.compat.ILBCompatModule;
 import dev.shadowsoffire.apotheosis.Apotheosis;

@@ -4,11 +4,11 @@ import com.clefal.lootbeams.Constants;
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
 import com.clefal.lootbeams.config.services.StringListHandler;
-import com.clefal.lootbeams.data.LBItemEntity;
-import com.clefal.lootbeams.data.LBItemEntityCache;
+import com.clefal.lootbeams.data.equipment.EquipmentConditions;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntityCache;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
-import com.clefal.lootbeams.utils.Checker;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +24,7 @@ public class Hooker {
         LBItemEntity lbItemEntity1 = LBItemEntityCache.ask(itemEntity);
 
 
-        if (lbItemEntity1.canBeRender() || (checkRenderable(itemEntity, lbItemEntity1) && (!(ConfigurationManager.<Boolean>request(Config.REQUIRE_ON_GROUND)) || itemEntity.onGround()))) {
+        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || (checkRenderable(itemEntity, lbItemEntity1) && (!(ConfigurationManager.<Boolean>request(Config.REQUIRE_ON_GROUND)) || itemEntity.onGround()))) {
             if (ConfigurationManager.request(Config.ENABLE_BEAM)) {
 
                 EntityRenderDispatcherHookEvent.RenderLootBeamEvent renderLootBeamEvent = new EntityRenderDispatcherHookEvent.RenderLootBeamEvent(lbItemEntity1, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light);
@@ -41,11 +41,8 @@ public class Hooker {
     }
 
     private static @NotNull Boolean checkRenderable(ItemEntity itemEntity, LBItemEntity lbItemEntity1) {
-        boolean onlyEquipment = ConfigurationManager.<Boolean>request(Config.ONLY_EQUIPMENT) && Checker.isEquipmentItem(itemEntity.getItem().getItem());
+        boolean onlyEquipment = ConfigurationManager.<Boolean>request(Config.ONLY_EQUIPMENT) && EquipmentConditions.isEquipment(itemEntity.getItem());
         boolean isRare = ConfigurationManager.<Boolean>request(Config.ONLY_RARE) && lbItemEntity1.isRare();
-        System.out.println("onlyEquipment? " + onlyEquipment);
-        System.out.println("isRare? " + isRare);
-        System.out.println(itemEntity.getItem().getItem().getClass());
         return ConfigurationManager.<Boolean>request(Config.ALL_ITEMS)
                 || onlyEquipment
                 || isRare

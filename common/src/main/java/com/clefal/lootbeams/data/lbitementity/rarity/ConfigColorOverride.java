@@ -1,11 +1,11 @@
-package com.clefal.lootbeams.data.rarity;
+package com.clefal.lootbeams.data.lbitementity.rarity;
 
 import com.clefal.lootbeams.Constants;
 import com.google.common.collect.ImmutableMap;
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
 import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.utils.Attempt;
 import com.mojang.datafixers.util.Pair;
 

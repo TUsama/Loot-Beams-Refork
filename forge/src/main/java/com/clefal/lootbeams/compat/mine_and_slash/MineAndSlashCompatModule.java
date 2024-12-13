@@ -1,10 +1,11 @@
 package com.clefal.lootbeams.compat.mine_and_slash;
 
 import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.data.LBItemEntity;
-import com.clefal.lootbeams.data.rarity.LBRarity;
-import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.clefal.lootbeams.compat.ILBCompatModule;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
+import com.clefal.lootbeams.events.RegisterEquipmentItemEvent;
+import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
@@ -24,6 +25,9 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
 
     private final List<String> rarities = new ArrayList<>();
 
+    public static LBRarity getNonSoulRarity() {
+        return new LBRarity(Component.translatable("lootbeams.mod_rarity.non_soul"), new Color(121, 121, 121), -1);
+    }
 
     @Override
     public boolean shouldBeEnable() {
@@ -65,7 +69,9 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
                 ));
     }
 
-    public static LBRarity getNonSoulRarity(){
-        return new LBRarity(Component.translatable("lootbeams.mod_rarity.non_soul"), new Color(121, 121, 121), -1);
+    @SubscribeEvent
+    public void registerEquipmentCondition(RegisterEquipmentItemEvent event) {
+        event.conditions.add(itemStack -> itemStack.getItem().getClass().toString().contains("com.robertx22.mine_and_slash.vanilla_mc.items.gearitems"));
     }
+
 }

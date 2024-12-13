@@ -1,7 +1,7 @@
 package com.clefal.lootbeams.config;
 
 import com.clefal.lootbeams.config.services.IServicesChecker;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

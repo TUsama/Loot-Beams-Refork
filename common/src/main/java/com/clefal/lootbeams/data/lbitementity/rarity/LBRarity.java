@@ -1,7 +1,6 @@
-package com.clefal.lootbeams.data.rarity;
+package com.clefal.lootbeams.data.lbitementity.rarity;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Rarity;
 
 import java.awt.*;

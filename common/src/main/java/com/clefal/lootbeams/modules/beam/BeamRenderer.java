@@ -2,7 +2,7 @@ package com.clefal.lootbeams.modules.beam;
 
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProvider;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
 import com.mojang.blaze3d.vertex.PoseStack;

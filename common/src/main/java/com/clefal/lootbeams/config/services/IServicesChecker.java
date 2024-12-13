@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.config.services;
 
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 
 public interface IServicesChecker {
 

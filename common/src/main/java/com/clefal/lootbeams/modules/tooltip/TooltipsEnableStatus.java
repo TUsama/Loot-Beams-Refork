@@ -2,7 +2,7 @@ package com.clefal.lootbeams.modules.tooltip;
 
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.data.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import io.vavr.Function1;
 import net.minecraft.network.chat.Component;

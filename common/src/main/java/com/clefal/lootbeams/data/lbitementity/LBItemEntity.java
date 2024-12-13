@@ -1,8 +1,8 @@
-package com.clefal.lootbeams.data;
+package com.clefal.lootbeams.data.lbitementity;
 
 import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.data.rarity.LBRarity;
+import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -10,11 +10,16 @@ import net.minecraft.world.entity.item.ItemEntity;
 @Accessors(fluent = true)
 public class LBItemEntity {
 
+    public enum RenderState{
+        PASS,
+        REJECT,
+        NONE
+    }
 
     private final ItemEntity item;
     private LBRarity rarity;
     private boolean isSounded;
-    private boolean canBeRender = false;
+    private RenderState canBeRender = RenderState.NONE;
     private int fadeIn;
 
     private LBItemEntity(ItemEntity item, LBRarity rarity, boolean isSounded, int fadeIn) {
@@ -37,7 +42,7 @@ public class LBItemEntity {
     }
 
     public void updateCanBeRender(){
-        if (!this.canBeRender) this.canBeRender = true;
+        if (this.canBeRender != RenderState.PASS) this.canBeRender = RenderState.PASS;
     }
 
     public void updateSounded(){

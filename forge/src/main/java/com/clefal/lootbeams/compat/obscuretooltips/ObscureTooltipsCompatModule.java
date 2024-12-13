@@ -1,8 +1,11 @@
 package com.clefal.lootbeams.compat.obscuretooltips;
 
 import com.clefal.lootbeams.Constants;
+import com.clefal.lootbeams.config.Config;
+import com.clefal.lootbeams.config.ConfigurationManager;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.compat.ILBCompatModule;
+import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
 import com.obscuria.tooltips.ObscureTooltips;
 import net.minecraftforge.fml.ModList;
 import net.neoforged.bus.api.EventPriority;
@@ -13,7 +16,9 @@ public class ObscureTooltipsCompatModule implements ILBCompatModule {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void removeRarity(TooltipsGatherNameAndRarityEvent event) {
-        event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY);
+        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) == TooltipsEnableStatus.TooltipsStatus.NAME_RARITY_TOOLTIPS){
+            event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY);
+        }
     }
 
     @Override

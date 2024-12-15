@@ -227,7 +227,7 @@ public class Configuration implements IConfigurationProvider {
 
 		clientBuilder.comment("Item Tooltips").push("Tooltips");
 
-		ENABLE_TOOLTIPS = clientBuilder.comment("If tooltips feature should be enabled.").defineEnum("enable_tooltips", TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY);
+		ENABLE_TOOLTIPS = clientBuilder.comment("If tooltips feature should be enabled.").defineEnum("enable_tooltips", TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_NAMETAG);
 
 		SCREEN_TOOLTIPS_REQUIRE_CROUCH = clientBuilder.comment("if tooltips should be rendered only when player is crouching").define("screen_tooltips_require_crouch", true);
 

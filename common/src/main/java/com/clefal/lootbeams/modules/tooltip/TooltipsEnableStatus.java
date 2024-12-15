@@ -31,14 +31,14 @@ public class TooltipsEnableStatus {
         NONE((event) -> {
             throw new UnsupportedOperationException("can't extract Components on NONE status!");
         }),
-        ONLY_NAME((event) ->
+        ONLY_NAME_IN_NAMETAG((event) ->
                 event.gather.put(TooltipsGatherNameAndRarityEvent.Case.NAME, handleName.apply(event.lbItemEntity))
         ),
-        NAME_AND_RARITY((event) -> {
+        NAME_AND_RARITY_IN_NAMETAG((event) -> {
             event.gather.put(TooltipsGatherNameAndRarityEvent.Case.NAME, handleName.apply(event.lbItemEntity));
             event.gather.put(TooltipsGatherNameAndRarityEvent.Case.RARITY, event.lbItemEntity.rarity().name());
         }),
-        NAME_RARITY_TOOLTIPS((event) -> {
+        NAME_AND_RARITY_IN_TOOLTIPS((event) -> {
             event.gather.put(TooltipsGatherNameAndRarityEvent.Case.NAME, handleName.apply(event.lbItemEntity));
             event.gather.put(TooltipsGatherNameAndRarityEvent.Case.RARITY, event.lbItemEntity.rarity().name());
         });

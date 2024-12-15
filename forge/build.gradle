@@ -1,3 +1,5 @@
+
+
 plugins {
     id 'idea'
     id 'maven-publish'
@@ -7,8 +9,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.1'
     id "me.modmuss50.mod-publish-plugin" version "0.8.1"
 }
+
+def namePattern = "${mod_name}-forge-${minecraft_version}"
 base {
-    archivesName = "${mod_name}-forge-${minecraft_version}"
+    archivesName = namePattern
 }
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
@@ -93,6 +97,8 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
+
+
     compileOnly fg.deobf("curse.maven:apotheosis-313970:5753183")
     compileOnly fg.deobf("curse.maven:placebo-283644:5414631")
     compileOnly fg.deobf("curse.maven:patchouli-306770:4966125")
@@ -110,6 +116,9 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:iceberg-520110:5838149")
 
     implementation fg.deobf("curse.maven:obscure-tooltips-715660:4686579")
+
+    implementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"
+    runtimeOnly("thedarkcolour:kotlinforforge:4.11.0")
 
     minecraftLibrary "io.vavr:vavr:0.10.4"
     minecraftLibrary ("net.neoforged:bus:${neoforge_eventbus_version}") {
@@ -152,7 +161,7 @@ reobf {
 
 publishMods {
     file = tasks.shadowJar.archiveFile
-    displayName = "${mod_name}-forge-${minecraft_version}-${version}"
+    displayName = file.map { it.asFile.name }
     changelog = file("..\\changelog.md").text
     type = STABLE
     modLoaders.add("forge")

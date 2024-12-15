@@ -14,12 +14,20 @@ plugins {
 }
 */
 
+
 plugins {
     id 'idea'
     id 'java'
     id 'maven-publish'
     id 'org.spongepowered.gradle.vanilla'
+    // Adds the Kotlin Gradle plugin
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    // OPTIONAL Kotlin Serialization plugin
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.22'
 }
+
+
+
 base {
     archivesName = "${mod_name}-common-${minecraft_version}"
 }
@@ -39,6 +47,8 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    implementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"
 
     implementation "io.vavr:vavr:0.10.4"
     implementation ("net.neoforged:bus:${neoforge_eventbus_version}") {

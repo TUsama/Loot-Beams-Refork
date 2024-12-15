@@ -98,7 +98,7 @@ public class AdvanceTooltipOverlay {
 
     public void render(GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         //cannot request this when register overlay, so I have to put it at here.
-        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) != TooltipsEnableStatus.TooltipsStatus.NAME_RARITY_TOOLTIPS) return;
+        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) != TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS) return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null) return;
         EntityHitResult entityItem = getEntityItem(mc.player);

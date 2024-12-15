@@ -17,6 +17,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":common")
+
+    modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}"
 }
 
 loom {

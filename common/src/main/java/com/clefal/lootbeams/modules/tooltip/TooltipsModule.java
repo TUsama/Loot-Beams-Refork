@@ -21,7 +21,7 @@ public class TooltipsModule implements ILBModule {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void renderNameTag(EntityRenderDispatcherHookEvent.RenderLBTooltipsEvent event) {
-        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) == TooltipsEnableStatus.TooltipsStatus.NAME_RARITY_TOOLTIPS)
+        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) == TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS)
             return;
         NameTagRenderer.renderNameTag(event.poseStack, event.buffers, event.LBItemEntity);
     }

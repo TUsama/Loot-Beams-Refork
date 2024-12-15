@@ -1,8 +1,8 @@
 ### V2.2.1
 
-port the project to MultiLoader Template
-fix an issue that cannot recognize MNS staff as equipment
-fix an issue that name tag will drop the rarity when ObscureTooltips installed
+port the project to MultiLoader Template</br>
+fix an issue that cannot recognize MNS staff as equipment</br>
+fix an issue that name tag will drop the rarity when ObscureTooltips installed</br>
 
 ### V2.1.3
 

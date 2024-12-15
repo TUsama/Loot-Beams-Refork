@@ -16,7 +16,7 @@ public class ObscureTooltipsCompatModule implements ILBCompatModule {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void removeRarity(TooltipsGatherNameAndRarityEvent event) {
-        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) == TooltipsEnableStatus.TooltipsStatus.NAME_RARITY_TOOLTIPS){
+        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) == TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS){
             event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY);
         }
     }

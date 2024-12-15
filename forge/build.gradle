@@ -171,11 +171,15 @@ publishMods {
     }}.join('\n')
     type = STABLE
     modLoaders.add("forge")
+
     curseforge {
         accessToken = file("D:\\curseforge-key.txt").text
         projectId = "1150640"
         clientRequired = true
         minecraftVersions.add("1.20.1")
+        requires("fzzy_config")
+        optional("mine-and-slash-reloaded", "apotheosis")
+        incompatible("loot-beams")
     }
 }
 

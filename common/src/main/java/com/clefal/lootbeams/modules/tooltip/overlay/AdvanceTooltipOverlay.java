@@ -7,8 +7,10 @@ import com.clefal.lootbeams.data.lbitementity.LBItemEntityCache;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
 import com.mojang.blaze3d.platform.Window;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -27,12 +29,12 @@ import java.util.Optional;
 public class AdvanceTooltipOverlay {
     public static final AdvanceTooltipOverlay INSTANCE = new AdvanceTooltipOverlay();
 
-    public static EntityHitResult getEntityItem(Player player) {
+    public static EntityHitResult getEntityItem(Player playerm, float partialTick) {
         Minecraft mc = Minecraft.getInstance();
+        LocalPlayer player = mc.player;
         double distance = 6.0d;
-        float partialTicks = mc.getDeltaFrameTime();
-        Vec3 position = player.getEyePosition(partialTicks);
-        Vec3 view = player.getViewVector(partialTicks);
+        Vec3 position = player.getEyePosition(partialTick);
+        Vec3 view = player.getViewVector(partialTick);
         if (mc.hitResult != null && mc.hitResult.getType() != HitResult.Type.MISS)
             distance = mc.hitResult.getLocation().distanceTo(position);
         return getEntityItem(player, position, position.add(view.x * distance, view.y * distance, view.z * distance));
@@ -94,17 +96,17 @@ public class AdvanceTooltipOverlay {
         return new Vector2f(window.getGuiScaledWidth() / 2f, window.getGuiScaledHeight() / 2f);
     }
 
-    public void render(GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void render(GuiGraphics guiGraphics, DeltaTracker tracker) {
         //cannot request this when register overlay, so I have to put it at here.
         if (TooltipsConfig.tooltipsConfig.tooltips_enable_status != TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS)
             return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null) return;
-        EntityHitResult entityItem = getEntityItem(mc.player);
+        EntityHitResult entityItem = getEntityItem(mc.player, tracker.getGameTimeDeltaPartialTick(true));
         if (entityItem == null) return;
         ItemEntity itemEntity = ((ItemEntity) entityItem.getEntity());
         LBItemEntity ask = LBItemEntityCache.ask(itemEntity);
-        Vector2f vector2f = this.transformToScreenCoordinate(itemEntity.position().toVector3f(), partialTick);
+        Vector2f vector2f = this.transformToScreenCoordinate(itemEntity.position().toVector3f(), tracker.getGameTimeDeltaTicks());
 
         if (checkCrouch()) {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, itemEntity.getItem(), (int) vector2f.x, (int) vector2f.y);

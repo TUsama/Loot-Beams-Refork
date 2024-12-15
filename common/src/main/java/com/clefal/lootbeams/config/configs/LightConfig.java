@@ -25,7 +25,7 @@ public class LightConfig extends Config {
 
 
     public LightConfig() {
-        super(new ResourceLocation(LootBeamsConstants.MODID + ":light_config"));
+        super(ResourceLocation.parse(LootBeamsConstants.MODID + ":light_config"));
     }
 
     public static void init() {

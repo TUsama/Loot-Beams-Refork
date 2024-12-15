@@ -17,7 +17,7 @@ public class SoundConfig extends Config {
     public SoundFilter soundFilter = new SoundFilter();
 
     public SoundConfig() {
-        super(new ResourceLocation(LootBeamsConstants.MODID + ":sound_config"));
+        super(ResourceLocation.parse(LootBeamsConstants.MODID + ":sound_config"));
     }
     public static void init(){
 

@@ -12,7 +12,7 @@ public class DynamicConfig extends Config {
     public boolean enable_dynamic = true;
     public ValidatedInt half_round_ticks = new ValidatedInt(30);
     public DynamicConfig() {
-        super(new ResourceLocation(LootBeamsConstants.MODID + ":dynamic_config"));
+        super(ResourceLocation.parse(LootBeamsConstants.MODID + ":dynamic_config"));
     }
     public static void init(){
 

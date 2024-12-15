@@ -18,7 +18,7 @@ public class TooltipsConfig extends Config {
     public TooltipsEnableStatus.TooltipsStatus tooltips_enable_status = TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_NAMETAG;
 
     public TooltipsConfig() {
-        super(new ResourceLocation(LootBeamsConstants.MODID + ":tooltips_config"));
+        super(ResourceLocation.parse(LootBeamsConstants.MODID + ":tooltips_config"));
     }
     public static void init(){
 

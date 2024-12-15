@@ -21,8 +21,10 @@ public abstract class EntityRenderDispatcherMixin {
             method = "render", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render(Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
-            shift = At.Shift.AFTER
-    )
+            shift = At.Shift.AFTER,
+            remap = false
+    ),
+            remap = false
     )
     private void lootBeamHook(Entity entity, double worldX, double worldY, double worldZ, float entityYRot, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int light, CallbackInfo ci) {
       Hooker.lootBeamEntityDispatcherHook(entity, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light, ci);

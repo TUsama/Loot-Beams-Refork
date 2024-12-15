@@ -12,7 +12,7 @@ public class LootBeamsConstants {
 	public static final String MOD_NAME = "ExampleMod";
 	public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
     public static final String MODID = "lootbeams";
-    public static final ResourceLocation LOOT_DROP = new ResourceLocation(MODID, "loot_drop");
+    public static final ResourceLocation LOOT_DROP = ResourceLocation.fromNamespaceAndPath(MODID, "loot_drop");
     public static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
     public static final LBEventBus EVENT_BUS = new LBEventBus(new BusBuilderImpl());
 }

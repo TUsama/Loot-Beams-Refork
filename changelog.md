@@ -1,6 +1,6 @@
 ### V2.3.0
 
-use Fzzy config to handle config
+use [Fzzy Config](https://www.curseforge.com/minecraft/mc-mods/fzzy-config/files/5969656) to handle config, so remember to add this mod!
 update forge version to 47.3.5
 
 ### V2.2.1

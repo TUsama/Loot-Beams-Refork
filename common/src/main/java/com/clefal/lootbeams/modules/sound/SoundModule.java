@@ -19,7 +19,9 @@ public class SoundModule implements ILBModule {
     public static final SoundModule INSTANCE = new SoundModule();
 
     private static boolean canSound(EntityRenderDispatcherHookEvent.RenderLootBeamEvent event, ItemEntity itemEntity) {
-        return !SoundConfigHandler.checkInBlackList(event.LBItemEntity) && (SoundConfig.soundConfig.soundSection.sound_all_items
+        if (event.LBItemEntity.isSounded()) return false;
+        if (!SoundConfigHandler.checkInBlackList(event.LBItemEntity)) return false;
+        return (SoundConfig.soundConfig.soundSection.sound_all_items
                 || (SoundConfig.soundConfig.soundSection.sound_only_equipment && EquipmentConditions.isEquipment(itemEntity.getItem()))
                 || (SoundConfig.soundConfig.soundSection.sound_only_rare && event.LBItemEntity.isRare())
                 || SoundConfigHandler.checkInWhiteList(event.LBItemEntity));
@@ -31,7 +33,7 @@ public class SoundModule implements ILBModule {
         ItemEntity itemEntity = event.LBItemEntity.item();
         if (event.LBItemEntity.canBeRender() == LBItemEntity.RenderState.REJECT) return;
 
-        if (event.LBItemEntity.canBeRender() == LBItemEntity.RenderState.PASS || canSound(event, itemEntity)
+        if (event.LBItemEntity.canBeRender() == LBItemEntity.RenderState.PASS && canSound(event, itemEntity)
         ) {
 
             WeighedSoundEvents sound = Minecraft.getInstance().getSoundManager().getSoundEvent(LootBeamsConstants.LOOT_DROP);

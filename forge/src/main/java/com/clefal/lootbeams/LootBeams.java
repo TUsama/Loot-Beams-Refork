@@ -16,8 +16,6 @@ public class LootBeams {
 
 		getModLoadingContext().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
-		getModLoadingContext().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
-
 		//FMLJavaModLoadingContext.get().getModEventBus().addListener(com.lootbeams.ClientSetup::init);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ConfigManager::init);

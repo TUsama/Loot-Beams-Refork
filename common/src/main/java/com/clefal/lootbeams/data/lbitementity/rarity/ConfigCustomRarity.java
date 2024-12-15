@@ -27,9 +27,9 @@ public class ConfigCustomRarity extends ModifyingConfigHandler {
     @Override
     public LBItemEntity modify(LBItemEntity lbItemEntity) {
         if (customRarity.isEmpty()) return lbItemEntity;
-        ItemStack item = lbItemEntity.item().getItem();
+        /*ItemStack item = lbItemEntity.item().getItem();
         AtomicReference<LBItemEntity> newEntity = new AtomicReference<>();
-        /*item.getTags()
+        item.getTags()
                 .map(x -> Pair.of(customRarity.contains(x.location()), x.location()))
                 .filter(Pair::getFirst)
                 .findFirst()
@@ -47,6 +47,6 @@ public class ConfigCustomRarity extends ModifyingConfigHandler {
                     newEntity.set(lbItemEntity);
                 });*/
 
-        return newEntity.get();
+        return lbItemEntity;
     }
 }

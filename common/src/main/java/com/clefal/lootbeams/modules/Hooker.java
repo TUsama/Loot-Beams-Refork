@@ -25,10 +25,11 @@ public class Hooker {
         if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.REJECT) return;
         LightConfig.Beam beamSection = LightConfig.lightConfig.beamSection;
 
+        var OnGroundCondition = (!beamSection.require_on_ground || itemEntity.onGround());
+        boolean b = checkRenderable(itemEntity, lbItemEntity1) && OnGroundCondition;
 
-        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || (checkRenderable(itemEntity, lbItemEntity1) && (!(beamSection.require_on_ground) || itemEntity.onGround()))) {
+        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || b) {
             if (beamSection.enable_beam) {
-
                 EntityRenderDispatcherHookEvent.RenderLootBeamEvent renderLootBeamEvent = new EntityRenderDispatcherHookEvent.RenderLootBeamEvent(lbItemEntity1, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light);
                 LootBeamsConstants.EVENT_BUS.post(renderLootBeamEvent);
             }
@@ -40,7 +41,7 @@ public class Hooker {
             }
             lbItemEntity1.passThis();
         } else {
-            lbItemEntity1.rejectThis();
+            if (OnGroundCondition) lbItemEntity1.rejectThis();
         }
     }
 
@@ -48,10 +49,11 @@ public class Hooker {
         var filter = LightConfig.lightConfig.lightEffectFilter;
         boolean onlyEquipment = filter.only_equipment && EquipmentConditions.isEquipment(itemEntity.getItem());
         boolean isRare = filter.only_rare && lbItemEntity1.isRare();
-        return filter.all_item
+        boolean b = filter.all_item
                 || onlyEquipment
                 || isRare
                 || (LightConfigHandler.checkInWhiteList(lbItemEntity1)
                 && !LightConfigHandler.checkInBlackList(lbItemEntity1));
+        return b;
     }
 }

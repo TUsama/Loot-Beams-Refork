@@ -25,10 +25,10 @@ public class SoundConfig extends Config {
     public static class SoundSection extends ConfigSection {
         public boolean enable_sound = true;
         public ValidatedFloat sound_volume = new ValidatedFloat(1, 1, 0);
-        public boolean sound_all_items = true;
+        public boolean sound_all_items = false;
         public boolean sound_only_rare = true;
         public ValidatedInt sound_rare_ordinal_min = new ValidatedInt(3);
-        public boolean sound_only_equipment = false;
+        public boolean sound_only_equipment = true;
     }
 
     public static class SoundFilter extends ConfigSection {

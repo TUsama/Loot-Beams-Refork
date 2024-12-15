@@ -1,13 +1,13 @@
 package com.clefal.lootbeams.modules;
 
-import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.config.services.StringListHandler;
+import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.config.configs.LightConfig;
+import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.data.equipment.EquipmentConditions;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntityCache;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
+import com.clefal.lootbeams.modules.beam.LightConfigHandler;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,31 +22,36 @@ public class Hooker {
         if (!(entity instanceof ItemEntity itemEntity)) return;
 
         LBItemEntity lbItemEntity1 = LBItemEntityCache.ask(itemEntity);
+        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.REJECT) return;
+        LightConfig.Beam beamSection = LightConfig.lightConfig.beamSection;
 
 
-        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || (checkRenderable(itemEntity, lbItemEntity1) && (!(ConfigurationManager.<Boolean>request(Config.REQUIRE_ON_GROUND)) || itemEntity.onGround()))) {
-            if (ConfigurationManager.request(Config.ENABLE_BEAM)) {
+        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || (checkRenderable(itemEntity, lbItemEntity1) && (!(beamSection.require_on_ground) || itemEntity.onGround()))) {
+            if (beamSection.enable_beam) {
 
                 EntityRenderDispatcherHookEvent.RenderLootBeamEvent renderLootBeamEvent = new EntityRenderDispatcherHookEvent.RenderLootBeamEvent(lbItemEntity1, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light);
-                Constants.EVENT_BUS.post(renderLootBeamEvent);
+                LootBeamsConstants.EVENT_BUS.post(renderLootBeamEvent);
             }
 
-            TooltipsEnableStatus.TooltipsStatus request = ConfigurationManager.request(Config.ENABLE_TOOLTIPS);
-            if (request != TooltipsEnableStatus.TooltipsStatus.NONE) {
+            var tooltipsConfig = TooltipsConfig.tooltipsConfig.tooltips_enable_status;
+            if (tooltipsConfig != TooltipsEnableStatus.TooltipsStatus.NONE) {
                 EntityRenderDispatcherHookEvent.RenderLBTooltipsEvent renderLBTooltipsEvent = new EntityRenderDispatcherHookEvent.RenderLBTooltipsEvent(lbItemEntity1, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light);
-                Constants.EVENT_BUS.post(renderLBTooltipsEvent);
+                LootBeamsConstants.EVENT_BUS.post(renderLBTooltipsEvent);
             }
-            lbItemEntity1.updateCanBeRender();
+            lbItemEntity1.passThis();
+        } else {
+            lbItemEntity1.rejectThis();
         }
     }
 
     private static @NotNull Boolean checkRenderable(ItemEntity itemEntity, LBItemEntity lbItemEntity1) {
-        boolean onlyEquipment = ConfigurationManager.<Boolean>request(Config.ONLY_EQUIPMENT) && EquipmentConditions.isEquipment(itemEntity.getItem());
-        boolean isRare = ConfigurationManager.<Boolean>request(Config.ONLY_RARE) && lbItemEntity1.isRare();
-        return ConfigurationManager.<Boolean>request(Config.ALL_ITEMS)
+        var filter = LightConfig.lightConfig.lightEffectFilter;
+        boolean onlyEquipment = filter.only_equipment && EquipmentConditions.isEquipment(itemEntity.getItem());
+        boolean isRare = filter.only_rare && lbItemEntity1.isRare();
+        return filter.all_item
                 || onlyEquipment
                 || isRare
-                || (StringListHandler.RenderList.checkInWhiteList(lbItemEntity1)
-                && !StringListHandler.RenderList.checkInBlackList(lbItemEntity1));
+                || (LightConfigHandler.checkInWhiteList(lbItemEntity1)
+                && !LightConfigHandler.checkInBlackList(lbItemEntity1));
     }
 }

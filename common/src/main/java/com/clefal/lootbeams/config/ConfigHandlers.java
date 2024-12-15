@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.config;
 
-import com.clefal.lootbeams.Constants;
+import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.impl.IConfigReloadable;
 import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
 import com.clefal.lootbeams.data.lbitementity.rarity.ConfigColorOverride;
@@ -21,7 +21,7 @@ public class ConfigHandlers implements IConfigReloadable {
     }
 
     public static void init(){
-        Constants.EVENT_BUS.register(INSTANCE);
+        LootBeamsConstants.EVENT_BUS.register(INSTANCE);
     }
 
 

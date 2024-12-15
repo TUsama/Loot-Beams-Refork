@@ -1,8 +1,7 @@
 package com.clefal.lootbeams.modules.tooltip.nametag;
 
-import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
+import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -24,54 +23,53 @@ public class NameTagRenderer {
 
     public static void renderNameTag(PoseStack stack, MultiBufferSource buffer, LBItemEntity LBItemEntity) {
         ItemEntity item = LBItemEntity.item();
-        if (Minecraft.getInstance().player.isCrouching() || ((((Boolean) ConfigurationManager.request(Config.RENDER_NAMETAGS_ONLOOK)) && isLookingAt(Minecraft.getInstance().player, item, ConfigurationManager.request(Config.NAMETAG_LOOK_SENSITIVITY))))) {
+        TooltipsConfig.nameTagSection nameTagSection = TooltipsConfig.tooltipsConfig.nameTagSection;
 
+        //If player is crouching or looking at the item
+        if (Minecraft.getInstance().player.isCrouching() || ((nameTagSection.render_name_tag_on_look && isLookingAt(Minecraft.getInstance().player, item, nameTagSection.name_tag_look_sensitivity.get())))) {
             Color color = LBItemEntity.rarity().color();
+            float foregroundAlpha = nameTagSection.name_tag_text_alpha.get();
+            float backgroundAlpha = nameTagSection.name_tag_background_alpha.get();
+            double yOffset = nameTagSection.name_tag_y_offset.get();
+            int foregroundColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int) (255 * foregroundAlpha)).getRGB();
+            int backgroundColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int) (255 * backgroundAlpha)).getRGB();
+            stack.pushPose();
 
-            //If player is crouching or looking at the item
-            if (Minecraft.getInstance().player.isCrouching() || (ConfigurationManager.<Boolean>request(Config.RENDER_NAMETAGS_ONLOOK) && isLookingAt(Minecraft.getInstance().player, item, ConfigurationManager.request(Config.NAMETAG_LOOK_SENSITIVITY)))) {
-                float foregroundAlpha = ConfigurationManager.request(Double.class, Config.NAMETAG_TEXT_ALPHA).floatValue();
-                float backgroundAlpha = ConfigurationManager.request(Double.class, Config.NAMETAG_BACKGROUND_ALPHA).floatValue();
-                double yOffset = ConfigurationManager.request(Double.class, Config.NAMETAG_Y_OFFSET);
-                int foregroundColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int) (255 * foregroundAlpha)).getRGB();
-                int backgroundColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int) (255 * backgroundAlpha)).getRGB();
-                stack.pushPose();
+            //Render nametags at heights based on player distance
+            stack.translate(0.0D, Math.min(1D, Minecraft.getInstance().player.distanceToSqr(item) * 0.025D) + yOffset, 0.0D);
+            stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
 
-                //Render nametags at heights based on player distance
-                stack.translate(0.0D, Math.min(1D, Minecraft.getInstance().player.distanceToSqr(item) * 0.025D) + yOffset, 0.0D);
-                stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+            float nametagScale = nameTagSection.name_tag_scale.get();
+            stack.scale(-0.02F * nametagScale, -0.02F * nametagScale, 0.02F * nametagScale);
 
-                float nametagScale = ConfigurationManager.<Double>request(Config.NAMETAG_SCALE).floatValue();
-                stack.scale(-0.02F * nametagScale, -0.02F * nametagScale, 0.02F * nametagScale);
+            //Render stack counts on nametag
+            Font fontrenderer = Minecraft.getInstance().font;
+            TooltipsGatherNameAndRarityEvent tooltipsGatherNameAndRarityEvent = new TooltipsGatherNameAndRarityEvent(LBItemEntity);
+            LootBeamsConstants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
+            List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
 
-                //Render stack counts on nametag
-                Font fontrenderer = Minecraft.getInstance().font;
-                TooltipsGatherNameAndRarityEvent tooltipsGatherNameAndRarityEvent = new TooltipsGatherNameAndRarityEvent(LBItemEntity);
-                Constants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
-                List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
+            stack.translate(0, 2, -10);
 
-                stack.translate(0, 2, -10);
-
-                for (Component c : nameAndRarity) {
-                    String s = c.getString();
-                    if (s.isBlank()) continue;
-                    renderText(fontrenderer, stack, buffer, s, foregroundColor, backgroundColor, backgroundAlpha);
-                    stack.translate(0, Minecraft.getInstance().font.lineHeight, 0.0f);
-
-                }
-
-
-                stack.popPose();
-
+            for (Component c : nameAndRarity) {
+                String s = c.getString();
+                if (s.isBlank()) continue;
+                renderText(fontrenderer, stack, buffer, s, foregroundColor, backgroundColor, backgroundAlpha);
+                stack.translate(0, Minecraft.getInstance().font.lineHeight, 0.0f);
 
             }
+
+
+            stack.popPose();
+
+
         }
+
 
     }
 
     private static void renderText(Font fontRenderer, PoseStack stack, MultiBufferSource buffer, String text, int foregroundColor, int backgroundColor, float backgroundAlpha) {
 
-        if (ConfigurationManager.<Boolean>request(Config.BORDERS)) {
+        if (TooltipsConfig.tooltipsConfig.nameTagSection.add_text_border) {
             float w = -fontRenderer.width(text) / 2f;
             int bg = new Color(0, 0, 0, (int) (255 * backgroundAlpha)).getRGB();
             Component comp = Component.literal(text);

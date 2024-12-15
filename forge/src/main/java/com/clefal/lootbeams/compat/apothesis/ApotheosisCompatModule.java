@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.compat.apothesis;
 
-import com.clefal.lootbeams.Constants;
+import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
@@ -28,8 +28,8 @@ public class ApotheosisCompatModule implements ILBCompatModule {
     @Override
     public void tryEnable() {
         if (shouldBeEnable()) {
-            Constants.LOGGER.info("Detected Apotheosis, enable ApotheosisCompatModule!");
-            Constants.EVENT_BUS.register(new ApotheosisCompatModule());
+            LootBeamsConstants.LOGGER.info("Detected Apotheosis, enable ApotheosisCompatModule!");
+            LootBeamsConstants.EVENT_BUS.register(new ApotheosisCompatModule());
         }
     }
 

@@ -1,7 +1,7 @@
 package com.clefal.lootbeams.modules.beam;
 
 import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
+import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProvider;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
@@ -25,17 +25,21 @@ public class BeamRenderer {
         ItemEntity itemEntity = LBItemEntity.item();
         Color color = LBItemEntity.rarity().color();
         int lifeTime = LBItemEntity.fadeIn();
-        Integer fadeInTime = ConfigurationManager.<Integer>request(Config.BEAM_FADE_IN_TIME);
+
+        LightConfig.Beam beamConfig = LightConfig.lightConfig.beamSection;
+        LightConfig.Glow glowConfig = LightConfig.lightConfig.glowSection;
+
+        int fadeInTime = beamConfig.beam_fade_in_time.get();
         var fadeInFactor = 1.0f * lifeTime / fadeInTime;
 
         float R = color.getRed() / 255f;
         float G = color.getGreen() / 255f;
         float B = color.getBlue() / 255f;
 
-        Double preBeamAlpha = ConfigurationManager.request(Config.BEAM_ALPHA);
+        float preBeamAlpha = beamConfig.beam_alpha.get();
 
         double distance = Minecraft.getInstance().player.distanceTo(itemEntity);
-        float fadeDistance = ((Double) ConfigurationManager.request(Config.BEAM_FADE_DISTANCE)).floatValue();
+        float fadeDistance = beamConfig.beam_fade_in_distance.get();
         //Clefal: we don't actually need that much beamAlpha gimmick.
         //We should never cancel the beam, just make it hard to see.
         if (distance > fadeDistance) {
@@ -45,10 +49,10 @@ public class BeamRenderer {
         }
 
 
-        float beamRadius = 0.05f * ((Double) ConfigurationManager.request(Config.BEAM_RADIUS)).floatValue();
-        float beamHeight = ((Double) ConfigurationManager.request(Config.BEAM_HEIGHT)).floatValue();
-        float yOffset = ((Double) ConfigurationManager.request(Config.BEAM_Y_OFFSET)).floatValue();
-        if (ConfigurationManager.request(Config.COMMON_SHORTER_BEAM)) {
+        float beamRadius = 0.05f * beamConfig.beam_radius.get();
+        float beamHeight = beamConfig.beam_height.get();
+        float yOffset = beamConfig.beam_y_offset.get();
+        if (beamConfig.common_shorter_beam) {
             if (LBItemEntity.isCommon()) {
                 beamHeight *= 0.65f;
                 yOffset -= yOffset;
@@ -56,7 +60,7 @@ public class BeamRenderer {
         }
 
 
-        var beamAlpha = preBeamAlpha.floatValue();
+        var beamAlpha = preBeamAlpha;
         Option<DynamicProvider> dynamicProvider1 = DynamicProviderModule.getDynamicProvider();
         if (dynamicProvider1.isDefined()) {
             beamAlpha *= Math.min(dynamicProvider1.get().getBeamLightFactor(), 1.0f);
@@ -105,11 +109,11 @@ public class BeamRenderer {
 
         {
 
-            if (ConfigurationManager.<Boolean>request(Config.GLOW_EFFECT) && itemEntity.onGround()) {
+            if (glowConfig.enable_glow && itemEntity.onGround()) {
 
                 stack.pushPose();
                 stack.translate(0, 0.01, 0);
-                float radius = ConfigurationManager.<Double>request(Config.GLOW_EFFECT_RADIUS).floatValue();
+                float radius = glowConfig.glow_effect_radius.get();
                 renderGlow(stack, buffer.getBuffer(BeamRenderType.GLOW), R, G, B, beamAlpha * 0.4f, radius);
                 stack.popPose();
             }

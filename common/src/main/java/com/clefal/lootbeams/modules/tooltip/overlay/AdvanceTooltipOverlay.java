@@ -1,12 +1,11 @@
 package com.clefal.lootbeams.modules.tooltip.overlay;
 
-import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
+import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntityCache;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
+import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -58,8 +57,7 @@ public class AdvanceTooltipOverlay {
     }
 
     public static boolean checkCrouch() {
-        Boolean request = ConfigurationManager.<Boolean>request(Config.SCREEN_TOOLTIPS_REQUIRE_CROUCH);
-        return !request || Minecraft.getInstance().player.isCrouching();
+        return !TooltipsConfig.tooltipsConfig.tooltipsSection.render_tooltips_on_crouch || Minecraft.getInstance().player.isCrouching();
     }
 
     public Vector2f transformToScreenCoordinate(Vector3f worldCoordinate, float partialTicks) {
@@ -98,7 +96,8 @@ public class AdvanceTooltipOverlay {
 
     public void render(GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         //cannot request this when register overlay, so I have to put it at here.
-        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) != TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS) return;
+        if (TooltipsConfig.tooltipsConfig.tooltips_enable_status != TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS)
+            return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null) return;
         EntityHitResult entityItem = getEntityItem(mc.player);
@@ -111,7 +110,7 @@ public class AdvanceTooltipOverlay {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, itemEntity.getItem(), (int) vector2f.x, (int) vector2f.y);
         } else {
             TooltipsGatherNameAndRarityEvent tooltipsGatherNameAndRarityEvent = new TooltipsGatherNameAndRarityEvent(ask);
-            Constants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
+            LootBeamsConstants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
             List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
 
             guiGraphics.renderTooltip(Minecraft.getInstance().font, nameAndRarity, itemEntity.getItem().getTooltipImage(), (int) vector2f.x, (int) vector2f.y);

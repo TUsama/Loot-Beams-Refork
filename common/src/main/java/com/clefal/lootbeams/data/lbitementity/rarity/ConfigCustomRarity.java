@@ -1,35 +1,27 @@
 package com.clefal.lootbeams.data.lbitementity.rarity;
 
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
 import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 public class ConfigCustomRarity extends ModifyingConfigHandler {
     public final static String langKeyFormat = "lootbeams.fake_rarity.";
-    private final Set<ResourceLocation> customRarity;
+    private final Set<ResourceLocation> customRarity = new HashSet<>();
 
 
     public ConfigCustomRarity() {
-        this.customRarity = ConfigurationManager.<List<String>>request(Config.CUSTOM_RARITIES)
+        /*this.customRarity = ConfigurationManager.<List<String>>request(Config.CUSTOM_RARITIES)
                 .stream()
                 .filter(x -> !x.contains("#"))
                 .map(x -> x.replace("#", ""))
                 .map(ResourceLocation::tryParse)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
     }
 
     @Override
@@ -37,7 +29,7 @@ public class ConfigCustomRarity extends ModifyingConfigHandler {
         if (customRarity.isEmpty()) return lbItemEntity;
         ItemStack item = lbItemEntity.item().getItem();
         AtomicReference<LBItemEntity> newEntity = new AtomicReference<>();
-        item.getTags()
+        /*item.getTags()
                 .map(x -> Pair.of(customRarity.contains(x.location()), x.location()))
                 .filter(Pair::getFirst)
                 .findFirst()
@@ -53,7 +45,7 @@ public class ConfigCustomRarity extends ModifyingConfigHandler {
                 }, () -> {
                     //if this item doesn't have a custom rarity, use the built-in rarity checker instead.
                     newEntity.set(lbItemEntity);
-                });
+                });*/
 
         return newEntity.get();
     }

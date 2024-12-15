@@ -1,8 +1,7 @@
 package com.clefal.lootbeams.modules.dynamicprovider;
 
-import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
+import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.config.configs.DynamicConfig;
 import com.clefal.lootbeams.config.impl.IConfigReloadable;
 import com.clefal.lootbeams.events.ConfigReloadEvent;
 import com.clefal.lootbeams.modules.ILBModule;
@@ -20,10 +19,10 @@ public class DynamicProviderModule implements ILBModule, IConfigReloadable {
 
     @Override
     public void tryEnable() {
-        if (ConfigurationManager.request(Config.ENABLE_DYNAMIC_PROVIDER)) {
+        if (DynamicConfig.dynamicConfig.enable_dynamic) {
             //only initialize the dynamicProvider when enabled.
-            this.dynamicProvider = new DynamicProvider(ConfigurationManager.request(Config.HALF_ROUND_TICKS));
-            Constants.EVENT_BUS.register(this.dynamicProvider);
+            this.dynamicProvider = new DynamicProvider(DynamicConfig.dynamicConfig.half_round_ticks.get());
+            LootBeamsConstants.EVENT_BUS.register(this.dynamicProvider);
 
         }
     }
@@ -36,8 +35,8 @@ public class DynamicProviderModule implements ILBModule, IConfigReloadable {
     @Override
     @SubscribeEvent
     public void onReload(ConfigReloadEvent event) {
-        Constants.EVENT_BUS.unregister(this.dynamicProvider);
-        this.dynamicProvider = new DynamicProvider(ConfigurationManager.request(Config.HALF_ROUND_TICKS));
-        Constants.EVENT_BUS.register(this.dynamicProvider);
+        LootBeamsConstants.EVENT_BUS.unregister(this.dynamicProvider);
+        this.dynamicProvider = new DynamicProvider(DynamicConfig.dynamicConfig.half_round_ticks.get());
+        LootBeamsConstants.EVENT_BUS.register(this.dynamicProvider);
     }
 }

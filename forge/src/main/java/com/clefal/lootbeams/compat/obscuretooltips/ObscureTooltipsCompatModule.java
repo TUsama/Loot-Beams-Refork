@@ -1,10 +1,9 @@
 package com.clefal.lootbeams.compat.obscuretooltips;
 
-import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
-import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
+import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.compat.ILBCompatModule;
+import com.clefal.lootbeams.config.configs.TooltipsConfig;
+import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
 import com.obscuria.tooltips.ObscureTooltips;
 import net.minecraftforge.fml.ModList;
@@ -16,7 +15,7 @@ public class ObscureTooltipsCompatModule implements ILBCompatModule {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void removeRarity(TooltipsGatherNameAndRarityEvent event) {
-        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) == TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS){
+        if (TooltipsConfig.tooltipsConfig.tooltips_enable_status == TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS) {
             event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY);
         }
     }
@@ -28,9 +27,9 @@ public class ObscureTooltipsCompatModule implements ILBCompatModule {
 
     @Override
     public void tryEnable() {
-        if (shouldBeEnable()){
-            Constants.LOGGER.info("Detected Obscure Tooltips, enable ObscureTooltipsCompatModule!");
-            Constants.EVENT_BUS.register(INSTANCE);
+        if (shouldBeEnable()) {
+            LootBeamsConstants.LOGGER.info("Detected Obscure Tooltips, enable ObscureTooltipsCompatModule!");
+            LootBeamsConstants.EVENT_BUS.register(INSTANCE);
         }
     }
 }

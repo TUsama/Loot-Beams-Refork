@@ -13,19 +13,19 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = LootBeamsConstants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class LootBeamsForgeModClientEvent {
 
 
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiOverlaysEvent event) {
-        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), Constants.MODID + "lb_tooltips", (gui, guiGraphics, partialTick, screenWidth, screenHeight) -> AdvanceTooltipOverlay.INSTANCE.render(guiGraphics, partialTick, screenWidth, screenHeight));
+        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), LootBeamsConstants.MODID + "lb_tooltips", (gui, guiGraphics, partialTick, screenWidth, screenHeight) -> AdvanceTooltipOverlay.INSTANCE.render(guiGraphics, partialTick, screenWidth, screenHeight));
     }
 
 
     @SubscribeEvent
     public static void registerModules(FMLClientSetupEvent event) {
-        Constants.LOGGER.info("register all modules");
+        LootBeamsConstants.LOGGER.info("register all modules");
         ModulesManager.registerModules(
                 new ApotheosisCompatModule(),
                 MineAndSlashCompatModule.INSTANCE,

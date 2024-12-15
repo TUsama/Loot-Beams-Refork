@@ -1,13 +1,12 @@
 package com.clefal.lootbeams.config.configs;
 
-import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.config.ConfigCustomInput;
+import com.clefal.lootbeams.LootBeamsConstants;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedList;
-import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedAny;
+import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt;
 import net.minecraft.resources.ResourceLocation;
@@ -15,9 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 public class SoundConfig extends Config {
     public static SoundConfig soundConfig = ConfigApiJava.registerAndLoadConfig(SoundConfig::new, RegisterType.CLIENT);
     public SoundSection soundSection = new SoundSection();
+    public SoundFilter soundFilter = new SoundFilter();
 
     public SoundConfig() {
-        super(new ResourceLocation(Constants.MODID + ":sound_config"));
+        super(new ResourceLocation(LootBeamsConstants.MODID + ":sound_config"));
     }
     public static void init(){
 
@@ -32,7 +32,7 @@ public class SoundConfig extends Config {
     }
 
     public static class SoundFilter extends ConfigSection {
-        public ValidatedList<ConfigCustomInput> whitelist = new ValidatedAny<>(new ConfigCustomInput("")).toList();
-        public ValidatedList<ConfigCustomInput> blacklist = new ValidatedAny<>(new ConfigCustomInput("")).toList();
+        public ValidatedList<ResourceLocation> whitelist = new ValidatedIdentifier().toList();
+        public ValidatedList<ResourceLocation> blacklist = new ValidatedIdentifier().toList();
     }
 }

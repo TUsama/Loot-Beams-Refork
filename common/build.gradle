@@ -48,7 +48,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
-    implementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"
+    compileOnly("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge")
 
     implementation "io.vavr:vavr:0.10.4"
     implementation ("net.neoforged:bus:${neoforge_eventbus_version}") {

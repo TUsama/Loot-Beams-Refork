@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.compat.mine_and_slash;
 
-import com.clefal.lootbeams.Constants;
+import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.compat.ILBCompatModule;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
@@ -37,8 +37,8 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
     @Override
     public void tryEnable() {
         if (shouldBeEnable()) {
-            Constants.LOGGER.info("Detected Mine and Slash, enable MineAndSlashCompatModule!");
-            Constants.EVENT_BUS.register(INSTANCE);
+            LootBeamsConstants.LOGGER.info("Detected Mine and Slash, enable MineAndSlashCompatModule!");
+            LootBeamsConstants.EVENT_BUS.register(INSTANCE);
             INSTANCE.rarities.add("common");
             INSTANCE.rarities.add("uncommon");
             INSTANCE.rarities.add("rare");

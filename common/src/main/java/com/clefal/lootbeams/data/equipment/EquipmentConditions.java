@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.data.equipment;
 
-import com.clefal.lootbeams.Constants;
+import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.events.RegisterEquipmentItemEvent;
 import io.vavr.collection.List;
 import net.minecraft.world.item.*;
@@ -13,7 +13,7 @@ public class EquipmentConditions {
     static {
 
         RegisterEquipmentItemEvent registerEquipmentItemEvent = new RegisterEquipmentItemEvent();
-        Constants.EVENT_BUS.post(registerEquipmentItemEvent);
+        LootBeamsConstants.EVENT_BUS.post(registerEquipmentItemEvent);
         conditions = List.ofAll(registerEquipmentItemEvent.conditions)
                 .prepend(item1 -> {
                     var item = item1.getItem();

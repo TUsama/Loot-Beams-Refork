@@ -115,10 +115,10 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:prism-lib-638111:4650325")
     runtimeOnly fg.deobf("curse.maven:iceberg-520110:5838149")
 
-    implementation fg.deobf("curse.maven:obscure-tooltips-715660:4686579")
+    compileOnly fg.deobf("curse.maven:obscure-tooltips-715660:4686579")
 
-    implementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"
-    runtimeOnly("thedarkcolour:kotlinforforge:4.11.0")
+    implementation(fg.deobf("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"))
+    implementation("thedarkcolour:kotlinforforge:4.11.0")
 
     minecraftLibrary "io.vavr:vavr:0.10.4"
     minecraftLibrary ("net.neoforged:bus:${neoforge_eventbus_version}") {
@@ -162,7 +162,13 @@ reobf {
 publishMods {
     file = tasks.shadowJar.archiveFile
     displayName = file.map { it.asFile.name }
-    changelog = file("..\\changelog.md").text
+    changelog = file("..\\changelog.md").text.split('\n').collect { string -> {
+        if (!string.isBlank()) {
+            string + "</br>"
+        } else {
+            string
+        }
+    }}.join('\n')
     type = STABLE
     modLoaders.add("forge")
     curseforge {

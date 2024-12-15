@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.data.lbitementity;
 
-import com.clefal.lootbeams.Constants;
+import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.data.lbitementity.rarity.ILBRarityApplier;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
@@ -35,8 +35,8 @@ public class InternalLBItemEntityProvider implements ILBModulePersistentData {
     @Override
     public void initData() {
         ArrayList<ILBRarityApplier> appliers = new ArrayList<>();
-        Constants.EVENT_BUS.post(new RegisterLBRarityEvent.Pre(appliers));
-        Constants.EVENT_BUS.post(new RegisterLBRarityEvent.Post(appliers));
+        LootBeamsConstants.EVENT_BUS.post(new RegisterLBRarityEvent.Pre(appliers));
+        LootBeamsConstants.EVENT_BUS.post(new RegisterLBRarityEvent.Post(appliers));
         sources.addAll(appliers);
         //vanilla rarity transformer
         sources.add(itemEntity -> Option.some(LBItemEntity.of(itemEntity, LBRarity.of(itemEntity.getItem().getRarity()))));

@@ -1,7 +1,6 @@
 package com.clefal.lootbeams.modules.tooltip;
 
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
+import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import io.vavr.Function1;
@@ -16,7 +15,7 @@ public class TooltipsEnableStatus {
     public static final String RARITY = "rarity";
     public static final String TOOLTIPS = "tooltips";
     public static final Function1<LBItemEntity, Component> handleName = lbItemEntity -> {
-        Boolean ifShowStack = ConfigurationManager.<Boolean>request(Config.RENDER_STACKCOUNT);
+        boolean ifShowStack = TooltipsConfig.tooltipsConfig.nameTagSection.render_stack_count;
         ItemStack item = lbItemEntity.item().getItem();
         Style style = item.getHoverName().getStyle();
         if (!ifShowStack) return item.getHoverName();

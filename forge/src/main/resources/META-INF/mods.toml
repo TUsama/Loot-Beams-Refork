@@ -31,3 +31,15 @@ mandatory = true
 versionRange = "[0.5.9,)"
 ordering = "AFTER"
 side = "CLIENT"
+[[dependencies.${mod_id}]]
+modId = "apotheosis"
+mandatory = false
+versionRange = "[7.2.0,)"
+ordering = "AFTER"
+side = "CLIENT"
+[[dependencies.${mod_id}]]
+modId = "mmorpg"
+mandatory = false
+versionRange = "[5.9.0,)"
+ordering = "AFTER"
+side = "CLIENT"

@@ -1,8 +1,7 @@
 package com.clefal.lootbeams.modules.tooltip;
 
-import com.clefal.lootbeams.Constants;
-import com.clefal.lootbeams.config.Config;
-import com.clefal.lootbeams.config.ConfigurationManager;
+import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.modules.ILBModule;
@@ -21,7 +20,7 @@ public class TooltipsModule implements ILBModule {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void renderNameTag(EntityRenderDispatcherHookEvent.RenderLBTooltipsEvent event) {
-        if (ConfigurationManager.request(Config.ENABLE_TOOLTIPS) == TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS)
+        if (TooltipsConfig.tooltipsConfig.tooltips_enable_status == TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS)
             return;
         NameTagRenderer.renderNameTag(event.poseStack, event.buffers, event.LBItemEntity);
     }
@@ -36,13 +35,13 @@ public class TooltipsModule implements ILBModule {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void InternalNameAndRarityCollector(TooltipsGatherNameAndRarityEvent event){
-        TooltipsEnableStatus.TooltipsStatus status = ConfigurationManager.request(Config.ENABLE_TOOLTIPS);
+        TooltipsEnableStatus.TooltipsStatus status = TooltipsConfig.tooltipsConfig.tooltips_enable_status;
         status.extractComponents.accept(event);
     }
 
 
     @Override
     public void tryEnable() {
-        Constants.EVENT_BUS.register(INSTANCE);
+        LootBeamsConstants.EVENT_BUS.register(INSTANCE);
     }
 }

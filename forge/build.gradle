@@ -177,7 +177,7 @@ publishMods {
         projectId = "1150640"
         clientRequired = true
         minecraftVersions.add("1.20.1")
-        requires("fzzy_config")
+        requires("fzzy-config")
         optional("mine-and-slash-reloaded", "apotheosis")
         incompatible("loot-beams")
     }

@@ -126,6 +126,8 @@ publishMods {
     changelog = file("..\\changelog.md").text.split('\n').collect { string -> {
         if (!string.isBlank()) {
             string + "</br>"
+        } else{
+            string
         }
     }}.join('\n')
     type = BETA
@@ -134,6 +136,9 @@ publishMods {
         accessToken = file("D:\\curseforge-key.txt").text
         projectId = "1150640"
         clientRequired = true
-        minecraftVersions.add("${minecraft_version}")
+        minecraftVersionRange {
+            start = "1.21"
+            end = "${minecraft_version}"
+        }
     }
 }

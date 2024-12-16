@@ -8,11 +8,16 @@ plugins {
     id "me.modmuss50.mod-publish-plugin" version "0.8.1"
 
 }
+def namePattern = "${mod_name}-neoforge-${minecraft_version}"
 
 configurations {
     shade
     libraries
     implementation.extendsFrom(libraries, shade)
+}
+
+base {
+    archivesName = namePattern
 }
 
 neoForge {

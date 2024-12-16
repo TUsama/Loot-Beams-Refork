@@ -1,3 +1,7 @@
+### V2.4.1
+now support 1.21
+
+
 ### V2.4.0
 add 1.21.1 neoforge support!
 change the beam facing way

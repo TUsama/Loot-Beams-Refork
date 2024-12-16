@@ -7,13 +7,16 @@ import com.clefal.lootbeams.modules.dynamicprovider.DynamicProvider;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import io.vavr.control.Option;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.item.ItemEntity;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import java.awt.*;
 
@@ -38,7 +41,8 @@ public class BeamRenderer {
 
         float preBeamAlpha = beamConfig.beam_alpha.get();
 
-        double distance = Minecraft.getInstance().player.distanceTo(itemEntity);
+        LocalPlayer player = Minecraft.getInstance().player;
+        double distance = player.distanceTo(itemEntity);
         float fadeDistance = beamConfig.beam_fade_in_distance.get();
         //Clefal: we don't actually need that much beamAlpha gimmick.
         //We should never cancel the beam, just make it hard to see.
@@ -69,9 +73,13 @@ public class BeamRenderer {
         }
 
         beamAlpha *= fadeInFactor;
+        Vector3f playerPos = player.getPosition(partialTick).toVector3f();
+        Vector3f targetPos = itemEntity.getPosition(partialTick).toVector3f();
+        Vector3f direction = targetPos.sub(playerPos).normalize();
+        double v = Math.atan2(direction.x(), direction.z());
 
         stack.pushPose();
-        stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        stack.mulPose(Axis.YP.rotation((float) v));
         //Render main beam
         {
             stack.pushPose();

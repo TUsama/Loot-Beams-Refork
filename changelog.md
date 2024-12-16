@@ -1,3 +1,7 @@
+### V2.4.0
+add 1.21.1 neoforge support!
+change the beam facing way
+
 ### V2.3.0
 
 use [Fzzy Config](https://www.curseforge.com/minecraft/mc-mods/fzzy-config/files/5969656) to handle config, so remember to add this mod!

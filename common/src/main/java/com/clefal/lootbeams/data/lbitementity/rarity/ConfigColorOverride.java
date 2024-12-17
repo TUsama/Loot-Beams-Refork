@@ -5,6 +5,7 @@ import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
 import com.clefal.lootbeams.config.services.IServicesChecker;
 import com.clefal.lootbeams.config.services.PlatformChecker;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedIdentifierMap;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedMap;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedColor;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +18,7 @@ public class ConfigColorOverride extends ModifyingConfigHandler {
 
 
 
-    private final ValidatedMap<ResourceLocation, ValidatedColor.ColorHolder> overrides = LightConfig.lightConfig.customColorSetting.color_override;
+    private final ValidatedIdentifierMap<ValidatedColor.ColorHolder> overrides = LightConfig.lightConfig.customColorSetting.color_override;
 
     public ConfigColorOverride() {
 

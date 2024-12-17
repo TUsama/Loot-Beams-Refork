@@ -1,3 +1,7 @@
+### V2.4.2
+refactor the color_override
+add several comment
+
 ### V2.4.1
 add Fabric support!
 fix a config issue that the equipment and rare condition can't work together correctly

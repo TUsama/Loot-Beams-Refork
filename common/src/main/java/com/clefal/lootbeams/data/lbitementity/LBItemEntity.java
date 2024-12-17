@@ -1,6 +1,7 @@
 package com.clefal.lootbeams.data.lbitementity;
 
 import com.clefal.lootbeams.config.configs.LightConfig;
+import com.clefal.lootbeams.config.configs.SoundConfig;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import lombok.Getter;
 import lombok.experimental.Accessors;
@@ -50,7 +51,13 @@ public class LBItemEntity {
         return this.rarity.absoluteOrdinal() <= 0;
     }
 
-    public boolean isRare() {
+    public boolean shouldPlayRareSound() {
+        int min = SoundConfig.soundConfig.soundSection.sound_rare_ordinal_min.get();
+
+        return this.rarity.absoluteOrdinal() >= min;
+    }
+
+    public boolean ShouldRenderRareBeam() {
         int min = LightConfig.lightConfig.lightEffectFilter.rare_ordinal_min.get();
 
         return this.rarity.absoluteOrdinal() >= min;

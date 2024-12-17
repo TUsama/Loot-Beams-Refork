@@ -1,6 +1,9 @@
 package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
+import me.fzzyhmstrs.fzzy_config.annotations.Action;
+import me.fzzyhmstrs.fzzy_config.annotations.Comment;
+import me.fzzyhmstrs.fzzy_config.annotations.RequiresAction;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
@@ -32,7 +35,11 @@ public class SoundConfig extends Config {
     }
 
     public static class SoundFilter extends ConfigSection {
+        @Comment(value = "support item, tag and modid")
+        @RequiresAction(action = Action.RESTART)
         public ValidatedList<ResourceLocation> whitelist = new ValidatedIdentifier().toList();
+        @Comment(value = "support item, tag and modid")
+        @RequiresAction(action = Action.RESTART)
         public ValidatedList<ResourceLocation> blacklist = new ValidatedIdentifier().toList();
     }
 }

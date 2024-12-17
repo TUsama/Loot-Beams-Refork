@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import me.modmuss50.mpp.ReleaseType
 
 plugins {
     id 'multiloader-loader'
@@ -130,7 +131,7 @@ publishMods {
             string
         }
     }}.join('\n')
-    type = BETA
+    type = ReleaseType.STABLE
     modLoaders.add("neoforge")
     curseforge {
         accessToken = file("D:\\curseforge-key.txt").text

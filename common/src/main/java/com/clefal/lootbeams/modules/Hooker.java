@@ -45,15 +45,30 @@ public class Hooker {
         }
     }
 
-    private static @NotNull Boolean checkRenderable(ItemEntity itemEntity, LBItemEntity lbItemEntity1) {
+    private static boolean checkRenderable(ItemEntity itemEntity, LBItemEntity lbItemEntity1) {
         var filter = LightConfig.lightConfig.lightEffectFilter;
-        boolean onlyEquipment = filter.only_equipment && EquipmentConditions.isEquipment(itemEntity.getItem());
-        boolean isRare = filter.only_rare && lbItemEntity1.isRare();
-        boolean b = filter.all_item
-                || onlyEquipment
-                || isRare
-                || (LightConfigHandler.checkInWhiteList(lbItemEntity1)
-                && !LightConfigHandler.checkInBlackList(lbItemEntity1));
-        return b;
+        if (LightConfigHandler.checkInBlackList(lbItemEntity1)) return false;
+        if (filter.all_item || LightConfigHandler.checkInWhiteList(lbItemEntity1)) return true;
+        boolean equipmentCondition = filter.only_equipment;
+        boolean isEquipment = EquipmentConditions.isEquipment(itemEntity.getItem());
+        boolean rareCondition = filter.only_rare;
+        boolean isRare = lbItemEntity1.isRare();
+        if (equipmentCondition) {
+            if (isEquipment) {
+                if (rareCondition) {
+                    return isRare;
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            if (rareCondition) {
+                return isRare;
+            } else {
+                return false;
+            }
+        }
     }
 }

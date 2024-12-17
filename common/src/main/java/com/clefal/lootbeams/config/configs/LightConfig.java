@@ -1,6 +1,7 @@
 package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
+import com.google.common.collect.Maps;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
@@ -13,6 +14,7 @@ import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class LightConfig extends Config {
@@ -56,9 +58,11 @@ public class LightConfig extends Config {
     }
 
     public static class CustomColorSetting {
-
+        public boolean enable_custom_color = false;
         public ValidatedMap<ResourceLocation, ValidatedColor.ColorHolder> color_override = new ValidatedMap<>(
-                new LinkedHashMap<>(),
+                new LinkedHashMap<>(){{
+                    put(ResourceLocation.of("minecraft:air", ':'), new ValidatedColor(0, 0, 0, 0).copyStoredValue());
+                }},
                 new ValidatedIdentifier(),
                 new ValidatedColor(255, 128, 0, 255)
         );
@@ -66,7 +70,7 @@ public class LightConfig extends Config {
 
     public static class LightEffectFilter extends ConfigSection {
         public boolean all_item = false;
-        public boolean only_rare = true;
+        public boolean only_rare = false;
         public ValidatedInt rare_ordinal_min = new ValidatedInt(3);
         public boolean only_equipment = true;
         public ValidatedList<ResourceLocation> whitelist = new ValidatedIdentifier().toList();

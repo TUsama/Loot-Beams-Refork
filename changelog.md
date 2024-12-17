@@ -1,6 +1,8 @@
+### V2.4.2
+fix a config issue that the equipment and rare condition can't work together correctly
+
 ### V2.4.1
 now support 1.21
-
 
 ### V2.4.0
 add 1.21.1 neoforge support!

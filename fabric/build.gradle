@@ -1,9 +1,16 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
+    id 'com.github.johnrengelman.shadow' version '7.1.1'
+
 }
 base {
     archivesName = "${mod_name}-fabric-${minecraft_version}"
+}
+configurations {
+    shade
+    implementation.extendsFrom shade
 }
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
@@ -15,7 +22,21 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
-    //modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}"
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}"
+
+    shade "io.vavr:vavr:0.10.4"
+    shade ("net.neoforged:bus:${neoforge_eventbus_version}") {
+        exclude group: "org.ow2.asm"
+        exclude group: "net.jodah"
+        exclude group: "org.apache.logging.log4j"
+        exclude group: "cpw.mods", module: "modlauncher"
+    }
 }
 
 loom {
@@ -42,5 +63,43 @@ loom {
     }
 }
 
+
+processResources {
+    from project(":common").sourceSets.main.resources
+}
+
+shadowJar {
+    exclude("META-INF")
+    configurations = [project.configurations.shade]
+    archiveClassifier = "shadow"
+    relocate 'net.neoforged.bus', "${project.group}.relocated.net.neoforged.bus"
+}
+
+remapJar {
+    dependsOn(shadowJar)
+    mustRunAfter(shadowJar)
+    inputFile = file(tasks.shadowJar.archiveFile)
+}
+
+publishMods {
+    file = tasks.remapJar.archiveFile
+    displayName = file.map { it.asFile.name }
+    changelog = file("..\\changelog.md").text.split('\n').collect { string -> {
+        if (!string.isBlank()) {
+            string + "</br>"
+        } else {
+            string
+        }
+    }}.join('\n')
+    type = BETA
+    modLoaders.add("fabric")
+    curseforge {
+        accessToken = file("D:\\curseforge-key.txt").text
+        projectId = "1150640"
+        clientRequired = true
+        minecraftVersions.add("1.20.1")
+        requires("fzzy-config")
+    }
+}
 
 

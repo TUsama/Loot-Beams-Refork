@@ -170,7 +170,6 @@ publishMods {
     }}.join('\n')
     type = STABLE
     modLoaders.add("forge")
-    dryRun = true
     curseforge {
         accessToken = file("D:\\curseforge-key.txt").text
         projectId = "1150640"

@@ -19,22 +19,40 @@ public class SoundModule implements ILBModule {
     public static final SoundModule INSTANCE = new SoundModule();
 
     private static boolean canSound(EntityRenderDispatcherHookEvent.RenderLootBeamEvent event, ItemEntity itemEntity) {
-        if (event.LBItemEntity.isSounded()) return false;
-        if (!SoundConfigHandler.checkInBlackList(event.LBItemEntity)) return false;
-        return (SoundConfig.soundConfig.soundSection.sound_all_items
-                || (SoundConfig.soundConfig.soundSection.sound_only_equipment && EquipmentConditions.isEquipment(itemEntity.getItem()))
-                || (SoundConfig.soundConfig.soundSection.sound_only_rare && event.LBItemEntity.isRare())
-                || SoundConfigHandler.checkInWhiteList(event.LBItemEntity));
+        if (SoundConfigHandler.checkInBlackList(event.LBItemEntity)) return false;
+        if (SoundConfig.soundConfig.soundSection.sound_all_items || SoundConfigHandler.checkInWhiteList(event.LBItemEntity)) return true;
+        boolean equipmentCondition = SoundConfig.soundConfig.soundSection.sound_only_equipment;
+        boolean isEquipment = EquipmentConditions.isEquipment(itemEntity.getItem());
+        boolean rareCondition = SoundConfig.soundConfig.soundSection.sound_only_rare;
+        boolean isRare = event.LBItemEntity.isRare();
+        if(equipmentCondition){
+            if(isEquipment){
+                if(rareCondition){
+                    return isRare;
+                } else {
+                    return true;
+                }
+            } else{
+                return false;
+            }
+        } else {
+            if(rareCondition){
+                return isRare;
+            } else {
+                return false;
+            }
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onEnableModule(EntityRenderDispatcherHookEvent.RenderLootBeamEvent event) {
         if (event.LBItemEntity.isSounded()) return;
         ItemEntity itemEntity = event.LBItemEntity.item();
+
         if (event.LBItemEntity.canBeRender() == LBItemEntity.RenderState.REJECT) return;
 
-        if (event.LBItemEntity.canBeRender() == LBItemEntity.RenderState.PASS && canSound(event, itemEntity)
-        ) {
+        if (event.LBItemEntity.canBeRender() == LBItemEntity.RenderState.PASS && canSound(event, itemEntity))
+        {
 
             WeighedSoundEvents sound = Minecraft.getInstance().getSoundManager().getSoundEvent(LootBeamsConstants.LOOT_DROP);
 

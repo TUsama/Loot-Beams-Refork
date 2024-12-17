@@ -26,6 +26,7 @@ public class ConfigColorOverride extends ModifyingConfigHandler {
 
     @Override
     public LBItemEntity modify(LBItemEntity lbItemEntity) {
+        if (!LightConfig.lightConfig.customColorSetting.enable_custom_color) return lbItemEntity;
         AtomicReference<LBItemEntity> result = new AtomicReference<>(lbItemEntity);
         if (!overrides.isEmpty()) {
 

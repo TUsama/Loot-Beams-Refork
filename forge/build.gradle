@@ -2,7 +2,6 @@
 
 plugins {
     id 'idea'
-    id 'maven-publish'
     id 'net.minecraftforge.gradle'
     id 'org.spongepowered.mixin'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
@@ -171,7 +170,7 @@ publishMods {
     }}.join('\n')
     type = STABLE
     modLoaders.add("forge")
-
+    dryRun = true
     curseforge {
         accessToken = file("D:\\curseforge-key.txt").text
         projectId = "1150640"
@@ -183,17 +182,4 @@ publishMods {
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId base.archivesName.get()
-            from components.java
-            fg.component(it)
-        }
-    }
-    repositories {
-        maven {
-            url "file://" + System.getenv("local_maven")
-        }
-    }
-}
+

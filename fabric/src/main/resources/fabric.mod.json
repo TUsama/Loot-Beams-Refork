@@ -16,12 +16,17 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-          "com.clefal.lootbeams.ExampleMod"
+        ],
+        "client": [
+            "com.clefal.lootbeams.LootBeams"
         ]
     },
     "mixins": [
         "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
+        {
+            "config": "${mod_id}.fabric.mixins.json",
+            "environment": "client"
+        }
     ],
     "depends": {
         "fabricloader": ">=0.14",

@@ -1,3 +1,7 @@
+### V2.4.1
+add Fabric support!
+fix a config issue that the equipment and rare condition can't work together correctly
+
 ### V2.4.0
 add 1.21.1 neoforge support!
 change the beam facing way

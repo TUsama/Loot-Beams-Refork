@@ -26,9 +26,8 @@ public class Hooker {
         LightConfig.Beam beamSection = LightConfig.lightConfig.beamSection;
 
         var OnGroundCondition = (!beamSection.require_on_ground || itemEntity.onGround());
-        boolean b = checkRenderable(itemEntity, lbItemEntity1) && OnGroundCondition;
 
-        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || b) {
+        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || checkRenderable(itemEntity, lbItemEntity1) && OnGroundCondition) {
             if (beamSection.enable_beam) {
                 EntityRenderDispatcherHookEvent.RenderLootBeamEvent renderLootBeamEvent = new EntityRenderDispatcherHookEvent.RenderLootBeamEvent(lbItemEntity1, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light);
                 LootBeamsConstants.EVENT_BUS.post(renderLootBeamEvent);

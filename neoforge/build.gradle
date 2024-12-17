@@ -140,5 +140,6 @@ publishMods {
             start = "1.21"
             end = "${minecraft_version}"
         }
+        requires("fzzy-config")
     }
 }

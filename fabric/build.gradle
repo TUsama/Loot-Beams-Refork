@@ -2,7 +2,7 @@ plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
     id "me.modmuss50.mod-publish-plugin" version "0.8.1"
-    id 'com.github.johnrengelman.shadow' version '7.1.1'
+    id 'com.gradleup.shadow' version '9.0.0-beta4'
 
 }
 base {
@@ -97,7 +97,10 @@ publishMods {
         accessToken = file("D:\\curseforge-key.txt").text
         projectId = "1150640"
         clientRequired = true
-        minecraftVersions.add("1.20.1")
+        minecraftVersionRange {
+            start = "1.21"
+            end = "${minecraft_version}"
+        }
         requires("fzzy-config")
     }
 }

@@ -61,7 +61,7 @@ public class LightConfig extends Config {
         public boolean enable_custom_color = false;
         public ValidatedMap<ResourceLocation, ValidatedColor.ColorHolder> color_override = new ValidatedMap<>(
                 new LinkedHashMap<>(){{
-                    put(ResourceLocation.of("minecraft:air", ':'), new ValidatedColor(0, 0, 0, 0).copyStoredValue());
+                    put(ResourceLocation.fromNamespaceAndPath("minecraft", "air"), new ValidatedColor(0, 0, 0, 0).copyStoredValue());
                 }},
                 new ValidatedIdentifier(),
                 new ValidatedColor(255, 128, 0, 255)

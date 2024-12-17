@@ -24,7 +24,7 @@ public class SoundModule implements ILBModule {
         boolean equipmentCondition = SoundConfig.soundConfig.soundSection.sound_only_equipment;
         boolean isEquipment = EquipmentConditions.isEquipment(itemEntity.getItem());
         boolean rareCondition = SoundConfig.soundConfig.soundSection.sound_only_rare;
-        boolean isRare = event.LBItemEntity.isRare();
+        boolean isRare = event.LBItemEntity.shouldPlayRareSound();
         if(equipmentCondition){
             if(isEquipment){
                 if(rareCondition){

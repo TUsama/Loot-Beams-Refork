@@ -13,7 +13,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class Hooker {
@@ -51,7 +50,7 @@ public class Hooker {
         boolean equipmentCondition = filter.only_equipment;
         boolean isEquipment = EquipmentConditions.isEquipment(itemEntity.getItem());
         boolean rareCondition = filter.only_rare;
-        boolean isRare = lbItemEntity1.isRare();
+        boolean isRare = lbItemEntity1.ShouldRenderRareBeam();
         if (equipmentCondition) {
             if (isEquipment) {
                 if (rareCondition) {

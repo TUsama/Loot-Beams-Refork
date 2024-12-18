@@ -29,7 +29,7 @@ public class InternalLBItemEntityProvider implements ILBModulePersistentData {
                 return apply.get();
             }
         }
-        return LBItemEntity.of(entity, LBRarity.of(Rarity.COMMON));
+        return LBItemEntity.of(entity, LBRarity.ofVanillaRarity(Rarity.COMMON));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class InternalLBItemEntityProvider implements ILBModulePersistentData {
         LootBeamsConstants.EVENT_BUS.post(new RegisterLBRarityEvent.Post(appliers));
         sources.addAll(appliers);
         //vanilla rarity transformer
-        sources.add(itemEntity -> Option.some(LBItemEntity.of(itemEntity, LBRarity.of(itemEntity.getItem().getRarity()))));
+        sources.add(itemEntity -> Option.some(LBItemEntity.of(itemEntity, LBRarity.ofVanillaRarity(itemEntity.getItem().getRarity()))));
     }
 
     @Override

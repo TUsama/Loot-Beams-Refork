@@ -1,28 +1,41 @@
 package com.clefal.lootbeams.modules.sound;
 
+import com.clefal.lootbeams.config.configs.Checker;
+import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.config.configs.SoundConfig;
 import com.clefal.lootbeams.config.services.IServicesChecker;
 import com.clefal.lootbeams.config.services.PlatformChecker;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
+import com.google.common.base.Supplier;
+import lombok.experimental.UtilityClass;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.stream.Stream;
+@UtilityClass
 public class SoundConfigHandler {
 
     public static boolean checkInBlackList(LBItemEntity lbItemEntity){
         SoundConfig.SoundFilter soundFilter = SoundConfig.soundConfig.soundFilter;
-        return soundFilter.blacklist.stream()
-                .anyMatch(x -> {
-                    IServicesChecker checker = PlatformChecker.PLATFORM;
-                    return checker.checkItemEquality(lbItemEntity, x) ||  checker.checkTagContainItem(lbItemEntity, x) || checker.checkIsThisMod(lbItemEntity, x);
-                });
+        Supplier<Boolean> b = () -> soundFilter.blacklist_by_name.stream()
+                .anyMatch(x -> Checker.checkItemEquality(lbItemEntity, x));
+        Supplier<Boolean> b1 = () -> soundFilter.blacklist_by_tag.stream()
+                .map(x -> x.replace("#", ""))
+                .anyMatch(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.of(x, ':')));
+        Supplier<Boolean> b2 = () -> soundFilter.blacklist_by_modid.stream()
+                .anyMatch(x -> Checker.checkIsThisMod(lbItemEntity, x));
+        return Stream.of(b, b1, b2).anyMatch(Supplier::get);
     }
 
     public static boolean checkInWhiteList(LBItemEntity lbItemEntity){
         SoundConfig.SoundFilter soundFilter = SoundConfig.soundConfig.soundFilter;
-        return soundFilter.whitelist.stream()
-                .anyMatch(x -> {
-                    IServicesChecker checker = PlatformChecker.PLATFORM;
-                    return checker.checkItemEquality(lbItemEntity, x) ||  checker.checkTagContainItem(lbItemEntity, x) || checker.checkIsThisMod(lbItemEntity, x);
-                });
+        Supplier<Boolean> b = () -> soundFilter.whitelist_by_name.stream()
+                .anyMatch(x -> Checker.checkItemEquality(lbItemEntity, x));
+        Supplier<Boolean> b1 = () -> soundFilter.whitelist_by_tag.stream()
+                .map(x -> x.replace("#", ""))
+                .anyMatch(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.of(x, ':')));
+        Supplier<Boolean> b2 = () -> soundFilter.whitelist_by_modid.stream()
+                .anyMatch(x -> Checker.checkIsThisMod(lbItemEntity, x));
+        return Stream.of(b, b1, b2).anyMatch(Supplier::get);
+
     }
 }

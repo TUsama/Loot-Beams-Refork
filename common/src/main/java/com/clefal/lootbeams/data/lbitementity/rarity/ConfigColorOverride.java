@@ -1,24 +1,21 @@
 package com.clefal.lootbeams.data.lbitementity.rarity;
 
+import com.clefal.lootbeams.config.configs.Checker;
 import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
-import com.clefal.lootbeams.config.services.IServicesChecker;
-import com.clefal.lootbeams.config.services.PlatformChecker;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
-import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedIdentifierMap;
-import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedMap;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedColor;
 import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ConfigColorOverride extends ModifyingConfigHandler {
 
-
-
-    private final ValidatedIdentifierMap<ValidatedColor.ColorHolder> overrides = LightConfig.lightConfig.customColorSetting.color_override;
 
     public ConfigColorOverride() {
 
@@ -27,23 +24,39 @@ public class ConfigColorOverride extends ModifyingConfigHandler {
 
     @Override
     public LBItemEntity modify(LBItemEntity lbItemEntity) {
-        if (!LightConfig.lightConfig.customColorSetting.enable_custom_color) return lbItemEntity;
+        LightConfig.CustomColorSetting customColorSetting = LightConfig.lightConfig.customColorSetting;
+        if (!customColorSetting.enable_custom_color) return lbItemEntity;
         AtomicReference<LBItemEntity> result = new AtomicReference<>(lbItemEntity);
-        if (!overrides.isEmpty()) {
+        Supplier<Optional<ValidatedColor.ColorHolder>> o = () -> customColorSetting.color_override_by_name
+                .entrySet()
+                .stream()
+                .filter(x -> Checker.checkItemEquality(lbItemEntity, x.getKey()))
+                .map(Map.Entry::getValue)
+                .findFirst();
 
-            overrides.get().entrySet().stream()
-                    .filter(x -> {
-                        IServicesChecker checker = PlatformChecker.PLATFORM;
-                        ResourceLocation key = x.getKey();
-                        return checker.checkItemEquality(lbItemEntity, key) ||  checker.checkTagContainItem(lbItemEntity, key) || checker.checkIsThisMod(lbItemEntity, key);
-                    })
-                    .findFirst()
-                    .ifPresent(x -> {
-                        result.set(lbItemEntity.to(LBRarity.of(lbItemEntity.rarity().name(), new Color(x.getValue().argb(), true), lbItemEntity.rarity().absoluteOrdinal())));
-                    });
+        Supplier<Optional<ValidatedColor.ColorHolder>> o1 = () -> customColorSetting.color_override_by_tag
+                .entrySet()
+                .stream()
+                .filter(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.of(x.getKey().replace("#", ""), ':')))
+                .map(Map.Entry::getValue)
+                .findFirst();
 
+        Supplier<Optional<ValidatedColor.ColorHolder>> o2 = () -> customColorSetting.color_override_by_modid
+                .entrySet()
+                .stream()
+                .filter(x -> Checker.checkIsThisMod(lbItemEntity, x.getKey()))
+                .map(Map.Entry::getValue)
+                .findFirst();
 
-        }
+        Stream.of(o, o1, o2)
+                .map(Supplier::get)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .findFirst()
+                .ifPresent(x -> {
+                    result.set(lbItemEntity.to(lbItemEntity.rarity().configModifyColor(new Color(x.argb(), true))));
+                });
+
         return result.get();
     }
 }

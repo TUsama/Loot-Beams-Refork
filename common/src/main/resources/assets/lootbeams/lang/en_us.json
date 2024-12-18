@@ -3,5 +3,7 @@
   "lootbeams.vanilla_rarity.uncommon": "Uncommon",
   "lootbeams.vanilla_rarity.rare": "Rare",
   "lootbeams.vanilla_rarity.epic": "Epic",
-  "lootbeams.mod_rarity.non_soul": "Non Soul"
+  "lootbeams.mod_rarity.non_soul": "Non Soul",
+  "lootbeams.lightconfig.lighteffectfilter.whitelist_by_tag.desc": "the format is the same as the datapack format, start with \"#\".",
+  "lootbeams.light_config.lightEffectFilter.blacklist_by_tag.desc": "the format is the same as the datapack format, start with \"#\"."
 }

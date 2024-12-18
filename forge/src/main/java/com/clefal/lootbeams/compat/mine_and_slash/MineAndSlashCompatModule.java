@@ -26,7 +26,7 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
     private final List<String> rarities = new ArrayList<>();
 
     public static LBRarity getNonSoulRarity() {
-        return new LBRarity(Component.translatable("lootbeams.mod_rarity.non_soul"), new Color(121, 121, 121), -1);
+        return LBRarity.of(Component.translatable("lootbeams.mod_rarity.non_soul"), new Color(121, 121, 121), -1);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.services.IServiceCollector;
+import com.clefal.lootbeams.utils.ResourceLocationHelper;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
@@ -30,7 +31,7 @@ public class LightConfig extends Config {
 
 
     public LightConfig() {
-        super(ResourceLocation.parse(LootBeamsConstants.MODID + ":light_config"));
+        super(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID, "light_config"));
     }
 
     public static void init() {

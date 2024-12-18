@@ -1,6 +1,7 @@
 package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.utils.ResourceLocationHelper;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
@@ -12,7 +13,7 @@ public class DynamicConfig extends Config {
     public boolean enable_dynamic = true;
     public ValidatedInt half_round_ticks = new ValidatedInt(30);
     public DynamicConfig() {
-        super(ResourceLocation.parse(LootBeamsConstants.MODID + ":dynamic_config"));
+        super(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID , "dynamic_config"));
     }
     public static void init(){
 

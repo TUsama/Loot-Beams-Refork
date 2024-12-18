@@ -37,7 +37,7 @@ public class ConfigColorOverride extends ModifyingConfigHandler {
         Supplier<Optional<ValidatedColor.ColorHolder>> o1 = () -> customColorSetting.color_override_by_tag
                 .entrySet()
                 .stream()
-                .filter(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.of(x.getKey().replace("#", ""), ':')))
+                .filter(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.bySeparator(x.getKey().replace("#", ""), ':')))
                 .map(Map.Entry::getValue)
                 .findFirst();
 

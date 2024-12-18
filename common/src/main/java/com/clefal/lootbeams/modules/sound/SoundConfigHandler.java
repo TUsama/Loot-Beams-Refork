@@ -20,7 +20,7 @@ public class SoundConfigHandler {
                 .anyMatch(x -> Checker.checkItemEquality(lbItemEntity, x));
         Supplier<Boolean> b1 = () -> soundFilter.blacklist_by_tag.stream()
                 .map(x -> x.replace("#", ""))
-                .anyMatch(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.of(x, ':')));
+                .anyMatch(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.bySeparator(x, ':')));
         Supplier<Boolean> b2 = () -> soundFilter.blacklist_by_modid.stream()
                 .anyMatch(x -> Checker.checkIsThisMod(lbItemEntity, x));
         return Stream.of(b, b1, b2).anyMatch(Supplier::get);
@@ -32,7 +32,7 @@ public class SoundConfigHandler {
                 .anyMatch(x -> Checker.checkItemEquality(lbItemEntity, x));
         Supplier<Boolean> b1 = () -> soundFilter.whitelist_by_tag.stream()
                 .map(x -> x.replace("#", ""))
-                .anyMatch(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.of(x, ':')));
+                .anyMatch(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocation.bySeparator(x, ':')));
         Supplier<Boolean> b2 = () -> soundFilter.whitelist_by_modid.stream()
                 .anyMatch(x -> Checker.checkIsThisMod(lbItemEntity, x));
         return Stream.of(b, b1, b2).anyMatch(Supplier::get);

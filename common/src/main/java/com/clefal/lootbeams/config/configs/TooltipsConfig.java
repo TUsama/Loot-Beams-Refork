@@ -2,6 +2,7 @@ package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
+import com.clefal.lootbeams.utils.ResourceLocationHelper;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
@@ -18,7 +19,7 @@ public class TooltipsConfig extends Config {
     public TooltipsEnableStatus.TooltipsStatus tooltips_enable_status = TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_NAMETAG;
 
     public TooltipsConfig() {
-        super(new ResourceLocation(LootBeamsConstants.MODID + ":tooltips_config"));
+        super(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID , "tooltips_config"));
     }
     public static void init(){
 

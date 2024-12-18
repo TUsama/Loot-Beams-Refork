@@ -2,6 +2,7 @@ package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.services.IServiceCollector;
+import com.clefal.lootbeams.utils.ResourceLocationHelper;
 import me.fzzyhmstrs.fzzy_config.annotations.Action;
 import me.fzzyhmstrs.fzzy_config.annotations.Comment;
 import me.fzzyhmstrs.fzzy_config.annotations.RequiresAction;
@@ -24,7 +25,7 @@ public class SoundConfig extends Config {
     public SoundFilter soundFilter = new SoundFilter();
 
     public SoundConfig() {
-        super(new ResourceLocation(LootBeamsConstants.MODID + ":sound_config"));
+        super(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID, "sound_config"));
     }
     public static void init(){
 

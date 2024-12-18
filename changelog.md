@@ -1,3 +1,10 @@
+### V2.5.0
+re-implement the config filter. now it is more clear and understandable
+and don't use the color override config, this config option is currently broken.
+it could work, but it won't save the modification you made.
+
+fix a issue that the name tag can't properly render
+
 ### V2.4.3
 refactor the color_override
 add several comment

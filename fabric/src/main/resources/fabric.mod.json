@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "lootbeams",
+    "id": "${mod_id}",
     "version": "${version}",
     "name": "${mod_name}",
     "description": "${description}",
@@ -8,11 +8,12 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/loot-beams-refork",
+        "issues": "https://github.com/TUsama/Loot-Beams-Refork/issues",
+        "sources": "https://github.com/TUsama/Loot-Beams-Refork"
     },
     "license": "${license}",
-    "icon": "assets/modid/${mod_id}.png",
+    "icon": "assets/${mod_id}/${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [
@@ -28,6 +29,11 @@
             "environment": "client"
         }
     ],
+    "custom": {
+        "fzzy_config": [
+            "${mod_id}"
+        ]
+    },
     "depends": {
         "fabricloader": ">=0.14",
         "fabric": "*",

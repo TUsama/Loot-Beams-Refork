@@ -73,8 +73,6 @@ public class LightConfig extends Config {
                 new ValidatedColor(255, 255, 255, 255)
         );
 
-        public ValidatedColor color = new ValidatedColor(255, 255, 255, 255);
-
         public ValidatedMap<String, ValidatedColor.ColorHolder> color_override_by_modid = new ValidatedMap<>(
                 new LinkedHashMap<>(),
                 new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)),

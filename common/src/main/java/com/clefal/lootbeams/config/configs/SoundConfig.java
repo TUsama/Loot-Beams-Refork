@@ -1,6 +1,7 @@
 package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.config.services.IServiceCollector;
 import me.fzzyhmstrs.fzzy_config.annotations.Action;
 import me.fzzyhmstrs.fzzy_config.annotations.Comment;
 import me.fzzyhmstrs.fzzy_config.annotations.RequiresAction;
@@ -8,10 +9,13 @@ import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection;
+import me.fzzyhmstrs.fzzy_config.util.AllowableStrings;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedList;
 import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
+import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedString;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
 public class SoundConfig extends Config {
@@ -35,11 +39,12 @@ public class SoundConfig extends Config {
     }
 
     public static class SoundFilter extends ConfigSection {
-        @Comment(value = "support item, tag and modid")
-        @RequiresAction(action = Action.RESTART)
-        public ValidatedList<ResourceLocation> whitelist = new ValidatedIdentifier().toList();
-        @Comment(value = "support item, tag and modid")
-        @RequiresAction(action = Action.RESTART)
-        public ValidatedList<ResourceLocation> blacklist = new ValidatedIdentifier().toList();
+        public ValidatedList<ResourceLocation> whitelist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toList();
+        public ValidatedList<String> whitelist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
+        public ValidatedList<String> whitelist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
+
+        public ValidatedList<ResourceLocation> blacklist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toList();
+        public ValidatedList<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
+        public ValidatedList<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
     }
 }

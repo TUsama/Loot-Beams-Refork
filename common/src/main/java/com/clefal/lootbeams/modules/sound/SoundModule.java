@@ -2,7 +2,7 @@ package com.clefal.lootbeams.modules.sound;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.configs.SoundConfig;
-import com.clefal.lootbeams.data.equipment.EquipmentConditions;
+import com.clefal.lootbeams.config.persistent.EquipmentConditions;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.modules.ILBModule;

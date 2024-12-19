@@ -4,11 +4,17 @@ import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.compat.ILBCompatModule;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
-import com.clefal.lootbeams.events.RegisterEquipmentItemEvent;
+import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
+import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
+import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IRarityItem;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
+import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.GemItem;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fml.ModList;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -57,7 +63,12 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
 
                 Match(Match(itemEntity.getItem()).option(
                         //ItemEntity -> GearRarity
-                        Case($(stack -> StackSaving.GEARS.has(stack)), stack -> StackSaving.GEARS.loadFrom(stack).getRarity())
+                        Case($(stack -> StackSaving.GEARS.has(stack)), stack -> StackSaving.GEARS.loadFrom(stack).getRarity()),
+                        Case($(stack -> ICommonDataItem.load(stack) != null), stack -> ICommonDataItem.load(stack).getRarity()),
+                        Case($(stack -> stack.getItem() instanceof IRarityItem), stack -> ((IRarityItem) stack.getItem()).getItemRarity(stack)),
+                        Case($(stack -> stack.getItem() instanceof GemItem), stack -> ((GemItem) stack.getItem()).getBaseGem().getRarity()),
+                        Case($(stack -> StackSaving.OMEN.has(stack)), stack -> StackSaving.OMEN.loadFrom(stack).getRarity())
+
                 )).option(
                         //GearRarity -> LBRarity
                         Case($(option -> !option.isEmpty()), option -> LBItemEntity.of(itemEntity, LBRarity.of(
@@ -67,11 +78,23 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
                         ))),
                         Case($(option -> GearSlot.getSlotOf(itemEntity.getItem()) != null), option -> LBItemEntity.of(itemEntity, getNonSoulRarity()))
                 ));
+
     }
 
     @SubscribeEvent
-    public void registerEquipmentCondition(RegisterEquipmentItemEvent event) {
-        event.conditions.add(itemStack -> itemStack.getItem().getClass().toString().contains("com.robertx22.mine_and_slash.vanilla_mc.items.gearitems"));
+    public void registerEquipmentCondition(RegisterConfigConditionEvent.RegisterEquipmentItemEvent event) {
+        event.conditions.add(itemStack -> {
+            if (itemStack.getItem().getClass().toString().contains("com.robertx22.mine_and_slash.vanilla_mc.items.gearitems"))
+                return true;
+            GearSlot slotOf = GearSlot.getSlotOf(itemStack);
+            return (slotOf != null && slotOf.fam != SlotFamily.NONE);
+        });
+    }
+
+    @SubscribeEvent
+    public void registerWhitelistCondition(RegisterConfigConditionEvent.RegisterWhitelistEvent event) {
+        //currenccy, I prefer to show the currency always.
+        event.conditions.add(itemStack -> ExileCurrency.get(itemStack).isPresent() || itemStack.getItem() instanceof IItemAsCurrency);
     }
 
 }

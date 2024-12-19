@@ -20,6 +20,8 @@ mixin {
     config("${mod_id}.forge.mixins.json")
 }
 
+
+
 configurations {
     shade.extendsFrom(minecraftLibrary)
     implementation.extendsFrom shade
@@ -118,6 +120,11 @@ dependencies {
 
     implementation(fg.deobf("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"))
     implementation("thedarkcolour:kotlinforforge:4.11.0")
+
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.11.0+1.20.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.11.0+1.20.1:api")
+
+    runtimeOnly fg.deobf("curse.maven:charm-of-undying-316873:5159193")
 
     minecraftLibrary "io.vavr:vavr:0.10.4"
     minecraftLibrary ("net.neoforged:bus:${neoforge_eventbus_version}") {

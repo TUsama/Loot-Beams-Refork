@@ -1,11 +1,12 @@
 package com.clefal.lootbeams;
 
+import com.clefal.lootbeams.compat.TrinketCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
 import com.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 
-public class LootBeamsForgeModClientEvent {
+public class LootBeamsFabricModClientEvent {
 
     public static void init(){
         registerOverlay();
@@ -22,6 +23,9 @@ public class LootBeamsForgeModClientEvent {
 
     public static void registerModules() {
         LootBeamsConstants.LOGGER.info("register all modules");
+        ModulesManager.registerModules(
+                TrinketCompatModule.INSTANCE
+        );
         ModulesManager.enableAll();
         ConfigHandlers.init();
     }

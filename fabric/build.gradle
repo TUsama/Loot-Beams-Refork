@@ -29,6 +29,8 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}"
+    modCompileOnly "dev.emi:trinkets:3.7.2"
+    //modImplementation "curse.maven:charm-of-undying-316873:5159191"
 
     shade "io.vavr:vavr:0.10.4"
     shade ("net.neoforged:bus:${neoforge_eventbus_version}") {
@@ -69,7 +71,6 @@ processResources {
 }
 
 shadowJar {
-    exclude("META-INF")
     configurations = [project.configurations.shade]
     archiveClassifier = "shadow"
     relocate 'net.neoforged.bus', "${project.group}.relocated.net.neoforged.bus"

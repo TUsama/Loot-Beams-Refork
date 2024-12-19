@@ -5,6 +5,8 @@ import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.config.services.IServiceCollector;
 import com.clefal.lootbeams.data.equipment.EquipmentConditions;
+import com.clefal.lootbeams.config.persistent.EquipmentConditions;
+import com.clefal.lootbeams.config.persistent.WhitelistCondition;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntityCache;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
@@ -15,6 +17,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class Hooker {
@@ -29,7 +32,7 @@ public class Hooker {
 
         var OnGroundCondition = (!beamSection.require_on_ground || itemEntity.onGround());
 
-        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || checkRenderable(itemEntity, lbItemEntity1) && OnGroundCondition) {
+        if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.PASS || checkRenderable(lbItemEntity1) && OnGroundCondition) {
             if (beamSection.enable_beam) {
                 EntityRenderDispatcherHookEvent.RenderLootBeamEvent renderLootBeamEvent = new EntityRenderDispatcherHookEvent.RenderLootBeamEvent(lbItemEntity1, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light);
                 LootBeamsConstants.EVENT_BUS.post(renderLootBeamEvent);
@@ -46,12 +49,14 @@ public class Hooker {
         }
     }
 
-    private static boolean checkRenderable(ItemEntity itemEntity, LBItemEntity lbItemEntity1) {
+    private static boolean checkRenderable(LBItemEntity lbItemEntity1) {
         var filter = LightConfig.lightConfig.lightEffectFilter;
         if (LightConfigHandler.checkInBlackList(lbItemEntity1)) return false;
+        ItemStack item = lbItemEntity1.item().getItem();
         if (filter.all_item || LightConfigHandler.checkInWhiteList(lbItemEntity1) || lbItemEntity1.rarity().context().hasBeenModified()) return true;
+        if (WhitelistCondition.isInSpecialWhitelist(item)) return true;
         boolean equipmentCondition = filter.only_equipment;
-        boolean isEquipment = EquipmentConditions.isEquipment(itemEntity.getItem());
+        boolean isEquipment = EquipmentConditions.isEquipment(item);
         boolean rareCondition = filter.only_rare;
         boolean isRare = lbItemEntity1.ShouldRenderRareBeam();
         if (equipmentCondition) {

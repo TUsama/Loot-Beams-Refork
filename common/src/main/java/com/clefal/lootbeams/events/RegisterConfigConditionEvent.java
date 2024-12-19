@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class RegisterEquipmentItemEvent extends Event {
+public abstract class RegisterConfigConditionEvent extends Event {
     public final List<Predicate<ItemStack>> conditions = new ArrayList<>();
+
+    public static class RegisterEquipmentItemEvent extends RegisterConfigConditionEvent {
+    }
+
+
+    public static class RegisterWhitelistEvent extends RegisterConfigConditionEvent {
+    }
 }

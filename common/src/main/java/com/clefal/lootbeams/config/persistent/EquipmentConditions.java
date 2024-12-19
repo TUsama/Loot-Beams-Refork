@@ -1,13 +1,9 @@
 package com.clefal.lootbeams.config.persistent;
 
-import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
-import io.vavr.collection.List;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.function.Predicate;
-
-public class EquipmentConditions extends PersistentConfigData<RegisterConfigConditionEvent.RegisterEquipmentItemEvent>{
+public class EquipmentConditions extends PersistentConfigData<RegisterConfigConditionEvent.RegisterEquipmentItemEvent> {
     public final static EquipmentConditions INSTANCE = new EquipmentConditions();
 
 

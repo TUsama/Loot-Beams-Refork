@@ -105,14 +105,6 @@ public class LightConfig extends Config {
         public ValidatedList<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
         public ValidatedList<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
 
-
-        public ValidatedList<ResourceLocation> whitelist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toList();
-        public ValidatedList<String> whitelist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
-        public ValidatedList<String> whitelist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
-
-        public ValidatedList<ResourceLocation> blacklist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toList();
-        public ValidatedList<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
-        public ValidatedList<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
     }
 
 }

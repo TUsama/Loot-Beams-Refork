@@ -1,3 +1,9 @@
+### V2.5.1
+(Forge) add curios compat, now item that can be seen as trinket will also be seen as equipment, this will affect the config only_equipment.
+(Forge) improve the mns compat module
+(Fabric) add Trinket compat
+(Fabric) fix an upload issue
+
 ### V2.5.0
 re-implement the config filter. now it is more clear and understandable
 and don't use the color override config, this config option is currently broken.

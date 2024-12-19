@@ -1,7 +1,7 @@
 package com.clefal.lootbeams.compat.obscuretooltips;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.compat.ILBCompatModule;
+import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;

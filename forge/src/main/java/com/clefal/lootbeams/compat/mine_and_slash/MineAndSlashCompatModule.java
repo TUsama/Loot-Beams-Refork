@@ -1,7 +1,7 @@
 package com.clefal.lootbeams.compat.mine_and_slash;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.compat.ILBCompatModule;
+import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;

@@ -1,7 +1,7 @@
 package com.clefal.lootbeams.compat.curios;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.compat.ILBCompatModule;
+import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import net.minecraftforge.fml.ModList;
 import net.neoforged.bus.api.SubscribeEvent;

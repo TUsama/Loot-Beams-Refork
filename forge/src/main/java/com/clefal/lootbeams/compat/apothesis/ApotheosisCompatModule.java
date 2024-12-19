@@ -4,7 +4,7 @@ import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
-import com.clefal.lootbeams.compat.ILBCompatModule;
+import com.clefal.lootbeams.modules.ILBCompatModule;
 import dev.shadowsoffire.apotheosis.Apotheosis;
 import dev.shadowsoffire.apotheosis.adventure.affix.AffixHelper;
 import dev.shadowsoffire.apotheosis.adventure.affix.salvaging.SalvageItem;

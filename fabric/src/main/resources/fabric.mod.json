@@ -17,9 +17,10 @@
     "environment": "*",
     "entrypoints": {
         "main": [
+            "com.clefal.lootbeams.LootBeams"
         ],
         "client": [
-            "com.clefal.lootbeams.LootBeams"
+            "com.clefal.lootbeams.LootBeamsClient"
         ]
     },
     "mixins": [

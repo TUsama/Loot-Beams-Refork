@@ -67,28 +67,12 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
 
-/*
-    compileOnly fg.deobf("curse.maven:apotheosis-313970:5753183")
-    compileOnly fg.deobf("curse.maven:placebo-283644:5414631")
-    compileOnly fg.deobf("curse.maven:patchouli-306770:4966125")
-    compileOnly fg.deobf("curse.maven:apothic-attributes-898963:5634071")
-
-
-
-    implementation fg.deobf("curse.maven:library-of-exile-398780:5934664")
-    implementation fg.deobf("curse.maven:mine-and-slash-reloaded-306575:5939398")
-    runtimeOnly fg.deobf("curse.maven:curios-309927:5843594")
-    runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
-
-    compileOnly fg.deobf("curse.maven:legendary-tooltips-532127:4662781")
-    runtimeOnly fg.deobf("curse.maven:prism-lib-638111:4650325")
-    runtimeOnly fg.deobf("curse.maven:iceberg-520110:5838149")
-
-    compileOnly fg.deobf("curse.maven:obscure-tooltips-715660:4686579")*/
 
     implementation("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+neoforge")
-    // NEOFORGE
-    //implementation 'thedarkcolour:kotlinforforge-neoforge:4.11.0'
+
+    compileOnly "curse.maven:adorned-1036809:5740650"
+    compileOnly "curse.maven:accessories-938917:5727153"
+    compileOnly "curse.maven:curios-continuation-1037991:5747224"
 
     libraries "io.vavr:vavr:0.10.4"
     additionalRuntimeClasspath "io.vavr:vavr:0.10.4"

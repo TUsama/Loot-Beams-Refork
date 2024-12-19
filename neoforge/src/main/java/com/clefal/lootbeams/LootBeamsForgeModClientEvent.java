@@ -1,6 +1,8 @@
 package com.clefal.lootbeams;
 
 
+import com.clefal.lootbeams.compat.AccessoriesCompatModule;
+import com.clefal.lootbeams.compat.CuriosContinuationAndAdornedCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
 import com.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -27,7 +29,10 @@ public class LootBeamsForgeModClientEvent {
     @SubscribeEvent
     public static void registerModules(FMLClientSetupEvent event) {
         LootBeamsConstants.LOGGER.info("register all modules");
-
+        ModulesManager.registerModules(
+                CuriosContinuationAndAdornedCompatModule.INSTANCE,
+                AccessoriesCompatModule.INSTANCE
+        );
         ModulesManager.enableAll();
         ConfigHandlers.init();
     }

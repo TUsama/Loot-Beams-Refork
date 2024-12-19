@@ -1,5 +1,6 @@
 package com.clefal.lootbeams;
 
+import com.clefal.lootbeams.compat.AccessoriesCompatModule;
 import com.clefal.lootbeams.compat.TrinketCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
@@ -15,16 +16,15 @@ public class LootBeamsFabricModClientEvent {
 
 
     public static void registerOverlay() {
-        HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
-            AdvanceTooltipOverlay.INSTANCE.render(drawContext, tickDelta, drawContext.guiWidth(), drawContext.guiHeight());
-        });
+        HudRenderCallback.EVENT.register(AdvanceTooltipOverlay.INSTANCE::render);
     }
 
 
     public static void registerModules() {
         LootBeamsConstants.LOGGER.info("register all modules");
         ModulesManager.registerModules(
-                TrinketCompatModule.INSTANCE
+                TrinketCompatModule.INSTANCE,
+                AccessoriesCompatModule.INSTANCE
         );
         ModulesManager.enableAll();
         ConfigHandlers.init();

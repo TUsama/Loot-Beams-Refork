@@ -8,14 +8,13 @@ import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
-import net.minecraft.resources.ResourceLocation;
 
 public class TooltipsConfig extends Config {
 
     public static TooltipsConfig tooltipsConfig = ConfigApiJava.registerAndLoadConfig(TooltipsConfig::new, RegisterType.CLIENT);
 
-    public nameTagSection nameTagSection = new nameTagSection();
-    public TooltipsSection tooltipsSection = new TooltipsSection();
+    public nameTagSection nameTag = new nameTagSection();
+    public TooltipsSection tooltips = new TooltipsSection();
     public TooltipsEnableStatus.TooltipsStatus tooltips_enable_status = TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_NAMETAG;
 
     public TooltipsConfig() {
@@ -26,7 +25,6 @@ public class TooltipsConfig extends Config {
     }
     public static class nameTagSection extends ConfigSection {
         public boolean render_name_tag_on_look = true;
-        public boolean name_tag_need_crouch = false;
         public boolean add_text_border = true;
         public boolean render_stack_count = true;
         public ValidatedFloat name_tag_look_sensitivity = new ValidatedFloat(0.018f);

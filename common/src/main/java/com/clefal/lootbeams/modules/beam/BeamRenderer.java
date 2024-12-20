@@ -1,6 +1,5 @@
 package com.clefal.lootbeams.modules.beam;
 
-import com.clefal.lootbeams.config.Config;
 import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProvider;
@@ -29,8 +28,8 @@ public class BeamRenderer {
         Color color = LBItemEntity.rarity().color();
         int lifeTime = LBItemEntity.fadeIn();
 
-        LightConfig.Beam beamConfig = LightConfig.lightConfig.beamSection;
-        LightConfig.Glow glowConfig = LightConfig.lightConfig.glowSection;
+        LightConfig.Beam beamConfig = LightConfig.lightConfig.beam;
+        LightConfig.Glow glowConfig = LightConfig.lightConfig.glow;
 
         int fadeInTime = beamConfig.beam_fade_in_time.get();
         var fadeInFactor = 1.0f * lifeTime / fadeInTime;

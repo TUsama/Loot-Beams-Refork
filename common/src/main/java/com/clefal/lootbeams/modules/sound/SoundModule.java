@@ -2,7 +2,6 @@ package com.clefal.lootbeams.modules.sound;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.configs.SoundConfig;
-import com.clefal.lootbeams.config.persistent.EquipmentConditions;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.modules.ILBModule;
@@ -20,28 +19,7 @@ public class SoundModule implements ILBModule {
 
     private static boolean canSound(EntityRenderDispatcherHookEvent.RenderLootBeamEvent event, ItemEntity itemEntity) {
         if (SoundConfigHandler.checkInBlackList(event.LBItemEntity)) return false;
-        if (SoundConfig.soundConfig.soundSection.sound_all_items || SoundConfigHandler.checkInWhiteList(event.LBItemEntity)) return true;
-        boolean equipmentCondition = SoundConfig.soundConfig.soundSection.sound_only_equipment;
-        boolean isEquipment = EquipmentConditions.isEquipment(itemEntity.getItem());
-        boolean rareCondition = SoundConfig.soundConfig.soundSection.sound_only_rare;
-        boolean isRare = event.LBItemEntity.shouldPlayRareSound();
-        if(equipmentCondition){
-            if(isEquipment){
-                if(rareCondition){
-                    return isRare;
-                } else {
-                    return true;
-                }
-            } else{
-                return false;
-            }
-        } else {
-            if(rareCondition){
-                return isRare;
-            } else {
-                return false;
-            }
-        }
+        return event.LBItemEntity.isRare();
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -57,7 +35,7 @@ public class SoundModule implements ILBModule {
             WeighedSoundEvents sound = Minecraft.getInstance().getSoundManager().getSoundEvent(LootBeamsConstants.LOOT_DROP);
 
             if (sound != null && Minecraft.getInstance().level != null) {
-                Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), SoundEvent.createFixedRangeEvent(LootBeamsConstants.LOOT_DROP, 8.0f), SoundSource.AMBIENT, 0.1f * SoundConfig.soundConfig.soundSection.sound_volume.get(), 1.0f);
+                Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), SoundEvent.createFixedRangeEvent(LootBeamsConstants.LOOT_DROP, 8.0f), SoundSource.AMBIENT, 0.1f * SoundConfig.soundConfig.sound.sound_volume.get(), 1.0f);
                 event.LBItemEntity.updateSounded();
             }
         }
@@ -65,7 +43,7 @@ public class SoundModule implements ILBModule {
 
     @Override
     public void tryEnable() {
-        if (SoundConfig.soundConfig.soundSection.enable_sound) {
+        if (SoundConfig.soundConfig.sound.enable_sound) {
             LootBeamsConstants.EVENT_BUS.register(INSTANCE);
         }
     }

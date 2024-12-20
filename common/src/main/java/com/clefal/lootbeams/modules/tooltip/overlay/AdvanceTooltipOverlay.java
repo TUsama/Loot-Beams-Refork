@@ -59,7 +59,7 @@ public class AdvanceTooltipOverlay {
     }
 
     public static boolean checkCrouch() {
-        return !TooltipsConfig.tooltipsConfig.tooltipsSection.render_tooltips_on_crouch || Minecraft.getInstance().player.isCrouching();
+        return !TooltipsConfig.tooltipsConfig.tooltips.render_tooltips_on_crouch || Minecraft.getInstance().player.isCrouching();
     }
 
     public Vector2f transformToScreenCoordinate(Vector3f worldCoordinate, float partialTicks) {

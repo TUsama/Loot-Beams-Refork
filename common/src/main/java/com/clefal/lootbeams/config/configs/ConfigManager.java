@@ -7,5 +7,6 @@ public class ConfigManager {
         TooltipsConfig.init();
         SoundConfig.init();
         DynamicConfig.init();
+        CustomConfig.init();
     }
 }

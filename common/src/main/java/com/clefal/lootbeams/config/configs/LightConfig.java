@@ -89,7 +89,7 @@ public class LightConfig extends Config {
     public static class LightEffectFilter extends ConfigSection {
         public boolean all_item = false;
         public boolean only_rare = false;
-        public ValidatedInt rare_ordinal_min = new ValidatedInt(3);
+
         public boolean only_equipment = false;
         private final List<ResourceLocation> defaultVanillaWhitelist = ImmutableList.of(
                 "minecraft:totem_of_undying",

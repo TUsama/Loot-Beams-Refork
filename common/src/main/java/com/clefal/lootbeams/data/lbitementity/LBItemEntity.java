@@ -1,5 +1,6 @@
 package com.clefal.lootbeams.data.lbitementity;
 
+import com.clefal.lootbeams.config.configs.CustomConfig;
 import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.config.configs.SoundConfig;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
@@ -54,7 +55,7 @@ public class LBItemEntity {
 
 
     public boolean isRare() {
-        int min = LightConfig.lightConfig.lightEffectFilter.rare_ordinal_min.get();
+        int min = CustomConfig.customConfig.rareCondition.rare_ordinal_min.get();
 
         return this.rarity.absoluteOrdinal() >= min;
     }

@@ -22,7 +22,6 @@ public class Hooker {
     public static void lootBeamEntityDispatcherHook(Entity entity, double worldX, double worldY, double worldZ, float entityYRot, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int light, CallbackInfo ci) {
         if (!(entity instanceof ItemEntity itemEntity)) return;
 
-        System.out.println(itemEntity.getItem().getTags().toList());
         LBItemEntity lbItemEntity1 = LBItemEntityCache.ask(itemEntity);
         if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.REJECT) return;
         LightConfig.Beam beamSection = LightConfig.lightConfig.beam;

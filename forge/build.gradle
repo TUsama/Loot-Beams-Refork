@@ -107,16 +107,17 @@ dependencies {
 
 
 
-    implementation fg.deobf("curse.maven:library-of-exile-398780:5934664")
-    implementation fg.deobf("curse.maven:mine-and-slash-reloaded-306575:5939398")
-    runtimeOnly fg.deobf("curse.maven:curios-309927:5843594")
-    runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
+    compileOnly fg.deobf("curse.maven:library-of-exile-398780:5934664")
+    compileOnly fg.deobf("curse.maven:mine-and-slash-reloaded-306575:5939398")
+    //runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
 
     compileOnly fg.deobf("curse.maven:legendary-tooltips-532127:4662781")
-    runtimeOnly fg.deobf("curse.maven:prism-lib-638111:4650325")
-    runtimeOnly fg.deobf("curse.maven:iceberg-520110:5838149")
+    /*runtimeOnly fg.deobf("curse.maven:prism-lib-638111:4650325")
+    runtimeOnly fg.deobf("curse.maven:iceberg-520110:5838149")*/
 
     compileOnly fg.deobf("curse.maven:obscure-tooltips-715660:4686579")
+
+    compileOnly fg.deobf("curse.maven:spartan-weaponry-278141:5597663")
 
     implementation(fg.deobf("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"))
     implementation("thedarkcolour:kotlinforforge:4.11.0")
@@ -124,7 +125,12 @@ dependencies {
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.11.0+1.20.1")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.11.0+1.20.1:api")
 
-    runtimeOnly fg.deobf("curse.maven:charm-of-undying-316873:5159193")
+    runtimeOnly fg.deobf("curse.maven:balkons-weaponmod-legacy-1033985:5853414")
+    runtimeOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
+    runtimeOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
+    runtimeOnly fg.deobf("curse.maven:crafttweaker-239197:5880672")
+
+
 
     minecraftLibrary "io.vavr:vavr:0.10.4"
     minecraftLibrary ("net.neoforged:bus:${neoforge_eventbus_version}") {

@@ -4,6 +4,7 @@ import com.clefal.lootbeams.compat.apothesis.ApotheosisCompatModule;
 import com.clefal.lootbeams.compat.curios.CuriosCompatModule;
 import com.clefal.lootbeams.compat.mine_and_slash.MineAndSlashCompatModule;
 import com.clefal.lootbeams.compat.obscuretooltips.ObscureTooltipsCompatModule;
+import com.clefal.lootbeams.compat.spartanweaponry.SpartanWeaponryCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
 import com.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -31,7 +32,9 @@ public class LootBeamsForgeModClientEvent {
                 new ApotheosisCompatModule(),
                 MineAndSlashCompatModule.INSTANCE,
                 ObscureTooltipsCompatModule.INSTANCE,
-                CuriosCompatModule.INSTANCE);
+                CuriosCompatModule.INSTANCE,
+                SpartanWeaponryCompatModule.INSTANCE
+        );
         ModulesManager.enableAll();
         ConfigHandlers.init();
     }

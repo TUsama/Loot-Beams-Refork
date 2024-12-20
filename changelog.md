@@ -1,3 +1,6 @@
+### V2.5.1
+add three trinket api mods compat.
+
 ### V2.5.0
 re-implement the config filter. now it is more clear and understandable
 and don't use the color override config, this config option is currently broken.

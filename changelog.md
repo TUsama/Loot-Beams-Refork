@@ -1,3 +1,9 @@
+### V2.5.2
+(Common) implement the equipment config check, now you can add any equipment that isn't covered by internal equipment check to it.
+(Common) fix an issue that can't detect the vanilla equipment.
+(Common) remove some sound filter entry, now it follow the light effect config. You can now only control the blacklist.
+It's recommended that back up and delete your modified config files to let the mod regenerate the new configs.
+
 ### V2.5.1
 add three trinket api mods compat.
 

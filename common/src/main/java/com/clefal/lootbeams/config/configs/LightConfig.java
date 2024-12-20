@@ -12,6 +12,7 @@ import me.fzzyhmstrs.fzzy_config.util.AllowableStrings;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedIdentifierMap;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedList;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedMap;
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedSet;
 import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedColor;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedString;
@@ -26,8 +27,8 @@ import java.util.List;
 public class LightConfig extends Config {
     public static LightConfig lightConfig = ConfigApiJava.registerAndLoadConfig(LightConfig::new, RegisterType.CLIENT);
 
-    public Beam beamSection = new Beam();
-    public Glow glowSection = new Glow();
+    public Beam beam = new Beam();
+    public Glow glow = new Glow();
     public CustomColorSetting customColorSetting = new CustomColorSetting();
     public LightEffectFilter lightEffectFilter = new LightEffectFilter();
 
@@ -89,7 +90,7 @@ public class LightConfig extends Config {
         public boolean all_item = false;
         public boolean only_rare = false;
         public ValidatedInt rare_ordinal_min = new ValidatedInt(3);
-        public boolean only_equipment = true;
+        public boolean only_equipment = false;
         private final List<ResourceLocation> defaultVanillaWhitelist = ImmutableList.of(
                 "minecraft:totem_of_undying",
                 "minecraft:end_crystal",
@@ -97,13 +98,13 @@ public class LightConfig extends Config {
                 "minecraft:wither_skeleton_skull",
                 "minecraft:diamond").stream().map(ResourceLocationHelper::fromWholeName).toList();
 
-        public ValidatedList<ResourceLocation> whitelist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toList(defaultVanillaWhitelist);
-        public ValidatedList<String> whitelist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
-        public ValidatedList<String> whitelist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
+        public ValidatedSet<ResourceLocation> whitelist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toSet(defaultVanillaWhitelist);
+        public ValidatedSet<String> whitelist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toSet();
+        public ValidatedSet<String> whitelist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toSet();
 
-        public ValidatedList<ResourceLocation> blacklist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toList();
-        public ValidatedList<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
-        public ValidatedList<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
+        public ValidatedSet<ResourceLocation> blacklist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toSet();
+        public ValidatedSet<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toSet();
+        public ValidatedSet<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toSet();
 
 
     }

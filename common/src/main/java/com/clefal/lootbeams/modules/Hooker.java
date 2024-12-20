@@ -22,10 +22,10 @@ public class Hooker {
     public static void lootBeamEntityDispatcherHook(Entity entity, double worldX, double worldY, double worldZ, float entityYRot, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int light, CallbackInfo ci) {
         if (!(entity instanceof ItemEntity itemEntity)) return;
 
-        //System.out.println(IServiceCollector.COLLECTOR.gatherModIDList());
+        System.out.println(itemEntity.getItem().getTags().toList());
         LBItemEntity lbItemEntity1 = LBItemEntityCache.ask(itemEntity);
         if (lbItemEntity1.canBeRender() == LBItemEntity.RenderState.REJECT) return;
-        LightConfig.Beam beamSection = LightConfig.lightConfig.beamSection;
+        LightConfig.Beam beamSection = LightConfig.lightConfig.beam;
 
         var OnGroundCondition = (!beamSection.require_on_ground || itemEntity.onGround());
 
@@ -53,12 +53,13 @@ public class Hooker {
         if (filter.all_item || LightConfigHandler.checkInWhiteList(lbItemEntity1) || lbItemEntity1.rarity().context().hasBeenModified()) return true;
         if (WhitelistCondition.isInSpecialWhitelist(item)) return true;
         boolean equipmentCondition = filter.only_equipment;
-        boolean isEquipment = EquipmentConditions.isEquipment(item);
-        boolean rareCondition = filter.only_rare;
-        boolean isRare = lbItemEntity1.ShouldRenderRareBeam();
+
         if (equipmentCondition) {
+            boolean isEquipment = EquipmentConditions.isEquipment(item);
             if (isEquipment) {
+                boolean rareCondition = filter.only_rare;
                 if (rareCondition) {
+                    boolean isRare = lbItemEntity1.isRare();
                     return isRare;
                 } else {
                     return true;
@@ -67,7 +68,9 @@ public class Hooker {
                 return false;
             }
         } else {
+            boolean rareCondition = filter.only_rare;
             if (rareCondition) {
+                boolean isRare = lbItemEntity1.isRare();
                 return isRare;
             } else {
                 return false;

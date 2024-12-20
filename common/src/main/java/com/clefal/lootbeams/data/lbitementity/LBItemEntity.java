@@ -51,13 +51,9 @@ public class LBItemEntity {
         return this.rarity.absoluteOrdinal() <= 0;
     }
 
-    public boolean shouldPlayRareSound() {
-        int min = SoundConfig.soundConfig.soundSection.sound_rare_ordinal_min.get();
 
-        return this.rarity.absoluteOrdinal() >= min;
-    }
 
-    public boolean ShouldRenderRareBeam() {
+    public boolean isRare() {
         int min = LightConfig.lightConfig.lightEffectFilter.rare_ordinal_min.get();
 
         return this.rarity.absoluteOrdinal() >= min;

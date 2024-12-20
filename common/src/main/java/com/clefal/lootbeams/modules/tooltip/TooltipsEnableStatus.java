@@ -15,7 +15,7 @@ public class TooltipsEnableStatus {
     public static final String RARITY = "rarity";
     public static final String TOOLTIPS = "tooltips";
     public static final Function1<LBItemEntity, Component> handleName = lbItemEntity -> {
-        boolean ifShowStack = TooltipsConfig.tooltipsConfig.nameTagSection.render_stack_count;
+        boolean ifShowStack = TooltipsConfig.tooltipsConfig.nameTag.render_stack_count;
         ItemStack item = lbItemEntity.item().getItem();
         Style style = item.getHoverName().getStyle();
         if (!ifShowStack) return item.getHoverName();

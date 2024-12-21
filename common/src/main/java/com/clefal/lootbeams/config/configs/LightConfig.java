@@ -90,7 +90,7 @@ public class LightConfig extends Config {
         public boolean all_item = false;
         public boolean only_rare = false;
 
-        public boolean only_equipment = false;
+        public boolean only_equipment = true;
         private final List<ResourceLocation> defaultVanillaWhitelist = ImmutableList.of(
                 "minecraft:totem_of_undying",
                 "minecraft:end_crystal",

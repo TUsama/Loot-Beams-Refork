@@ -7,20 +7,20 @@ import com.clefal.lootbeams.utils.ResourceLocationHelper;
 import com.google.common.base.Supplier;
 import lombok.experimental.UtilityClass;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.LinkedHashSet;
 import java.util.stream.Stream;
 @UtilityClass
 public class SoundConfigHandler {
 
     public static boolean checkInBlackList(LBItemEntity lbItemEntity){
         SoundConfig.SoundFilter soundFilter = SoundConfig.soundConfig.soundFilter;
-        Supplier<Boolean> b = () -> soundFilter.blacklist_by_name.stream()
-                .anyMatch(x -> Checker.checkItemEquality(lbItemEntity, x));
-        Supplier<Boolean> b1 = () -> soundFilter.blacklist_by_tag.stream()
-                .map(x -> x.replace("#", ""))
-                .anyMatch(x -> Checker.checkTagContainItem(lbItemEntity, ResourceLocationHelper.fromWholeName(x)));
-        Supplier<Boolean> b2 = () -> soundFilter.blacklist_by_modid.stream()
-                .anyMatch(x -> Checker.checkIsThisMod(lbItemEntity, x));
+        ItemStack item = lbItemEntity.item().getItem();
+
+        Supplier<Boolean> b = () -> Checker.checkItemInItemList(item, soundFilter.blacklist_by_name);
+        Supplier<Boolean> b1 = () -> Checker.checkItemHasTagInTagList(item, soundFilter.blacklist_by_tag);
+        Supplier<Boolean> b2 = () -> Checker.checkIsInThisModList(item, soundFilter.blacklist_by_modid);
         return Stream.of(b, b1, b2).anyMatch(Supplier::get);
     }
 

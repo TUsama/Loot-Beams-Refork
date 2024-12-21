@@ -9,6 +9,7 @@ import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection;
 import me.fzzyhmstrs.fzzy_config.util.AllowableStrings;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedList;
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedSet;
 import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedString;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
@@ -32,8 +33,8 @@ public class SoundConfig extends Config {
     }
 
     public static class SoundFilter extends ConfigSection {
-        public ValidatedList<ResourceLocation> blacklist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toList();
-        public ValidatedList<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toList();
-        public ValidatedList<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toList();
+        public ValidatedSet<ResourceLocation> blacklist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toSet();
+        public ValidatedSet<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toSet();
+        public ValidatedSet<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), IServiceCollector.COLLECTOR::gatherModIDList)).toSet();
     }
 }

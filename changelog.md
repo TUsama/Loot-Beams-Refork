@@ -1,3 +1,7 @@
+### V2.5.3
+(common)optimize the config check performance. Now the config check should cost constant time, the config size will not increase the check time.
+
+
 ### V2.5.2
 (Common) implement the equipment config check, now you can add any equipment that isn't covered by internal equipment check to it.
 (Common) fix an issue that can't detect the vanilla equipment.

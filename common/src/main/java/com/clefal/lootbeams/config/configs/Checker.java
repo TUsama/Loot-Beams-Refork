@@ -44,4 +44,16 @@ public class Checker {
     public boolean checkIsInThisModList(ItemStack itemStack, ValidatedSet<String> modId) {
         return modId.contains(BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getNamespace());
     }
+
+    public boolean checkItemInItemList(LBItemEntity lbItemEntity, ValidatedSet<ResourceLocation> resourceLocations) {
+        return resourceLocations.contains(lbItemEntity.resourceLocation());
+    }
+
+    public boolean checkItemHasTagInTagList(LBItemEntity lbItemEntity, ValidatedSet<String> tags) {
+        return lbItemEntity.item().getItem().getTags().map(x -> x.location().toString()).anyMatch(tags::contains);
+    }
+
+    public boolean checkIsInThisModList(LBItemEntity lbItemEntity, ValidatedSet<String> modId) {
+        return modId.contains(lbItemEntity.resourceLocation().getNamespace());
+    }
 }

@@ -12,22 +12,20 @@ public class LightConfigHandler {
 
     public static boolean checkInBlackList(LBItemEntity lbItemEntity){
         LightConfig.LightEffectFilter lightEffectFilter = LightConfig.lightConfig.lightEffectFilter;
-        ItemStack item = lbItemEntity.item().getItem();
 
-        Supplier<Boolean> b = () -> Checker.checkItemInItemList(item, lightEffectFilter.blacklist_by_name);
-        Supplier<Boolean> b1 = () -> Checker.checkItemHasTagInTagList(item, lightEffectFilter.blacklist_by_tag);
-        Supplier<Boolean> b2 = () -> Checker.checkIsInThisModList(item, lightEffectFilter.blacklist_by_modid);
+        Supplier<Boolean> b = () -> Checker.checkItemInItemList(lbItemEntity, lightEffectFilter.blacklist_by_name);
+        Supplier<Boolean> b1 = () -> Checker.checkItemHasTagInTagList(lbItemEntity, lightEffectFilter.blacklist_by_tag);
+        Supplier<Boolean> b2 = () -> Checker.checkIsInThisModList(lbItemEntity, lightEffectFilter.blacklist_by_modid);
         return Stream.of(b, b1, b2).anyMatch(Supplier::get);
     }
 
     public static boolean checkInWhiteList(LBItemEntity lbItemEntity){
         LightConfig.LightEffectFilter lightEffectFilter = LightConfig.lightConfig.lightEffectFilter;
-        ItemStack item = lbItemEntity.item().getItem();
 
 
-        Supplier<Boolean> b = () -> Checker.checkItemInItemList(item, lightEffectFilter.whitelist_by_name);
-        Supplier<Boolean> b1 = () -> Checker.checkItemHasTagInTagList(item, lightEffectFilter.whitelist_by_tag);
-        Supplier<Boolean> b2 = () -> Checker.checkIsInThisModList(item, lightEffectFilter.whitelist_by_modid);
+        Supplier<Boolean> b = () -> Checker.checkItemInItemList(lbItemEntity, lightEffectFilter.whitelist_by_name);
+        Supplier<Boolean> b1 = () -> Checker.checkItemHasTagInTagList(lbItemEntity, lightEffectFilter.whitelist_by_tag);
+        Supplier<Boolean> b2 = () -> Checker.checkIsInThisModList(lbItemEntity, lightEffectFilter.whitelist_by_modid);
         return Stream.of(b, b1, b2).anyMatch(Supplier::get);
 
     }

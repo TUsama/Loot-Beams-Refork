@@ -16,11 +16,10 @@ public class SoundConfigHandler {
 
     public static boolean checkInBlackList(LBItemEntity lbItemEntity){
         SoundConfig.SoundFilter soundFilter = SoundConfig.soundConfig.soundFilter;
-        ItemStack item = lbItemEntity.item().getItem();
 
-        Supplier<Boolean> b = () -> Checker.checkItemInItemList(item, soundFilter.blacklist_by_name);
-        Supplier<Boolean> b1 = () -> Checker.checkItemHasTagInTagList(item, soundFilter.blacklist_by_tag);
-        Supplier<Boolean> b2 = () -> Checker.checkIsInThisModList(item, soundFilter.blacklist_by_modid);
+        Supplier<Boolean> b = () -> Checker.checkItemInItemList(lbItemEntity, soundFilter.blacklist_by_name);
+        Supplier<Boolean> b1 = () -> Checker.checkItemHasTagInTagList(lbItemEntity, soundFilter.blacklist_by_tag);
+        Supplier<Boolean> b2 = () -> Checker.checkIsInThisModList(lbItemEntity, soundFilter.blacklist_by_modid);
         return Stream.of(b, b1, b2).anyMatch(Supplier::get);
     }
 

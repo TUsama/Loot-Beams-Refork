@@ -4,15 +4,11 @@ import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.configs.Checker;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.google.common.collect.Sets;
 import com.oblivioussp.spartanweaponry.api.SpartanWeaponryAPI;
-import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
-import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraftforge.fml.ModList;
-import net.neoforged.bus.api.SubscribeEvent;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class SpartanWeaponryCompatModule implements ILBCompatModule {

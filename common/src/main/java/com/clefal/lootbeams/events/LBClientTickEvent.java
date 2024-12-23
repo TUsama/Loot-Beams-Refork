@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.events;
 
-import net.neoforged.bus.api.Event;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.Event;
 
 public class LBClientTickEvent extends Event {
 }

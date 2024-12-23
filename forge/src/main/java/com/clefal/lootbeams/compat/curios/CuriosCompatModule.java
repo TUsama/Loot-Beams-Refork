@@ -3,8 +3,8 @@ package com.clefal.lootbeams.compat.curios;
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.neoforged.bus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
 public class CuriosCompatModule implements ILBCompatModule {

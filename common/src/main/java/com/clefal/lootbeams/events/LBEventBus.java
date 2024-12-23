@@ -1,8 +1,8 @@
 package com.clefal.lootbeams.events;
 
 
-import net.neoforged.bus.BusBuilderImpl;
-import net.neoforged.bus.EventBus;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.BusBuilderImpl;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.EventBus;
 
 public class LBEventBus extends EventBus {
 

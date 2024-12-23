@@ -12,9 +12,9 @@ import dev.shadowsoffire.apotheosis.adventure.affix.salvaging.SalvageItem;
 import dev.shadowsoffire.apotheosis.adventure.loot.RarityRegistry;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemInstance;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemItem;
-import io.vavr.control.Option;
+import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
 import net.fabricmc.loader.api.FabricLoader;
-import net.neoforged.bus.api.SubscribeEvent;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 
 import java.awt.*;
 

@@ -1,11 +1,12 @@
 package com.clefal.lootbeams.compat.mine_and_slash;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
+import com.clefal.lootbeams.modules.ILBCompatModule;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
@@ -17,13 +18,12 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataIt
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.GemItem;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fml.ModList;
-import net.neoforged.bus.api.SubscribeEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.vavr.API.*;
+import static com.clefal.nirvana_lib.relocated.io.vavr.API.*;
 
 public class MineAndSlashCompatModule implements ILBCompatModule {
 

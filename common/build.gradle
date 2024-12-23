@@ -48,13 +48,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     compileOnly("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge")
+    compileOnly ("curse.maven:nirvana-library-1164411:6016044")
 
-    implementation "io.vavr:vavr:0.10.4"
-    implementation ("net.neoforged:bus:${neoforge_eventbus_version}") {
-        exclude group: "org.ow2.asm"
-        exclude group: "net.jodah"
-        exclude group: "org.apache.logging.log4j"
-        exclude group: "cpw.mods", module: "modlauncher"
-    }
 }
 

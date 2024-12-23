@@ -5,10 +5,11 @@ import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.EventPriority;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.obscuria.tooltips.ObscureTooltips;
 import net.minecraftforge.fml.ModList;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
+
 
 public class ObscureTooltipsCompatModule implements ILBCompatModule {
     public final static ObscureTooltipsCompatModule INSTANCE = new ObscureTooltipsCompatModule();

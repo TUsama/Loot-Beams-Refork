@@ -38,13 +38,7 @@ dependencies {
     modCompileOnly "curse.maven:zenith-attributes-910078:5918684"
     modCompileOnly "curse.maven:fakerlib-853197:5503724"
 
-    shade "io.vavr:vavr:0.10.4"
-    shade ("net.neoforged:bus:${neoforge_eventbus_version}") {
-        exclude group: "org.ow2.asm"
-        exclude group: "net.jodah"
-        exclude group: "org.apache.logging.log4j"
-        exclude group: "cpw.mods", module: "modlauncher"
-    }
+    modCompileOnly ("curse.maven:nirvana-library-1164411:6016044")
 }
 
 loom {
@@ -114,7 +108,7 @@ publishMods {
         projectId = "1150640"
         clientRequired = true
         minecraftVersions.add("1.20.1")
-        requires("fzzy-config")
+        requires("fzzy-config", "nirvana_lib")
     }
 }
 

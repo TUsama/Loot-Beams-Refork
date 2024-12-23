@@ -98,7 +98,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
-
+    implementation fg.deobf("curse.maven:nirvana-library-1164411:6016044")
 
     compileOnly fg.deobf("curse.maven:apotheosis-313970:5753183")
     compileOnly fg.deobf("curse.maven:placebo-283644:5414631")
@@ -131,14 +131,6 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:crafttweaker-239197:5880672")
 
 
-
-    minecraftLibrary "io.vavr:vavr:0.10.4"
-    minecraftLibrary ("net.neoforged:bus:${neoforge_eventbus_version}") {
-        exclude group: "org.ow2.asm"
-        exclude group: "net.jodah"
-        exclude group: "org.apache.logging.log4j"
-        exclude group: "cpw.mods", module: "modlauncher"
-    }
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -188,7 +180,7 @@ publishMods {
         projectId = "1150640"
         clientRequired = true
         minecraftVersions.add("1.20.1")
-        requires("fzzy-config")
+        requires("fzzy-config", "nirvana_lib")
         optional("mine-and-slash-reloaded", "apotheosis")
         incompatible("loot-beams")
     }

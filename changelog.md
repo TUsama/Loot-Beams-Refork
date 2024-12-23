@@ -1,5 +1,8 @@
+### V2.5.5
+(Common)add NirvanaLib as dependency.
+
 ### V2.5.4
-add zenith compat
+(Fabric)add zenith compat
 
 ### V2.5.3
 (common)optimize the config check performance. Now the config check should cost constant time, the config size will not increase the check time.

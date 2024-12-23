@@ -48,13 +48,12 @@ public class Hooker {
     private static boolean checkRenderable(LBItemEntity lbItemEntity1) {
         var filter = LightConfig.lightConfig.lightEffectFilter;
         if (LightConfigHandler.checkInBlackList(lbItemEntity1)) return false;
-        ItemStack item = lbItemEntity1.item().getItem();
         if (filter.all_item || LightConfigHandler.checkInWhiteList(lbItemEntity1) || lbItemEntity1.rarity().context().hasBeenModified()) return true;
-        if (WhitelistCondition.isInSpecialWhitelist(item)) return true;
+        if (WhitelistCondition.isInSpecialWhitelist(lbItemEntity1)) return true;
         boolean equipmentCondition = filter.only_equipment;
 
         if (equipmentCondition) {
-            boolean isEquipment = EquipmentConditions.isEquipment(item);
+            boolean isEquipment = EquipmentConditions.isEquipment(lbItemEntity1);
             if (isEquipment) {
                 boolean rareCondition = filter.only_rare;
                 if (rareCondition) {

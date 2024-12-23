@@ -4,9 +4,9 @@ plugins {
     id 'idea'
     id 'net.minecraftforge.gradle'
     id 'org.spongepowered.mixin'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'com.github.johnrengelman.shadow' version '7.1.1'
-    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
+    id 'org.parchmentmc.librarian.forgegradle'
+    id 'com.github.johnrengelman.shadow'
+    id "me.modmuss50.mod-publish-plugin"
 }
 
 def namePattern = "${mod_name}-forge-${minecraft_version}"

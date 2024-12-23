@@ -63,9 +63,9 @@ public class SpartanWeaponryCompatModule implements ILBCompatModule {
 
     @SubscribeEvent
     public void registerEquipmentCondition(RegisterConfigConditionEvent.RegisterEquipmentItemEvent event) {
-        event.conditions.add(itemStack -> {
-            if (Checker.checkIsThisMod(itemStack, SpartanWeaponryAPI.MOD_ID)) return false;
-            String path = BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getPath();
+        event.conditions.add(lbItemEntity -> {
+            if (Checker.checkIsThisMod(lbItemEntity.item().getItem(), SpartanWeaponryAPI.MOD_ID)) return false;
+            String path = lbItemEntity.resourceLocation().getPath();
             //I think this might be the fastest way to check if this item is using the SP tag.
             return this.allAvailablePath.contains(path);
         });

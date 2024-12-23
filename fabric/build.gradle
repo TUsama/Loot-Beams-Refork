@@ -2,8 +2,8 @@ plugins {
     id 'java'
     id 'idea'
     id 'fabric-loom'
-    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
-    id 'com.github.johnrengelman.shadow' version '7.1.1'
+    id "me.modmuss50.mod-publish-plugin"
+    id 'com.github.johnrengelman.shadow'
 
 }
 base {
@@ -31,8 +31,12 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}"
+
     modCompileOnly "dev.emi:trinkets:3.7.2"
-    //modImplementation "curse.maven:charm-of-undying-316873:5159191"
+
+    modCompileOnly "curse.maven:zenith-620928:5904438"
+    modCompileOnly "curse.maven:zenith-attributes-910078:5918684"
+    modCompileOnly "curse.maven:fakerlib-853197:5503724"
 
     shade "io.vavr:vavr:0.10.4"
     shade ("net.neoforged:bus:${neoforge_eventbus_version}") {

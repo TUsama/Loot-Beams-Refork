@@ -1,11 +1,9 @@
-package com.clefal.lootbeams.compat;
+package com.clefal.lootbeams.compat.TrinketCompatModule;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
-import com.mojang.datafixers.kinds.IdF;
 import dev.emi.trinkets.TrinketsMain;
-import dev.emi.trinkets.api.Trinket;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.loader.api.FabricLoader;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,6 +26,6 @@ public class TrinketCompatModule implements ILBCompatModule {
 
     @SubscribeEvent
     public void registerEquipmentCondition(RegisterConfigConditionEvent.RegisterEquipmentItemEvent event) {
-        event.conditions.add(itemStack -> TrinketsApi.getTrinket(itemStack.getItem()) != TrinketsApi.getDefaultTrinket());
+        event.conditions.add(lbItemEntity -> TrinketsApi.getTrinket(lbItemEntity.item().getItem().getItem()) != TrinketsApi.getDefaultTrinket());
     }
 }

@@ -83,10 +83,10 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
 
     @SubscribeEvent
     public void registerEquipmentCondition(RegisterConfigConditionEvent.RegisterEquipmentItemEvent event) {
-        event.conditions.add(itemStack -> {
-            if (itemStack.getItem().getClass().toString().contains("com.robertx22.mine_and_slash.vanilla_mc.items.gearitems"))
+        event.conditions.add(lbItemEntity -> {
+            if (lbItemEntity.item().getItem().getClass().toString().contains("com.robertx22.mine_and_slash.vanilla_mc.items.gearitems"))
                 return true;
-            GearSlot slotOf = GearSlot.getSlotOf(itemStack);
+            GearSlot slotOf = GearSlot.getSlotOf(lbItemEntity.item().getItem());
             return (slotOf != null && slotOf.fam != SlotFamily.NONE);
         });
     }
@@ -94,7 +94,7 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
     @SubscribeEvent
     public void registerWhitelistCondition(RegisterConfigConditionEvent.RegisterWhitelistEvent event) {
         //currenccy, I prefer to show the currency always.
-        event.conditions.add(itemStack -> ExileCurrency.get(itemStack).isPresent() || itemStack.getItem() instanceof IItemAsCurrency);
+        event.conditions.add(lbItemEntity -> ExileCurrency.get(lbItemEntity.item().getItem()).isPresent() || lbItemEntity.item().getItem().getItem() instanceof IItemAsCurrency);
     }
 
 }

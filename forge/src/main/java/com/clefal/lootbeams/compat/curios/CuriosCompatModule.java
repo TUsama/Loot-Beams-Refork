@@ -25,6 +25,6 @@ public class CuriosCompatModule implements ILBCompatModule {
 
     @SubscribeEvent
     public void registerEquipmentCondition(RegisterConfigConditionEvent.RegisterEquipmentItemEvent event) {
-        event.conditions.add(itemStack -> CuriosApi.getCurio(itemStack).isPresent());
+        event.conditions.add(lbItemEntity -> CuriosApi.getCurio(lbItemEntity.item().getItem()).isPresent());
     }
 }

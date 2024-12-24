@@ -21,6 +21,7 @@ base {
     archivesName = namePattern
 }
 
+
 neoForge {
     version = neoforge_version
     // Automatically enable neoforge AccessTransformers if the file exists
@@ -74,8 +75,6 @@ dependencies {
     compileOnly "curse.maven:accessories-938917:5727153"
     compileOnly "curse.maven:curios-continuation-1037991:5747224"
 
-    libraries "io.vavr:vavr:0.10.4"
-    additionalRuntimeClasspath "io.vavr:vavr:0.10.4"
 
     implementation "curse.maven:nirvana-library-1164411:6018351"
 }

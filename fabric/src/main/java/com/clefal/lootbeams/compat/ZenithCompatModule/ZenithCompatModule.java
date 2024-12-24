@@ -18,7 +18,8 @@ import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 
 import java.awt.*;
 
-import static io.vavr.API.*;
+import static com.clefal.nirvana_lib.relocated.io.vavr.API.*;
+
 
 public class ZenithCompatModule implements ILBCompatModule {
     public final static ZenithCompatModule INSTANCE = new ZenithCompatModule();

@@ -1,3 +1,6 @@
+### V2.5.6
+(Fabric) Support 1.21 Fabric.
+
 ### V2.5.5
 (Common)fix a bug that no equipment can be recognized as equipment.
 

@@ -1,3 +1,6 @@
+### V2.5.5
+(Common)fix a bug that no equipment can be recognized as equipment.
+
 ### V2.5.4
 (Common) add Nirvana Library to dependency to avoid potential dependency conflict.
 

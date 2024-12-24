@@ -30,7 +30,7 @@ dependencies {
 
     modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}"
     modCompileOnly "dev.emi:trinkets:3.10.0"
-    modImplementation "curse.maven:accessories-938917:5727156"
+    modCompileOnly "curse.maven:accessories-938917:5727156"
     //modImplementation "curse.maven:charm-of-undying-316873:5159191"
 
     modImplementation "curse.maven:nirvana-library-1164411:6018350"
@@ -88,7 +88,7 @@ publishMods {
             string
         }
     }}.join('\n')
-    type = BETA
+    type = STABLE
     modLoaders.add("fabric")
     curseforge {
         accessToken = file("D:\\curseforge-key.txt").text

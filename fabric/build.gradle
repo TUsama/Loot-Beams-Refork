@@ -33,13 +33,7 @@ dependencies {
     modImplementation "curse.maven:accessories-938917:5727156"
     //modImplementation "curse.maven:charm-of-undying-316873:5159191"
 
-    shade "io.vavr:vavr:0.10.4"
-    shade ("net.neoforged:bus:${neoforge_eventbus_version}") {
-        exclude group: "org.ow2.asm"
-        exclude group: "net.jodah"
-        exclude group: "org.apache.logging.log4j"
-        exclude group: "cpw.mods", module: "modlauncher"
-    }
+    modImplementation "curse.maven:nirvana-library-1164411:6018350"
 }
 
 loom {
@@ -68,6 +62,7 @@ loom {
 
 
 processResources {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     from project(":common").sourceSets.main.resources
 }
 
@@ -103,7 +98,7 @@ publishMods {
             start = "1.21"
             end = "${minecraft_version}"
         }
-        requires("fzzy-config")
+        requires("fzzy-config", "nirvana-library")
     }
 }
 

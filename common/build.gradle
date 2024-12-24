@@ -61,13 +61,7 @@ dependencies {
 
     compileOnly group: 'me.fzzyhmstrs', name: 'fzzy_config', version: "${fzzy_config_version}+neoforge"
 
-    implementation "io.vavr:vavr:0.10.4"
-    implementation ("net.neoforged:bus:${neoforge_eventbus_version}") {
-        exclude group: "org.ow2.asm"
-        exclude group: "net.jodah"
-        exclude group: "org.apache.logging.log4j"
-        exclude group: "cpw.mods", module: "modlauncher"
-    }
+    compileOnly "curse.maven:nirvana-library-1164411:6018351"
 }
 
 configurations {

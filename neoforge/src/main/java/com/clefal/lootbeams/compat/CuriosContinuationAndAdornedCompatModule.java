@@ -3,7 +3,7 @@ package com.clefal.lootbeams.compat;
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
-import net.neoforged.bus.api.SubscribeEvent;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -25,6 +25,6 @@ public class CuriosContinuationAndAdornedCompatModule implements ILBCompatModule
 
     @SubscribeEvent
     public void registerEquipmentCondition(RegisterConfigConditionEvent.RegisterEquipmentItemEvent event) {
-        event.conditions.add(itemStack -> CuriosApi.getCurio(itemStack).isPresent());
+        event.conditions.add(itemStack -> CuriosApi.getCurio(itemStack.item().getItem()).isPresent());
     }
 }

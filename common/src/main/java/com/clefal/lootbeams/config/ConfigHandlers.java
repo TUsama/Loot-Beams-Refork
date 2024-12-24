@@ -6,7 +6,7 @@ import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
 import com.clefal.lootbeams.data.lbitementity.rarity.ConfigColorOverride;
 import com.clefal.lootbeams.events.ConfigReloadEvent;
 import lombok.Getter;
-import net.neoforged.bus.api.SubscribeEvent;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 
 import java.util.List;
 

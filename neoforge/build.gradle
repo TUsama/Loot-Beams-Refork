@@ -77,12 +77,7 @@ dependencies {
     libraries "io.vavr:vavr:0.10.4"
     additionalRuntimeClasspath "io.vavr:vavr:0.10.4"
 
-    implementation ("net.neoforged:bus:${neoforge_eventbus_version}") {
-        exclude group: "org.ow2.asm"
-        exclude group: "net.jodah"
-        exclude group: "org.apache.logging.log4j"
-        exclude group: "cpw.mods", module: "modlauncher"
-    }
+    implementation "curse.maven:nirvana-library-1164411:6018351"
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -125,6 +120,6 @@ publishMods {
             start = "1.21"
             end = "${minecraft_version}"
         }
-        requires("fzzy-config")
+        requires("fzzy-config", "nirvana-library")
     }
 }

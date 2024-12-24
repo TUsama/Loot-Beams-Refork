@@ -101,14 +101,14 @@ publishMods {
             string
         }
     }}.join('\n')
-    type = BETA
+    type = STABLE
     modLoaders.add("fabric")
     curseforge {
         accessToken = file("D:\\curseforge-key.txt").text
         projectId = "1150640"
         clientRequired = true
         minecraftVersions.add("1.20.1")
-        requires("fzzy-config", "nirvana_lib")
+        requires("fzzy-config", "nirvana-library")
     }
 }
 

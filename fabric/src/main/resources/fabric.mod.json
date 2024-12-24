@@ -41,7 +41,9 @@
     "depends": {
         "fabricloader": ">=0.14",
         "fabric": "*",
-        "minecraft": "${minecraft_version}",
+        "fzzy_config": "*",
+        "nirvana_lib": "*",
+        "minecraft": ">=1.21",
         "java": ">=17"
     },
     "suggests": {

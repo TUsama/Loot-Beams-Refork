@@ -3,6 +3,7 @@ package com.clefal.lootbeams.modules.tooltip.nametag;
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.configs.TooltipsConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.rarity.LBColor;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -28,12 +29,12 @@ public class NameTagRenderer {
 
         //If player is crouching or looking at the item
         if (Minecraft.getInstance().player.isCrouching() || ((nameTagSection.render_name_tag_on_look && isLookingAt(Minecraft.getInstance().player, item, nameTagSection.name_tag_look_sensitivity.get())))) {
-            Color color = LBItemEntity.rarity().color();
+            LBColor color = LBItemEntity.rarity().color();
             float foregroundAlpha = nameTagSection.name_tag_text_alpha.get();
             float backgroundAlpha = nameTagSection.name_tag_background_alpha.get();
             double yOffset = nameTagSection.name_tag_y_offset.get();
-            int foregroundColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int) (255 * foregroundAlpha)).getRGB();
-            int backgroundColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int) (255 * backgroundAlpha)).getRGB();
+            int foregroundColor = color.changeA(((int) (foregroundAlpha * 255))).argb();
+            int backgroundColor = color.changeA(((int) (foregroundAlpha * 255))).argb();
             stack.pushPose();
             //Render nametags at heights based on player distance
             stack.translate(0.0D, Math.min(1D, Minecraft.getInstance().player.distanceToSqr(item) * 0.025D) + yOffset, 0.0D);

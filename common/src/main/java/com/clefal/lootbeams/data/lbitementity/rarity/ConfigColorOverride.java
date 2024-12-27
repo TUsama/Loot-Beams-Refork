@@ -1,6 +1,5 @@
 package com.clefal.lootbeams.data.lbitementity.rarity;
 
-import com.clefal.lootbeams.config.configs.Checker;
 import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
@@ -9,8 +8,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import java.awt.*;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
@@ -55,7 +52,7 @@ public class ConfigColorOverride extends ModifyingConfigHandler {
                 .map(Optional::get)
                 .findFirst()
                 .ifPresent(x -> {
-                    result.set(lbItemEntity.to(lbItemEntity.rarity().configModifyColor(new Color(x.argb(), true))));
+                    result.set(lbItemEntity.to(lbItemEntity.rarity().configModifyColor(LBColor.of(x.argb()))));
                 });
 
         return result.get();

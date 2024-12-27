@@ -2,6 +2,7 @@ package com.clefal.lootbeams.modules.beam;
 
 import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
+import com.clefal.lootbeams.data.lbitementity.rarity.LBColor;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProvider;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.item.ItemEntity;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -25,7 +27,7 @@ public class BeamRenderer {
 
     public static void renderLootBeam(PoseStack stack, MultiBufferSource buffer, float partialTick, LBItemEntity LBItemEntity) {
         ItemEntity itemEntity = LBItemEntity.item();
-        Color color = LBItemEntity.rarity().color();
+        LBColor color = LBItemEntity.rarity().color();
         int lifeTime = LBItemEntity.fadeIn();
 
         LightConfig.Beam beamConfig = LightConfig.lightConfig.beam;
@@ -33,10 +35,10 @@ public class BeamRenderer {
 
         int fadeInTime = beamConfig.beam_fade_in_time.get();
         var fadeInFactor = 1.0f * lifeTime / fadeInTime;
-
-        float R = color.getRed() / 255f;
-        float G = color.getGreen() / 255f;
-        float B = color.getBlue() / 255f;
+        int argb = color.argb();
+        int R = FastColor.ARGB32.red(argb);
+        int G = FastColor.ARGB32.green(argb);
+        int B = FastColor.ARGB32.blue(argb);
 
         float preBeamAlpha = beamConfig.beam_alpha.get();
 
@@ -63,7 +65,7 @@ public class BeamRenderer {
         }
 
 
-        var beamAlpha = preBeamAlpha;
+        int beamAlpha = ((int) (preBeamAlpha * 255));
         Option<DynamicProvider> dynamicProvider1 = DynamicProviderModule.getDynamicProvider();
         if (dynamicProvider1.isDefined()) {
             beamAlpha *= Math.min(dynamicProvider1.get().getBeamLightFactor(), 1.0f);
@@ -98,7 +100,7 @@ public class BeamRenderer {
             //shadow
             {
                 float glowRadius = beamRadius * 1.35f;
-                float glowAlpha = beamAlpha * 0.55f;
+                int glowAlpha = ((int) (beamAlpha * 0.55f));
                 buffer1.addVertex(stack.last().pose(), -glowRadius, -beamHeight, 0.001f).setColor(R, G, B, glowAlpha).setUv(0, 0).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
 
                 buffer1.addVertex(stack.last().pose(), -glowRadius, beamHeight, 0.001f).setColor(R, G, B, 0).setUv(0, 1).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
@@ -121,7 +123,7 @@ public class BeamRenderer {
                 stack.pushPose();
                 stack.translate(0, 0.01, 0);
                 float radius = glowConfig.glow_effect_radius.get();
-                renderGlow(stack, buffer.getBuffer(BeamRenderType.GLOW), R, G, B, beamAlpha * 0.4f, radius);
+                renderGlow(stack, buffer.getBuffer(BeamRenderType.GLOW), R, G, B, ((int) (beamAlpha * 0.4f)), radius);
                 stack.popPose();
             }
 
@@ -154,7 +156,7 @@ public class BeamRenderer {
     }
 
 
-    private static void renderGlow(PoseStack stack, VertexConsumer builder, float red, float green, float blue, float alpha, float radius) {
+    private static void renderGlow(PoseStack stack, VertexConsumer builder, int red, int green, int blue, int alpha, float radius) {
         PoseStack.Pose matrixentry = stack.last();
         Matrix4f matrixpose = matrixentry.pose();
         // draw a quad on the xz plane facing up with a radius of 0.5

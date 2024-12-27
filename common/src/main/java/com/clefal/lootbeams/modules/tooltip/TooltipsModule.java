@@ -29,7 +29,7 @@ public class TooltipsModule implements ILBModule {
     public void colorizeNameAndRarity(TooltipsGatherNameAndRarityEvent event){
         for (Map.Entry<TooltipsGatherNameAndRarityEvent.Case, Component> caseComponentEntry : event.gather.entrySet()) {
             Style oldStyle = caseComponentEntry.getValue().getStyle();
-            caseComponentEntry.setValue(caseComponentEntry.getValue().plainCopy().withStyle(oldStyle).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(event.lbItemEntity.rarity().color().getRGB()))));
+            caseComponentEntry.setValue(caseComponentEntry.getValue().plainCopy().withStyle(oldStyle).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(event.lbItemEntity.rarity().color().rgb()))));
         }
     }
 

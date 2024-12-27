@@ -1,3 +1,7 @@
+### V2.5.7
+(Common) refactor the color holder, now supports mutable color, like rainbow
+(NeoForge) add Apotheosis compat
+
 ### V2.5.6
 (Fabric) Support 1.21 Fabric.
 

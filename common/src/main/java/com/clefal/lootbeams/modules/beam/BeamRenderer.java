@@ -68,7 +68,7 @@ public class BeamRenderer {
         int beamAlpha = ((int) (preBeamAlpha * 255));
         Option<DynamicProvider> dynamicProvider1 = DynamicProviderModule.getDynamicProvider();
         if (dynamicProvider1.isDefined()) {
-            beamAlpha *= Math.min(dynamicProvider1.get().getBeamLightFactor(), 1.0f);
+            beamAlpha *= Math.min(dynamicProvider1.get().getBeamLightFactor(), 1);
             beamHeight += dynamicProvider1.get().getBeamLightFactor() - 0.3f;
             beamRadius += 0.005f * dynamicProvider1.get().getGlowFactor();
         }
@@ -127,31 +127,10 @@ public class BeamRenderer {
                 stack.popPose();
             }
 
-            /*
-            if (Configuration.PARTICLES.get()) {
-                if (!Configuration.PARTICLE_RARE_ONLY.get()) {
-                    renderParticles(pticks, itemEntity, (int) entityTime, R, G, B);
-                } else {
-                    boolean shouldRender1 = false;
-                    shouldRender1 = compatRarityCheck(itemEntity, shouldRender1);
-                    if (shouldRender1) {
-                        renderParticles(pticks, itemEntity, (int) entityTime, R, G, B);
-                    }
-                }
-
-            }*/
         }
         if (lifeTime < fadeInTime) {
             LBItemEntity.updateFade();
         }
-
-        /*
-
-        if (Configuration.RENDER_NAMETAGS.get()) {
-            //TooltipRenderer.renderNameTag(stack, buffer, item, color);
-        }
-
-*/
 
     }
 

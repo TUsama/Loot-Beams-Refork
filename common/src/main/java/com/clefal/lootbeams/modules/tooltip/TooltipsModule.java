@@ -41,7 +41,7 @@ public class TooltipsModule implements ILBModule {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void deleteRarityInfoWhenConfigEnable(TooltipsGatherNameAndRarityEvent event){
-        API.Match(LootInfomationConfig.lootInfomationConfig.rarity.showRarityFor).of(
+        API.Match(LootInfomationConfig.lootInfomationConfig.rarity.showRarityFor).option(
                 Case($(x -> x == LootInfomationConfig.ShowRarityTarget.NONE), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY)),
                 Case($(x -> x == LootInfomationConfig.ShowRarityTarget.RARE && !event.lbItemEntity.isRare()), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY))
         );

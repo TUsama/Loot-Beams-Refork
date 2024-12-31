@@ -1,11 +1,14 @@
 package com.clefal.lootbeams.modules.tooltip;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.config.configs.TooltipsConfig;
+import com.clefal.lootbeams.config.configs.LootInfomationConfig;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.modules.ILBModule;
 import com.clefal.lootbeams.modules.tooltip.nametag.NameTagRenderer;
+import com.clefal.nirvana_lib.relocated.io.vavr.API;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.EventPriority;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -14,13 +17,16 @@ import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 
 import java.util.Map;
 
+import static com.clefal.nirvana_lib.relocated.io.vavr.API.$;
+import static com.clefal.nirvana_lib.relocated.io.vavr.API.Case;
+
 public class TooltipsModule implements ILBModule {
 
     public final static TooltipsModule INSTANCE = new TooltipsModule();
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void renderNameTag(EntityRenderDispatcherHookEvent.RenderLBTooltipsEvent event) {
-        if (TooltipsConfig.tooltipsConfig.tooltips_enable_status == TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS)
+        if (LootInfomationConfig.lootInfomationConfig.lootInformationControl.loot_information_status == LootInformationEnableStatus.LootInformationStatus.NAME_AND_RARITY_IN_TOOLTIPS)
             return;
         NameTagRenderer.renderNameTag(event.poseStack, event.buffers, event.LBItemEntity);
     }
@@ -33,9 +39,17 @@ public class TooltipsModule implements ILBModule {
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void deleteRarityInfoWhenConfigEnable(TooltipsGatherNameAndRarityEvent event){
+        API.Match(LootInfomationConfig.lootInfomationConfig.rarity.showRarityFor).of(
+                Case($(x -> x == LootInfomationConfig.ShowRarityTarget.NONE), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY)),
+                Case($(x -> x == LootInfomationConfig.ShowRarityTarget.RARE && !event.lbItemEntity.isRare()), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY))
+        );
+    }
+
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void InternalNameAndRarityCollector(TooltipsGatherNameAndRarityEvent event){
-        TooltipsEnableStatus.TooltipsStatus status = TooltipsConfig.tooltipsConfig.tooltips_enable_status;
+        LootInformationEnableStatus.LootInformationStatus status = LootInfomationConfig.lootInfomationConfig.lootInformationControl.loot_information_status;
         status.extractComponents.accept(event);
     }
 

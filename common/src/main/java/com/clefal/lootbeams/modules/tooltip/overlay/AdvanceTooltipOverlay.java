@@ -1,11 +1,11 @@
 package com.clefal.lootbeams.modules.tooltip.overlay;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.config.configs.TooltipsConfig;
+import com.clefal.lootbeams.config.configs.LootInfomationConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntityCache;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
-import com.clefal.lootbeams.modules.tooltip.TooltipsEnableStatus;
+import com.clefal.lootbeams.modules.tooltip.LootInformationEnableStatus;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -59,7 +59,7 @@ public class AdvanceTooltipOverlay {
     }
 
     public static boolean checkCrouch() {
-        return !TooltipsConfig.tooltipsConfig.tooltips.render_tooltips_on_crouch || Minecraft.getInstance().player.isCrouching();
+        return !LootInfomationConfig.lootInfomationConfig.tooltips.render_tooltips_on_crouch || Minecraft.getInstance().player.isCrouching();
     }
 
     public Vector2f transformToScreenCoordinate(Vector3f worldCoordinate, float partialTicks) {
@@ -98,7 +98,7 @@ public class AdvanceTooltipOverlay {
 
     public void render(GuiGraphics guiGraphics, DeltaTracker tracker) {
         //cannot request this when register overlay, so I have to put it at here.
-        if (TooltipsConfig.tooltipsConfig.tooltips_enable_status != TooltipsEnableStatus.TooltipsStatus.NAME_AND_RARITY_IN_TOOLTIPS)
+        if (LootInfomationConfig.lootInfomationConfig.lootInformationControl.loot_information_status != LootInformationEnableStatus.LootInformationStatus.NAME_AND_RARITY_IN_TOOLTIPS)
             return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null) return;

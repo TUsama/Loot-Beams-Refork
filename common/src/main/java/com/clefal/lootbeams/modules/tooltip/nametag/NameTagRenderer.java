@@ -1,7 +1,7 @@
 package com.clefal.lootbeams.modules.tooltip.nametag;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.config.configs.TooltipsConfig;
+import com.clefal.lootbeams.config.configs.LootInfomationConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -23,7 +23,7 @@ public class NameTagRenderer {
 
     public static void renderNameTag(PoseStack stack, MultiBufferSource buffer, LBItemEntity LBItemEntity) {
         ItemEntity item = LBItemEntity.item();
-        TooltipsConfig.nameTagSection nameTagSection = TooltipsConfig.tooltipsConfig.nameTag;
+        LootInfomationConfig.nameTagSection nameTagSection = LootInfomationConfig.lootInfomationConfig.nameTag;
 
         //If player is crouching or looking at the item
         if (Minecraft.getInstance().player.isCrouching() || ((nameTagSection.render_name_tag_on_look && isLookingAt(Minecraft.getInstance().player, item, nameTagSection.name_tag_look_sensitivity.get())))) {
@@ -69,7 +69,7 @@ public class NameTagRenderer {
 
     private static void renderText(Font fontRenderer, PoseStack stack, MultiBufferSource buffer, String text, int foregroundColor, int backgroundColor, float backgroundAlpha) {
 
-        if (TooltipsConfig.tooltipsConfig.nameTag.add_text_border) {
+        if (LootInfomationConfig.lootInfomationConfig.nameTag.add_text_border) {
             float w = -fontRenderer.width(text) / 2f;
             int bg = new Color(0, 0, 0, (int) (255 * backgroundAlpha)).getRGB();
             Component comp = Component.literal(text);

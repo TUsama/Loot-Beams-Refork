@@ -4,7 +4,7 @@ public class ConfigManager {
 
     public static void init(){
         LightConfig.init();
-        TooltipsConfig.init();
+        LootInfomationConfig.init();
         SoundConfig.init();
         DynamicConfig.init();
         CustomConfig.init();

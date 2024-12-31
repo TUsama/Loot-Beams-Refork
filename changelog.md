@@ -1,3 +1,7 @@
+### V2.5.8
+(Common)add two new configs, now you can choose if show item name and rarity for all items, despite the beam config.
+(Common)rename the Tooltips Config to Loot Information Config.
+
 ### V2.5.7
 (Common) refactor the color holder, now supports mutable color, like rainbow
 (NeoForge) add Apotheosis compat

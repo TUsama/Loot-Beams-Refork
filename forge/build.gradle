@@ -108,7 +108,7 @@ dependencies {
 
 
     compileOnly fg.deobf("curse.maven:library-of-exile-398780:5934664")
-    compileOnly fg.deobf("curse.maven:mine-and-slash-reloaded-306575:5939398")
+    compileOnly fg.deobf("curse.maven:mine-and-slash-reloaded-306575:6045385")
     //runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
 
     compileOnly fg.deobf("curse.maven:legendary-tooltips-532127:4662781")

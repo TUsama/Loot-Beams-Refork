@@ -1,3 +1,6 @@
+### V2.5.8
+(Forge) fix MNS compat
+
 ### V2.5.7
 (Common)add two new configs, now you can choose if show item name and rarity for all items, despite the beam config.
 (Common)rename the Tooltips Config to Loot Information Config.

@@ -1,4 +1,4 @@
-package com.clefal.lootbeams.compat.TrinketCompatModule;
+package com.clefal.lootbeams.compat;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;

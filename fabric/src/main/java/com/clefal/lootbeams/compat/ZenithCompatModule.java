@@ -1,7 +1,6 @@
-package com.clefal.lootbeams.compat.ZenithCompatModule;
+package com.clefal.lootbeams.compat;
 
 import com.clefal.lootbeams.LootBeamsConstants;
-import com.clefal.lootbeams.compat.TrinketCompatModule.TrinketCompatModule;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;

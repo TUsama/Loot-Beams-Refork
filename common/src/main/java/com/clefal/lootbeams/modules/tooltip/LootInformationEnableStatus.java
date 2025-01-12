@@ -5,15 +5,14 @@ import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.nirvana_lib.relocated.io.vavr.Function1;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Consumer;
 
 public class LootInformationEnableStatus {
-    public static final String NAME = "name";
-    public static final String RARITY = "rarity";
-    public static final String TOOLTIPS = "tooltips";
     public static final Function1<LBItemEntity, Component> handleName = lbItemEntity -> {
         boolean ifShowStack = LootInfomationConfig.lootInfomationConfig.nameTag.render_stack_count;
         ItemStack item = lbItemEntity.item().getItem();
@@ -21,7 +20,8 @@ public class LootInformationEnableStatus {
         if (!ifShowStack) return item.getHoverName();
         int count = item.getCount();
         if (count > 1) {
-            return item.getHoverName().plainCopy().append(" x" + count).withStyle(style);
+
+            return MutableComponent.create(new LiteralContents(item.getHoverName().getString())).append(" x" + count).withStyle(style);
         }
         return item.getHoverName();
     };

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class LootBeamsConstants {
 
-	public static final String MOD_NAME = "ExampleMod";
+	public static final String MOD_NAME = "Loot Beams Refork";
 	public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
     public static final String MODID = "lootbeams";
     public static final ResourceLocation LOOT_DROP = new ResourceLocation(MODID, "loot_drop");

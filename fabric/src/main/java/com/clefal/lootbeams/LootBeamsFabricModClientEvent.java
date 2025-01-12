@@ -3,8 +3,6 @@ package com.clefal.lootbeams;
 import com.clefal.lootbeams.compat.AccessoriesCompatModule;
 import com.clefal.lootbeams.compat.TrinketCompatModule;
 import com.clefal.lootbeams.compat.TieredZCompatModule;
-import com.clefal.lootbeams.compat.TrinketCompatModule;
-import com.clefal.lootbeams.compat.ZenithCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
 import com.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;

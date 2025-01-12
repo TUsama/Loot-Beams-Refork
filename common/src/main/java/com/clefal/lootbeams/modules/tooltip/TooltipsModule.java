@@ -13,10 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.EventPriority;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
-import net.minecraft.network.chat.contents.LiteralContents;
-
+import net.minecraft.network.chat.contents.PlainTextContents;
 
 import java.util.Map;
 
@@ -35,17 +32,17 @@ public class TooltipsModule implements ILBModule {
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void colorizeNameAndRarity(TooltipsGatherNameAndRarityEvent event){
+    public void colorizeNameAndRarity(TooltipsGatherNameAndRarityEvent event) {
         for (Map.Entry<TooltipsGatherNameAndRarityEvent.Case, Component> caseComponentEntry : event.gather.entrySet()) {
             Style oldStyle = caseComponentEntry.getValue().getStyle();
-            if (oldStyle.equals(Style.EMPTY)){
-                caseComponentEntry.setValue(MutableComponent.create(new LiteralContents(caseComponentEntry.getValue().getString())).withStyle(oldStyle).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(event.lbItemEntity.rarity().color().getRGB()))));
+            if (oldStyle.equals(Style.EMPTY)) {
+                caseComponentEntry.setValue(MutableComponent.create(new PlainTextContents.LiteralContents(caseComponentEntry.getValue().getString())).withStyle(oldStyle).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(event.lbItemEntity.rarity().color().rgb()))));
             }
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void deleteRarityInfoWhenConfigEnable(TooltipsGatherNameAndRarityEvent event){
+    public void deleteRarityInfoWhenConfigEnable(TooltipsGatherNameAndRarityEvent event) {
         API.Match(LootInfomationConfig.lootInfomationConfig.rarity.showRarityFor).option(
                 Case($(x -> x == LootInfomationConfig.ShowRarityTarget.NONE), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY)),
                 Case($(x -> x == LootInfomationConfig.ShowRarityTarget.RARE && !event.lbItemEntity.isRare()), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY))
@@ -53,7 +50,7 @@ public class TooltipsModule implements ILBModule {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void InternalNameAndRarityCollector(TooltipsGatherNameAndRarityEvent event){
+    public void InternalNameAndRarityCollector(TooltipsGatherNameAndRarityEvent event) {
         LootInformationEnableStatus.LootInformationStatus status = LootInfomationConfig.lootInfomationConfig.lootInformationControl.loot_information_status;
         status.extractComponents.accept(event);
     }

@@ -35,7 +35,7 @@ dependencies {
 
     modImplementation "curse.maven:nirvana-library-1164411:6018350"
 
-    modCompileOnly "curse.maven:tieredz-615948:5233351"
+    modCompileOnly "curse.maven:tieredz-615948:5934487"
 }
 
 loom {

@@ -7,7 +7,7 @@ import com.clefal.nirvana_lib.relocated.io.vavr.Function1;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Consumer;
@@ -21,7 +21,7 @@ public class LootInformationEnableStatus {
         int count = item.getCount();
         if (count > 1) {
 
-            return MutableComponent.create(new LiteralContents(item.getHoverName().getString())).append(" x" + count).withStyle(style);
+            return MutableComponent.create(new PlainTextContents.LiteralContents(item.getHoverName().getString())).append(" x" + count).withStyle(style);
         }
         return item.getHoverName();
     };

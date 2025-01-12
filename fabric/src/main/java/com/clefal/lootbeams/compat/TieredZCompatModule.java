@@ -55,7 +55,6 @@ public class TieredZCompatModule implements ILBCompatModule {
                         ResourceLocation tier = new ResourceLocation(item.getTagElement("Tiered").getString("Tier"));
                         PotentialAttribute potentialAttribute = Tiered.ATTRIBUTE_DATA_LOADER.getItemAttributes().get(tier);
                         if (potentialAttribute != null) {
-                            System.out.println("hover name is " + item.getHoverName().plainCopy().getString());
                             String id = potentialAttribute.getID();
 
                             Option<String> find = this.rarities.find(id::contains);

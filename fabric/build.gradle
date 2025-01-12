@@ -34,6 +34,8 @@ dependencies {
     //modImplementation "curse.maven:charm-of-undying-316873:5159191"
 
     modImplementation "curse.maven:nirvana-library-1164411:6018350"
+
+    modCompileOnly "curse.maven:tieredz-615948:5233351"
 }
 
 loom {

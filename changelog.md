@@ -1,3 +1,7 @@
+### V2.5.9
+(Common) fix an issue that renders the item name incorrectly due to method misuse
+(Fabric) add TieredZ compat
+
 ### V2.5.8
 (Forge) fix MNS compat
 

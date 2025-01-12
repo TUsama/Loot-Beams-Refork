@@ -1,3 +1,7 @@
+### V2.5.9
+(Common) fix an issue that renders the item name incorrectly due to method misuse
+(Fabric) add TieredZ compat
+
 ### V2.5.8
 (Common)add two new configs, now you can choose if show item name and rarity for all items, despite the beam config.
 (Common)rename the Tooltips Config to Loot Information Config.

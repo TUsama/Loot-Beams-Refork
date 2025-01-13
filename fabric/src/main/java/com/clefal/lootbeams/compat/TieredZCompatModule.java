@@ -47,6 +47,7 @@ public class TieredZCompatModule implements ILBCompatModule {
         event.register(itemEntity -> {
                     //copy from ItemStackClientMixin getName
                     ItemStack item = itemEntity.getItem();
+                    if (item.get(Tiered.TIER) == null) return Option.none();
                     ResourceLocation parse = ResourceLocation.parse(item.get(Tiered.TIER).tier());
                     if (item.get(Tiered.TIER) != null && Tiered.ATTRIBUTE_DATA_LOADER.getItemAttributes().containsKey(parse)) {
                         PotentialAttribute potentialAttribute = Tiered.ATTRIBUTE_DATA_LOADER.getItemAttributes().get(parse);

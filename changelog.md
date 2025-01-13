@@ -1,3 +1,6 @@
+### V2.5.10
+(Fabric) fix TieredZ compat crash
+
 ### V2.5.9
 (Common) fix an issue that renders the item name incorrectly due to method misuse
 (Fabric) add TieredZ compat

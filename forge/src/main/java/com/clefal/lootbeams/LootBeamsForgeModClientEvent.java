@@ -3,6 +3,7 @@ package com.clefal.lootbeams;
 import com.clefal.lootbeams.compat.apothesis.ApotheosisCompatModule;
 import com.clefal.lootbeams.compat.curios.CuriosCompatModule;
 import com.clefal.lootbeams.compat.mine_and_slash.MineAndSlashCompatModule;
+import com.clefal.lootbeams.compat.mine_and_slash.OrbOfCraftingCompatModule;
 import com.clefal.lootbeams.compat.obscuretooltips.ObscureTooltipsCompatModule;
 import com.clefal.lootbeams.compat.spartanweaponry.SpartanWeaponryCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
@@ -33,7 +34,8 @@ public class LootBeamsForgeModClientEvent {
                 MineAndSlashCompatModule.INSTANCE,
                 ObscureTooltipsCompatModule.INSTANCE,
                 CuriosCompatModule.INSTANCE,
-                SpartanWeaponryCompatModule.INSTANCE
+                SpartanWeaponryCompatModule.INSTANCE,
+                OrbOfCraftingCompatModule.INSTANCE
         );
         ModulesManager.enableAll();
         ConfigHandlers.init();

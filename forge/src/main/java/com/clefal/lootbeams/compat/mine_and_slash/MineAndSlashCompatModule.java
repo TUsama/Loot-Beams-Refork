@@ -8,7 +8,6 @@ import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.robertx22.addons.orbs_of_crafting.currency.IItemAsCurrency;
-import com.robertx22.addons.orbs_of_crafting.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
@@ -94,7 +93,7 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
     @SubscribeEvent
     public void registerWhitelistCondition(RegisterConfigConditionEvent.RegisterWhitelistEvent event) {
         //currenccy, I prefer to show the currency always.
-        event.conditions.add(lbItemEntity -> ExileCurrency.get(lbItemEntity.item().getItem()).isPresent() || lbItemEntity.item().getItem().getItem() instanceof IItemAsCurrency);
+        event.conditions.add(lbItemEntity -> lbItemEntity.item().getItem().getItem() instanceof IItemAsCurrency);
     }
 
 }

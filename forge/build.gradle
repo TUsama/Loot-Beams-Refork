@@ -107,9 +107,10 @@ dependencies {
 
 
 
-    compileOnly fg.deobf("curse.maven:library-of-exile-398780:5934664")
-    compileOnly fg.deobf("curse.maven:mine-and-slash-reloaded-306575:6045385")
-    //runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
+    implementation fg.deobf("curse.maven:library-of-exile-398780:6107923")
+    implementation fg.deobf("curse.maven:mine-and-slash-reloaded-306575:6107937")
+    implementation fg.deobf("curse.maven:orbs-of-crafting-1182250:6107927")
+    runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
 
     compileOnly fg.deobf("curse.maven:legendary-tooltips-532127:4662781")
     /*runtimeOnly fg.deobf("curse.maven:prism-lib-638111:4650325")

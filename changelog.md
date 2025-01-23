@@ -1,3 +1,6 @@
+### V2.5.11
+(Forge)fix orbs of crafting compat
+
 ### V2.5.10
 (Forge) fix MNS compat, add orb of crafting compat
 

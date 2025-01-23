@@ -18,8 +18,10 @@ public class OrbOfCraftingCompatModule implements ILBCompatModule {
 
     @Override
     public void tryEnable() {
-        LootBeamsConstants.LOGGER.info("Detected Orb Of Crafting, enable OrbOfCraftingCompatModule!");
-        LootBeamsConstants.EVENT_BUS.register(INSTANCE);
+        if (shouldBeEnable()){
+            LootBeamsConstants.LOGGER.info("Detected Orb Of Crafting, enable OrbOfCraftingCompatModule!");
+            LootBeamsConstants.EVENT_BUS.register(INSTANCE);
+        }
     }
 
     @SubscribeEvent

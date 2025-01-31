@@ -39,7 +39,7 @@ public class LootInfomationConfig extends Config {
 
 
     public static class raritySection extends ConfigSection{
-        public ShowRarityTarget showRarityFor = ShowRarityTarget.RARE;
+        public ValidatedEnum<ShowRarityTarget> showRarityFor = new ValidatedEnum<>(ShowRarityTarget.RARE, ValidatedEnum.WidgetType.CYCLING);
     }
 
 

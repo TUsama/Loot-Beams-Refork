@@ -1,3 +1,6 @@
+### V2.5.12
+(Forge)implement Tiered Reforged compat, the rare sound effect is unavailable for this mod.
+
 ### V2.5.11
 (Forge)fix orbs of crafting compat
 

@@ -1,3 +1,7 @@
+### V2.5.11
+(Fabric)prob fix the crash when user installs Tiered Reforged.
+(Forge)add Tiered Reforged compat
+
 ### V2.5.10
 (Fabric) fix TieredZ compat crash
 

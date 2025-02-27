@@ -82,6 +82,9 @@ dependencies {
     runtimeOnly "curse.maven:apothic-attributes-898963:6021370"
 
     implementation "curse.maven:nirvana-library-1164411:6018351"
+
+    implementation "curse.maven:tiered-forge-453889:6206636"
+    implementation "curse.maven:unionlib-367806:5997453"
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

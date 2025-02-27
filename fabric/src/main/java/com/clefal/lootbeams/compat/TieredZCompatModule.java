@@ -24,6 +24,11 @@ public class TieredZCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
+        try {
+            Class.forName("draylar.tiered.Tiered");
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
         return FabricLoader.getInstance().isModLoaded("tiered");
     }
 

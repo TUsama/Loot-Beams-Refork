@@ -98,7 +98,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
-    implementation fg.deobf("curse.maven:nirvana-library-1164411:6016044")
+    implementation fg.deobf("curse.maven:nirvana-library-1164411:6390745")
 
     compileOnly fg.deobf("curse.maven:apotheosis-313970:5753183")
     compileOnly fg.deobf("curse.maven:placebo-283644:5414631")

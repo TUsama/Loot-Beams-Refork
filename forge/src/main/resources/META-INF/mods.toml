@@ -27,13 +27,13 @@ side = "BOTH"
 [[dependencies.${mod_id}]]
 modId = "fzzy_config"
 mandatory = true
-versionRange = "[0.5.9,)"
+versionRange = "[${fzzy_config_version},)"
 ordering = "AFTER"
 side = "CLIENT"
 [[dependencies.${mod_id}]]
 modId = "nirvana_lib"
 mandatory = true
-versionRange = "[1.0.0,)"
+versionRange = "[1.1.8,)"
 ordering = "AFTER"
 side = "CLIENT"
 [[dependencies.${mod_id}]]

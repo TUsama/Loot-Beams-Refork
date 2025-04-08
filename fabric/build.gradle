@@ -38,7 +38,7 @@ dependencies {
     modCompileOnly "curse.maven:zenith-attributes-910078:5918684"
     modCompileOnly "curse.maven:fakerlib-853197:5503724"
 
-    modImplementation ("curse.maven:nirvana-library-1164411:6016044")
+    modImplementation ("curse.maven:nirvana-library-1164411:6390745")
 
     modCompileOnly "curse.maven:tieredz-615948:5233351"
 }

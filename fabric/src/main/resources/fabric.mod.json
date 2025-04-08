@@ -39,7 +39,8 @@
         "fabricloader": ">=0.14",
         "fabric": "*",
         "minecraft": "${minecraft_version}",
-        "java": ">=17"
+        "java": ">=17",
+        "nirvana_library": ">=1.1.8"
     },
     "suggests": {
         "another-mod": "*"

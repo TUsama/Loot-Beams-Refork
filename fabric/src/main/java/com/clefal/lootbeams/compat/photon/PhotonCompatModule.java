@@ -4,8 +4,8 @@ import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.configs.LightConfig;
 import com.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
-import com.clefal.lootbeams.platform.Services;
 import com.clefal.lootbeams.utils.ResourceLocationHelper;
+import com.clefal.nirvana_lib.platform.Services;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;
@@ -31,7 +31,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraftforge.fml.ModList;
 
 import java.util.Map;
 
@@ -55,7 +54,7 @@ public class PhotonCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded("photon");
+        return Services.PLATFORM.isModLoaded("photon");
     }
 
     @Override
@@ -186,7 +185,8 @@ public class PhotonCompatModule implements ILBCompatModule {
         public static class FXControl extends ConfigSection {
             @Comment("In each FX, you will create several FXObjects for the visual effect. This mod will automatically replace the FXObject's color(only the particle and the beam) if the object's name is in this config. the three objects provided by default is for the default baseFX. The Replace Alpha means use the beam_alpha define in Beam Config to change the alpha of object")
             public ValidatedMap<String, ReplaceConfig> ifThisNameShouldBeReplacedColor = new ValidatedMap.Builder<String, ReplaceConfig>().keyHandler(new ValidatedString())
-                    .valueHandler(new ValidatedAny<>(new ReplaceConfig(true, true))).defaults(
+                    .valueHandler(new ValidatedAny<>(new ReplaceConfig(true, true)))
+                    .defaults(
                             Map.of("rarityParticle", new ReplaceConfig(false, true),
                                     "halo", new ReplaceConfig(true, true),
                                     "haloVertical", new ReplaceConfig(true, true))

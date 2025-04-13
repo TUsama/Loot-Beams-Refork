@@ -40,7 +40,7 @@
         "fabric": "*",
         "minecraft": "${minecraft_version}",
         "java": ">=17",
-        "nirvana_library": ">=1.1.8"
+        "nirvana_lib": ">=1.1.8"
     },
     "suggests": {
         "another-mod": "*"

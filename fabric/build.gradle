@@ -30,7 +30,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
-    modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}"
+    modImplementation "me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+${minecraft_version}"
 
     modCompileOnly "dev.emi:trinkets:3.7.2"
 

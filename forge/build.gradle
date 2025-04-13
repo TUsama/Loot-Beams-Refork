@@ -46,6 +46,7 @@ minecraft {
             taskName 'Client'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            jvmArgs '-XX:+AllowEnhancedClassRedefinition'
             mods {
                 modClientRun {
                     source sourceSets.main
@@ -120,7 +121,7 @@ dependencies {
 
     compileOnly fg.deobf("curse.maven:spartan-weaponry-278141:5597663")
 
-    implementation(fg.deobf("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+forge"))
+    implementation(fg.deobf("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+${minecraft_version}+forge"))
     implementation("thedarkcolour:kotlinforforge:4.11.0")
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.11.0+1.20.1")
@@ -133,6 +134,9 @@ dependencies {
 
     compileOnly fg.deobf("curse.maven:tiered-forge-453889:6109619")
     compileOnly fg.deobf("curse.maven:unionlib-367806:6012406")
+
+    implementation fg.deobf("curse.maven:ldlib-626676:6337779")
+    implementation fg.deobf("curse.maven:photon-871522:6373238")
 }
 
 tasks.withType(JavaCompile).configureEach {

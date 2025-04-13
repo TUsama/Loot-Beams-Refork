@@ -16,9 +16,9 @@ public class EquipmentConditions extends PersistentConfigData<RegisterConfigCond
         super();
         CustomConfig.EquipmentRegister equipmentRegister = CustomConfig.customConfig.equipmentRegister;
 
-        super.conditions.add((item) -> Checker.checkItemInItemList(item, equipmentRegister.by_name));
-        super.conditions.add((item) -> Checker.checkItemHasTagInTagList(item, equipmentRegister.by_tag));
-        super.conditions.add((item) -> Checker.checkIsInThisModList(item, equipmentRegister.by_modid));
+        super.conditions.add((item) -> Checker.checkItemInItemSet(item, equipmentRegister.by_name));
+        super.conditions.add((item) -> Checker.checkItemHasTagInTagSet(item, equipmentRegister.by_tag));
+        super.conditions.add((item) -> Checker.checkIsInThisModSet(item, equipmentRegister.by_modid));
 
     }
 

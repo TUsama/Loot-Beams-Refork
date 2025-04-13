@@ -32,28 +32,28 @@ public class Checker {
         return BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getNamespace().equals(modId);
     }
 
-    public boolean checkItemInItemList(ItemStack itemStack, ValidatedSet<ResourceLocation> resourceLocations) {
+    public boolean checkItemInItemSet(ItemStack itemStack, ValidatedSet<ResourceLocation> resourceLocations) {
         ResourceLocation registryItem = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
         return resourceLocations.contains(registryItem);
     }
 
-    public boolean checkItemHasTagInTagList(ItemStack itemStack, ValidatedSet<String> tags) {
+    public boolean checkItemHasTagInTagSet(ItemStack itemStack, ValidatedSet<String> tags) {
         return itemStack.getTags().map(x -> x.location().toString()).anyMatch(tags::contains);
     }
 
-    public boolean checkIsInThisModList(ItemStack itemStack, ValidatedSet<String> modId) {
+    public boolean checkIsInThisModSet(ItemStack itemStack, ValidatedSet<String> modId) {
         return modId.contains(BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getNamespace());
     }
 
-    public boolean checkItemInItemList(LBItemEntity lbItemEntity, ValidatedSet<ResourceLocation> resourceLocations) {
+    public boolean checkItemInItemSet(LBItemEntity lbItemEntity, ValidatedSet<ResourceLocation> resourceLocations) {
         return resourceLocations.contains(lbItemEntity.resourceLocation());
     }
 
-    public boolean checkItemHasTagInTagList(LBItemEntity lbItemEntity, ValidatedSet<String> tags) {
+    public boolean checkItemHasTagInTagSet(LBItemEntity lbItemEntity, ValidatedSet<String> tags) {
         return lbItemEntity.item().getItem().getTags().map(x -> x.location().toString()).anyMatch(tags::contains);
     }
 
-    public boolean checkIsInThisModList(LBItemEntity lbItemEntity, ValidatedSet<String> modId) {
+    public boolean checkIsInThisModSet(LBItemEntity lbItemEntity, ValidatedSet<String> modId) {
         return modId.contains(lbItemEntity.resourceLocation().getNamespace());
     }
 }

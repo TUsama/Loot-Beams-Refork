@@ -1,3 +1,7 @@
+### V3.0.1
+(Fabric) add Photon compat
+(Both) add ifThisNameShouldBeReplacedColor three default values
+
 ### V3.0.0
 Introducing [Photon](https://www.curseforge.com/minecraft/mc-mods/photon) compat, now the beam effect is all painted by you!
 Please check out the new config section appeared after you installing Photon to see how you can make your loot beam FX.

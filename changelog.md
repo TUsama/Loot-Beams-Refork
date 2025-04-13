@@ -1,3 +1,8 @@
+### V3.0.0
+Introducing [Photon](https://www.curseforge.com/minecraft/mc-mods/photon) compat, now the beam effect is all painted by you!
+Please check out the new config section appeared after you installing Photon to see how you can make your loot beam FX.
+You can also use the default FX provided by Clefal to check the In-game visual effect.
+
 ### V2.5.12
 (Forge)implement Tiered Reforged compat, the rare sound effect is unavailable for this mod.
 

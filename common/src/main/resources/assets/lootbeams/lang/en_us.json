@@ -6,9 +6,10 @@
   "lootbeams.mod_rarity.non_soul": "Non Soul",
   "lootbeams.light_config.lightEffectFilter.whitelist_by_tag.desc": "the format is the same as the datapack format, start with \"#\".",
   "lootbeams.light_config.lightEffectFilter.blacklist_by_tag.desc": "the format is the same as the datapack format, start with \"#\".",
-  "lootbeams.photon_compat_config.fxEnable.affectAllBeam.desc": "When enable, the original light effect will be removed(means the 'loot beam'), all the effects will be replaced by the photon FX",
-  "lootbeams.photon_compat_config.fxEnable.baseFX.desc": "The FX that every beam effect will be replaced by. Default value is a FX made by Clefal, also you can check the project file inside mod assets folder",
-  "lootbeams.photon_compat_config.fxEnable.byItemName.desc": "Item that need special handle, key is the item ResourceLocation, and the value is the FX ResourceLocation",
-  "lootbeams.photon_compat_config.fxEnable.affectStrategy.desc": "The strategy that how the fx affect current loot beam appearance",
-  "lootbeams.photon_compat_config.fxControl.ifThisNameShouldBeReplacedColor.desc": "In each FX, you will create several FXObjects for the visual effect. This mod will automatically replace the FXObject's color(only the particle and the beam) if the object's name is in this config. the three objects provided by default is for the default baseFX. The Replace Alpha means use the beam_alpha define in Beam Config to change the alpha of object"
+  "lootbeams.photon_compat_config.fxEnable.affectAllBeam.desc": "When enable, the original light effect will be removed(means the 'loot beam'), all the effects will be replaced by the photon FX.",
+  "lootbeams.photon_compat_config.fxEnable.affectSetting.desc": "the detail of affectAllBeam.",
+  "lootbeams.photon_compat_config.fxEnable.baseFX.desc": "The FX that every beam effect will be replaced by. Default value is a FX made by Clefal, also you can check the project file inside mod assets folder.",
+  "lootbeams.photon_compat_config.fxEnable.byItemName.desc": "Item that need special handle, key is the item ResourceLocation, and the value is the FX ResourceLocation.",
+  "lootbeams.photon_compat_config.fxEnable.affectStrategy.desc": "The strategy that how the fx affect current loot beam appearance.",
+  "lootbeams.photon_compat_config.fxControl.ifThisNameShouldBeReplacedColor.desc": "In each FX, you will create several FXObjects for the visual effect. This mod will automatically replace the FXObject's color(only the particle and the beam) if the object's name is in this config. the three objects provided by default is for the default baseFX. The Replace Alpha means use the beam_alpha define in Beam Config to change the alpha of object."
 }

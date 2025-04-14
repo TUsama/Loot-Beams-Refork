@@ -177,7 +177,6 @@ public class PhotonCompatModule implements ILBCompatModule {
             public boolean affectAllBeam = false;
             public ConfigGroup affectSetting = new ConfigGroup("replace_setting");
             @ConfigGroup.Pop
-
             public ValidatedIdentifier baseFX = new ValidatedIdentifier(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID,
                     "common"));
             
@@ -191,7 +190,8 @@ public class PhotonCompatModule implements ILBCompatModule {
 
         public static class FXControl extends ConfigSection {
             public ValidatedMap<String, ReplaceConfig> ifThisNameShouldBeReplacedColor = new ValidatedMap.Builder<String, ReplaceConfig>().keyHandler(new ValidatedString())
-                    .valueHandler(new ValidatedAny<>(new ReplaceConfig(true, true))).defaults(
+                    .valueHandler(new ValidatedAny<>(new ReplaceConfig(true, true)))
+                    .defaults(
                             Map.of("rarityParticle", new ReplaceConfig(false, true),
                                     "halo", new ReplaceConfig(true, true),
                                     "haloVertical", new ReplaceConfig(true, true))

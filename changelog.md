@@ -1,8 +1,13 @@
+### V3.1.0
+### **Backup your Config!!**
+(Both) add affectStrategy to allow player to control if the FX fully replace the original loot beam. Rename some configs
+
 ### V3.0.1
 (Fabric) add Photon compat
 (Both) add ifThisNameShouldBeReplacedColor three default values
 
 ### V3.0.0
+### **Backup your Config!!**
 Introducing [Photon](https://www.curseforge.com/minecraft/mc-mods/photon) compat, now the beam effect is all painted by you!
 Please check out the new config section appeared after you installing Photon to see how you can make your loot beam FX.
 You can also use the default FX provided by Clefal to check the In-game visual effect.

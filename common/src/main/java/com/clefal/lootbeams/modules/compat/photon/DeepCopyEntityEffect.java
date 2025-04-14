@@ -1,4 +1,4 @@
-package com.clefal.lootbeams.compat.photon;
+package com.clefal.lootbeams.modules.compat.photon;
 
 import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;

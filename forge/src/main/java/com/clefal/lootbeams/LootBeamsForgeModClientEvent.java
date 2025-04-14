@@ -5,7 +5,6 @@ import com.clefal.lootbeams.compat.curios.CuriosCompatModule;
 import com.clefal.lootbeams.compat.mine_and_slash.MineAndSlashCompatModule;
 import com.clefal.lootbeams.compat.mine_and_slash.OrbOfCraftingCompatModule;
 import com.clefal.lootbeams.compat.obscuretooltips.ObscureTooltipsCompatModule;
-import com.clefal.lootbeams.compat.photon.PhotonCompatModule;
 import com.clefal.lootbeams.compat.spartanweaponry.SpartanWeaponryCompatModule;
 import com.clefal.lootbeams.compat.tiered_reforged.TieredReforgedCompatModule;
 import com.clefal.lootbeams.config.ConfigHandlers;
@@ -38,8 +37,7 @@ public class LootBeamsForgeModClientEvent {
                 CuriosCompatModule.INSTANCE,
                 SpartanWeaponryCompatModule.INSTANCE,
                 OrbOfCraftingCompatModule.INSTANCE,
-                TieredReforgedCompatModule.INSTANCE,
-                PhotonCompatModule.INSTANCE
+                TieredReforgedCompatModule.INSTANCE
         );
         ModulesManager.enableAll();
         ConfigHandlers.init();

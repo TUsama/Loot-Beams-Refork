@@ -1,4 +1,4 @@
-package com.clefal.lootbeams.compat.photon;
+package com.clefal.lootbeams.modules.compat.photon;
 
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.configs.LightConfig;
@@ -68,9 +68,9 @@ public class PhotonCompatModule implements ILBCompatModule {
 
     @SubscribeEvent
     public void onHook(EntityRenderDispatcherHookEvent.RenderLootBeamEvent event) {
-        PhotonCompatConfig.FXOverride fxOverride = getConfig().fxOverride;
-        if (!fxOverride.enableFXOverride) return;
-        ValidatedIdentifierMap<ResourceLocation> byItemName = fxOverride.byItemName;
+        PhotonCompatConfig.FXEnable fxEnable = getConfig().fxEnable;
+        if (!fxEnable.enableFX) return;
+        ValidatedIdentifierMap<ResourceLocation> byItemName = fxEnable.byItemName;
         ItemEntity item = event.LBItemEntity.item();
         ResourceLocation key = BuiltInRegistries.ITEM.getKey(item.getItem().getItem());
         boolean isSpecial = false;
@@ -81,19 +81,19 @@ public class PhotonCompatModule implements ILBCompatModule {
                 if (fx != null) {
                     replaceFXColor(event, fx, item);
                     isSpecial = true;
-                    event.setCanceled(true);
+                    if (getConfig().fxEnable.affectStrategy.equals(Strategies.CompletelyReplace)) event.setCanceled(true);
                 }
 
             }
 
         }
-        if (fxOverride.replaceAllBeam && !isSpecial) {
-            ResourceLocation resourceLocation = fxOverride.baseFX.get();
+        if (fxEnable.affectAllBeam && !isSpecial) {
+            ResourceLocation resourceLocation = fxEnable.baseFX.get();
             if (resourceLocation != null) {
                 FX fx = FXHelper.getFX(resourceLocation);
                 if (fx != null) {
                     replaceFXColor(event, fx, item);
-                    event.setCanceled(true);
+                    if (getConfig().fxEnable.affectStrategy.equals(Strategies.CompletelyReplace)) event.setCanceled(true);
                 }
             }
         }
@@ -157,25 +157,32 @@ public class PhotonCompatModule implements ILBCompatModule {
         }
     }
 
+    public enum Strategies {
+        CompletelyReplace,
+        Merge
+    }
 
     public static class PhotonCompatConfig extends Config {
         private static PhotonCompatConfig config;
-        public FXOverride fxOverride = new FXOverride();
+        public FXEnable fxEnable = new FXEnable();
         public FXControl fxControl = new FXControl();
 
         public PhotonCompatConfig() {
             super(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID, "photon_compat_config"));
         }
 
-        public static class FXOverride extends ConfigSection {
-            public boolean enableFXOverride = false;
-            @Comment("When enable, the original light effect will be removed(means the 'loot beam'), all the effects will be replaced by the photon FX")
-            public boolean replaceAllBeam = false;
-            public ConfigGroup replaceSetting = new ConfigGroup("replace_setting");
+        public static class FXEnable extends ConfigSection {
+            public boolean enableFX = false;
+
+            public boolean affectAllBeam = false;
+            public ConfigGroup affectSetting = new ConfigGroup("replace_setting");
             @ConfigGroup.Pop
-            @Comment("The FX that every beam effect will be replaced by. Default value is a FX made by Clefal, also you can check the project file inside mod assets folder")
-            public ValidatedIdentifier baseFX = new ValidatedIdentifier(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID, "common"));
-            @Comment("Item that need special handle, key is the item ResourceLocation, and the value is the FX ResourceLocation")
+
+            public ValidatedIdentifier baseFX = new ValidatedIdentifier(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID,
+                    "common"));
+            
+            public Strategies affectStrategy = Strategies.Merge;
+
             public ValidatedIdentifierMap<ResourceLocation> byItemName = new ValidatedIdentifierMap.Builder<ResourceLocation>()
                     .keyHandler(ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM))
                     .valueHandler(new ValidatedIdentifier())
@@ -183,10 +190,8 @@ public class PhotonCompatModule implements ILBCompatModule {
         }
 
         public static class FXControl extends ConfigSection {
-            @Comment("In each FX, you will create several FXObjects for the visual effect. This mod will automatically replace the FXObject's color(only the particle and the beam) if the object's name is in this config. the three objects provided by default is for the default baseFX. The Replace Alpha means use the beam_alpha define in Beam Config to change the alpha of object")
             public ValidatedMap<String, ReplaceConfig> ifThisNameShouldBeReplacedColor = new ValidatedMap.Builder<String, ReplaceConfig>().keyHandler(new ValidatedString())
-                    .valueHandler(new ValidatedAny<>(new ReplaceConfig(true, true)))
-                    .defaults(
+                    .valueHandler(new ValidatedAny<>(new ReplaceConfig(true, true))).defaults(
                             Map.of("rarityParticle", new ReplaceConfig(false, true),
                                     "halo", new ReplaceConfig(true, true),
                                     "haloVertical", new ReplaceConfig(true, true))

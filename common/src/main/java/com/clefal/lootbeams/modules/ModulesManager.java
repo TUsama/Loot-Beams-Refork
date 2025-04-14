@@ -1,6 +1,7 @@
 package com.clefal.lootbeams.modules;
 
 import com.clefal.lootbeams.modules.beam.BeamModule;
+import com.clefal.lootbeams.modules.compat.photon.PhotonCompatModule;
 import com.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
 import com.clefal.lootbeams.modules.sound.SoundModule;
 import com.clefal.lootbeams.modules.tooltip.TooltipsModule;
@@ -16,6 +17,7 @@ public class ModulesManager {
         list.add(TooltipsModule.INSTANCE);
         list.add(new SoundModule());
         list.add(DynamicProviderModule.INSTANCE);
+        list.add(PhotonCompatModule.INSTANCE);
 
     }
 

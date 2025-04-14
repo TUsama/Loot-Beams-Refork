@@ -1,3 +1,6 @@
+### V3.1.1
+add Beam Object color replacement
+
 ### V3.1.0
 ### **Backup your Config!!**
 (Both) add affectStrategy to allow player to control if the FX fully replace the original loot beam. Rename some configs

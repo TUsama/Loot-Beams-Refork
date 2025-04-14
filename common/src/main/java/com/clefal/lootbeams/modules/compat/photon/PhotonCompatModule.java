@@ -11,6 +11,7 @@ import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;
 import com.lowdragmc.photon.client.fx.FXRuntime;
+import com.lowdragmc.photon.client.gameobject.emitter.beam.BeamConfig;
 import com.lowdragmc.photon.client.gameobject.emitter.beam.BeamEmitter;
 import com.lowdragmc.photon.client.gameobject.emitter.data.number.color.Color;
 import com.lowdragmc.photon.client.gameobject.emitter.particle.ParticleEmitter;
@@ -137,7 +138,28 @@ public class PhotonCompatModule implements ILBCompatModule {
                             }
 
                         } else if (x instanceof BeamEmitter beamEmitter) {
-                            beamEmitter.getConfig().setColor(new Color(FastColor.ARGB32.color((int) ((LightConfig.lightConfig.beam.beam_alpha.get() * 2 / 3.0f) * 255), color.getRed(), color.getGreen(), color.getBlue())));
+                            BeamConfig config = beamEmitter.getConfig();
+                            if (config.getColor() instanceof Color constantColor) {
+                                int i = constantColor.getNumber().intValue();
+                                int newAlpha = ((int) (LightConfig.lightConfig.beam.beam_alpha.get() * 255));
+                                int newRGB = getRGB(color.getRGB());
+                                int oldAlpha = FastColor.ARGB32.alpha(i);
+                                int oldRGB = getRGB(i);
+                                if (replaceConfig.replaceAlpha) {
+                                    if (replaceConfig.replaceColor) {
+                                        config.setColor(new Color(makeARGB(newAlpha, newRGB)));
+                                    } else {
+
+                                        config.setColor(new Color(makeARGB(newAlpha, oldRGB)));
+                                    }
+                                } else {
+                                    if (replaceConfig.replaceColor) {
+                                        config.setColor(new Color(makeARGB(oldAlpha, newRGB)));
+                                    }
+                                }
+
+
+                            }
                         }
                     });
 

@@ -91,7 +91,14 @@ subprojects {
         maven {
             url = "https://maven.theillusivec4.top/"
         }
+        flatDir {
+            dirs "libs"
+        }
+        flatDir {
+            dirs "..\\common\\libs"
+        }
     }
+
 
     tasks.withType(JavaCompile).configureEach {
     

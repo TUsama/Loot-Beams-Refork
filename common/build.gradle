@@ -53,5 +53,8 @@ dependencies {
     compileOnly ("curse.maven:ldlib-626676:6337779")
     compileOnly ("curse.maven:photon-871522:6373238")
 
+    compileOnly ("blank:SubtleEffects-forge-1.20.1:1.9.4-hotfix.1")
+
+
 }
 

@@ -137,6 +137,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:ldlib-626676:6337779")
     implementation fg.deobf("curse.maven:photon-871522:6373238")
+
+    implementation fg.deobf("blank:SubtleEffects-forge-1.20.1:1.9.4-hotfix.1")
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -186,8 +188,7 @@ publishMods {
         projectId = "1150640"
         clientRequired = true
         minecraftVersions.add("1.20.1")
-        requires("fzzy-config", "nirvana-library")
-        optional("mine-and-slash-reloaded", "apotheosis")
+        requires("nirvana-library")
         incompatible("loot-beams")
     }
 }

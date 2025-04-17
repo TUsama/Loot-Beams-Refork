@@ -14,6 +14,7 @@ import com.lowdragmc.photon.client.fx.FXRuntime;
 import com.lowdragmc.photon.client.gameobject.emitter.beam.BeamConfig;
 import com.lowdragmc.photon.client.gameobject.emitter.beam.BeamEmitter;
 import com.lowdragmc.photon.client.gameobject.emitter.data.number.color.Color;
+import com.lowdragmc.photon.client.gameobject.emitter.particle.ParticleConfig;
 import com.lowdragmc.photon.client.gameobject.emitter.particle.ParticleEmitter;
 import me.fzzyhmstrs.fzzy_config.annotations.Comment;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
@@ -21,6 +22,7 @@ import me.fzzyhmstrs.fzzy_config.api.RegisterType;
 import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.config.ConfigGroup;
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection;
+import me.fzzyhmstrs.fzzy_config.util.EnumTranslatable;
 import me.fzzyhmstrs.fzzy_config.util.Walkable;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedIdentifierMap;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedMap;
@@ -32,6 +34,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.item.ItemEntity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -115,7 +118,8 @@ public class PhotonCompatModule implements ILBCompatModule {
                         ReplaceConfig replaceConfig = getConfig().fxControl.ifThisNameShouldBeReplacedColor.get(x.getName());
                         java.awt.Color color = event.LBItemEntity.rarity().color();
                         if (x instanceof ParticleEmitter particleEmitter) {
-                            if (particleEmitter.config.getStartColor() instanceof Color constantColor) {
+                            ParticleConfig config = particleEmitter.config;
+                            if (config.getStartColor() instanceof Color constantColor) {
                                 int i = constantColor.getNumber().intValue();
                                 int newAlpha = ((int) (LightConfig.lightConfig.beam.beam_alpha.get() * 255));
                                 int newRGB = getRGB(color.getRGB());
@@ -123,14 +127,14 @@ public class PhotonCompatModule implements ILBCompatModule {
                                 int oldRGB = getRGB(i);
                                 if (replaceConfig.replaceAlpha) {
                                     if (replaceConfig.replaceColor) {
-                                        particleEmitter.config.setStartColor(new Color(makeARGB(newAlpha, newRGB)));
+                                        config.setStartColor(new Color(makeARGB(newAlpha, newRGB)));
                                     } else {
 
-                                        particleEmitter.config.setStartColor(new Color(makeARGB(newAlpha, oldRGB)));
+                                        config.setStartColor(new Color(makeARGB(newAlpha, oldRGB)));
                                     }
                                 } else {
                                     if (replaceConfig.replaceColor) {
-                                        particleEmitter.config.setStartColor(new Color(makeARGB(oldAlpha, newRGB)));
+                                        config.setStartColor(new Color(makeARGB(oldAlpha, newRGB)));
                                     }
                                 }
 
@@ -179,9 +183,14 @@ public class PhotonCompatModule implements ILBCompatModule {
         }
     }
 
-    public enum Strategies {
+    public enum Strategies implements EnumTranslatable {
         CompletelyReplace,
-        Merge
+        Merge;
+
+        @Override
+        public @NotNull String prefix() {
+            return LootBeamsConstants.MODID + ".affect_strategy";
+        }
     }
 
     public static class PhotonCompatConfig extends Config {

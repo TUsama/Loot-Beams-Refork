@@ -1,14 +1,17 @@
 package com.clefal.lootbeams.modules.tooltip;
 
+import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.configs.LootInfomationConfig;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.nirvana_lib.relocated.io.vavr.Function1;
+import me.fzzyhmstrs.fzzy_config.util.EnumTranslatable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -26,7 +29,7 @@ public class LootInformationEnableStatus {
         return item.getHoverName();
     };
 
-    public enum LootInformationStatus {
+    public enum LootInformationStatus implements EnumTranslatable {
         NONE((event) -> {
             throw new UnsupportedOperationException("can't extract Components on NONE status!");
         }),
@@ -50,5 +53,9 @@ public class LootInformationEnableStatus {
         }
 
 
+        @Override
+        public @NotNull String prefix() {
+            return LootBeamsConstants.MODID + ".loot_information_status";
+        }
     }
 }

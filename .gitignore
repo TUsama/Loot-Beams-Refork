@@ -22,3 +22,4 @@ build
 eclipse
 run
 /fabric/runs/
+/common/libs

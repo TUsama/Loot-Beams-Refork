@@ -1,3 +1,7 @@
+### V3.1.2
+add Subtle Effect compat
+add some config localization
+
 ### V3.1.1
 add Beam Object color replacement
 

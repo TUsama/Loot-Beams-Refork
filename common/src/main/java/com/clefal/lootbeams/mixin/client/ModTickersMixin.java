@@ -1,6 +1,6 @@
 package com.clefal.lootbeams.mixin.client;
 
-import com.clefal.lootbeams.modules.compat.photon.PhotonCompatModule;
+import com.clefal.lootbeams.modules.compat.photon.PhotonCompatConfig;
 import com.clefal.lootbeams.modules.compat.subtle_effect.SubtleEffectCompatModule;
 import einstein.subtle_effects.tickers.ItemRarityTicker;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +17,7 @@ public class ModTickersMixin {
     ), remap = false, cancellable = true)
     public void onTick(CallbackInfo ci) {
         if (SubtleEffectCompatModule.INSTANCE.isEnabled && SubtleEffectCompatModule.getConfig().forceDisableItemRarity) {
-            if (PhotonCompatModule.getConfig().fxEnable.enableFX) {
+            if (PhotonCompatConfig.getConfig().fxEnable.enableFX) {
                 ci.cancel();
             }
         }

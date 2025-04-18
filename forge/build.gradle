@@ -135,10 +135,10 @@ dependencies {
     compileOnly fg.deobf("curse.maven:tiered-forge-453889:6109619")
     compileOnly fg.deobf("curse.maven:unionlib-367806:6012406")
 
-    implementation fg.deobf("curse.maven:ldlib-626676:6337779")
-    implementation fg.deobf("curse.maven:photon-871522:6373238")
+    compileOnly fg.deobf("curse.maven:ldlib-626676:6337779")
+    compileOnly fg.deobf("curse.maven:photon-871522:6373238")
 
-    implementation fg.deobf("blank:SubtleEffects-forge-1.20.1:1.9.4-hotfix.1")
+    compileOnly fg.deobf("blank:SubtleEffects-forge-1.20.1:1.9.4-hotfix.1")
 }
 
 tasks.withType(JavaCompile).configureEach {

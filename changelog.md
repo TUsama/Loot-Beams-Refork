@@ -1,3 +1,6 @@
+### V3.1.3
+fix start up crash
+
 ### V3.1.2
 add Subtle Effect compat
 add some config localization

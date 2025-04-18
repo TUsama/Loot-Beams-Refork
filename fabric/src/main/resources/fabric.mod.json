@@ -40,8 +40,7 @@
         "fabric": "*",
         "minecraft": "${minecraft_version}",
         "java": ">=17",
-        "nirvana_lib": ">=1.1.8",
-        "fzzy_config": ">=${fzzy_config_version}"
+        "nirvana_lib": ">=1.1.8"
     },
     "suggests": {
         "another-mod": "*"

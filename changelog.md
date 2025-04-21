@@ -1,3 +1,6 @@
+### V3.1.4
+fix crash
+
 ### V3.1.3
 fix start up crash
 

@@ -191,6 +191,13 @@ publishMods {
         requires("nirvana-library")
         incompatible("loot-beams")
     }
+
+    modrinth {
+        accessToken = file("D:\\modrinth-key.txt").text
+        projectId = "rp7ooqvq"
+        minecraftVersions.add("${minecraft_version}")
+        requires("nirvana-library")
+    }
 }
 
 

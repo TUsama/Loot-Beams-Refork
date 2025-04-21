@@ -114,7 +114,14 @@ publishMods {
         accessToken = file("D:\\curseforge-key.txt").text
         projectId = "1150640"
         clientRequired = true
-        minecraftVersions.add("1.20.1")
+        minecraftVersions.add("${minecraft_version}")
+        requires("nirvana-library")
+    }
+
+    modrinth {
+        accessToken = file("D:\\modrinth-key.txt").text
+        projectId = "rp7ooqvq"
+        minecraftVersions.add("${minecraft_version}")
         requires("nirvana-library")
     }
 }

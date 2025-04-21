@@ -28,7 +28,6 @@ public class LBItemEntityCache implements ILBModuleRenderCache<InternalLBItemEnt
         if (ifPresent == null) {
             INSTANCE.handle(InternalLBItemEntityProvider.INSTANCE, entity, mark);
         }
-        //System.out.println(cache.getIfPresent(item).rarity());
         return cache.getIfPresent(item);
     }
 

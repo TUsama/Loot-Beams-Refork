@@ -30,7 +30,7 @@ public class PhotonCompatModule implements ILBCompatModule {
     public void tryEnable() {
         if (shouldBeEnable()) {
             LootBeamsConstants.LOGGER.info("Detected Photon, enable PhotonCompatModule!");
-            LootBeamsConstants.EVENT_BUS.register(INSTANCE);
+            LootBeamsConstants.EVENT_BUS.register(PhotonCompatModule.class);
             PhotonCompatConfig.getConfig();
         }
     }

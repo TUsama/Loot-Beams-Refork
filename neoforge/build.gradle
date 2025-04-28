@@ -81,7 +81,7 @@ dependencies {
     runtimeOnly "curse.maven:apothic-enchanting-1063926:6026346"
     runtimeOnly "curse.maven:apothic-attributes-898963:6021370"
 
-    implementation "curse.maven:nirvana-library-1164411:6018351"
+    implementation "curse.maven:nirvana-library-1164411:6473162"
 
     implementation "curse.maven:tiered-forge-453889:6206636"
     implementation "curse.maven:unionlib-367806:5997453"
@@ -107,26 +107,3 @@ tasks.named('shadowJar', ShadowJar) {
 
 assemble.dependsOn shadowJar
 
-publishMods {
-    file = tasks.shadowJar.archiveFile
-    displayName = file.map { it.asFile.name }
-    changelog = file("..\\changelog.md").text.split('\n').collect { string -> {
-        if (!string.isBlank()) {
-            string + "</br>"
-        } else{
-            string
-        }
-    }}.join('\n')
-    type = ReleaseType.STABLE
-    modLoaders.add("neoforge")
-    curseforge {
-        accessToken = file("D:\\curseforge-key.txt").text
-        projectId = "1150640"
-        clientRequired = true
-        minecraftVersionRange {
-            start = "1.21"
-            end = "${minecraft_version}"
-        }
-        requires("fzzy-config", "nirvana-library")
-    }
-}

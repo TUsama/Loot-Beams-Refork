@@ -9,11 +9,82 @@ plugins {
     id("org.spongepowered.mixin") version "0.7-SNAPSHOT" apply(false)
     id 'org.parchmentmc.librarian.forgegradle' version '1.+' apply(false)
     id 'com.gradleup.shadow' version '9.0.0-beta4' apply(false)
-    id "me.modmuss50.mod-publish-plugin" version "0.8.1" apply(false)
+    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
     // Adds the Kotlin Gradle plugin
     id 'org.jetbrains.kotlin.jvm' version '1.9.22' apply(false)
     // OPTIONAL Kotlin Serialization plugin
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.22' apply(false)
     //id 'net.neoforged.gradle.userdev' version '7.0.120' apply(false)
+}
+
+publishMods {
+    changelog = file("changelog.md").text.split('\n').collect { string -> {
+        if (!string.isBlank()) {
+            string + "</br>"
+        } else{
+            string
+        }
+    }}.join('\n')
+    type = STABLE
+    //dryRun = true
+    // CurseForge options used by both Fabric and Forge
+    def cfOptions = curseforgeOptions {
+        accessToken = file("D:\\curseforge-key.txt").text
+        projectId = "1150640"
+        minecraftVersionRange {
+            start = "1.21"
+            end = "${minecraft_version}"
+        }
+        requires("nirvana-library")
+    }
+
+    // Modrinth options used by both Fabric and Forge
+    def mrOptions = modrinthOptions {
+        accessToken = file("D:\\modrinth-key.txt").text
+        projectId = "rp7ooqvq"
+        minecraftVersionRange {
+            start = "1.21"
+            end = "${minecraft_version}"
+        }
+        requires("nirvana-library")
+    }
+
+    // Fabric specific options for CurseForge
+    curseforge("curseforgeFabric") {
+        from cfOptions
+        file = project.provider { project(":fabric").tasks.remapJar }.flatMap { it.archiveFile }
+        modLoaders.add("fabric")
+        requires {
+            slug = "fabric-api"
+        }
+        displayName = file.map { it.asFile.name }
+    }
+
+    // Forge specific options for CurseForge
+    curseforge("curseforgeNeoforge") {
+        from cfOptions
+        file = project.provider { project(":neoforge").tasks.shadowJar }.flatMap { it.archiveFile }
+        modLoaders.add("neoforge")
+        displayName = file.map { it.asFile.name }
+    }
+
+    // Fabric specific options for Modrinth
+    modrinth("modrinthFabric") {
+        from mrOptions
+        file = project.provider { project(":fabric").tasks.remapJar }.flatMap { it.archiveFile }
+        modLoaders.add("fabric")
+        requires {
+            slug = "fabric-api"
+        }
+        displayName = file.map { it.asFile.name }
+    }
+
+    // Forge specific options for Modrinth
+    modrinth("modrinthNeoforge") {
+        from mrOptions
+        file = project.provider { project(":neoforge").tasks.shadowJar }.flatMap { it.archiveFile }
+        modLoaders.add("neoforge")
+        displayName = file.map { it.asFile.name }
+    }
 }
 

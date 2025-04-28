@@ -6,7 +6,7 @@ import com.clefal.lootbeams.modules.ILBCompatModule;
 import io.wispforest.accessories.Accessories;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.client.Minecraft;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 
 public class AccessoriesCompatModule implements ILBCompatModule {

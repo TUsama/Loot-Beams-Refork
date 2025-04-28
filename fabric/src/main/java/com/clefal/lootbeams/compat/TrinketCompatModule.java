@@ -8,7 +8,7 @@ import dev.emi.trinkets.TrinketsMain;
 import dev.emi.trinkets.api.Trinket;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.loader.api.FabricLoader;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 
 public class TrinketCompatModule implements ILBCompatModule {
     public final static TrinketCompatModule INSTANCE = new TrinketCompatModule();

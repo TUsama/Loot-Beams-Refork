@@ -7,7 +7,7 @@ import io.wispforest.accessories.Accessories;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 
 public class AccessoriesCompatModule implements ILBCompatModule {
     public final static AccessoriesCompatModule INSTANCE = new AccessoriesCompatModule();

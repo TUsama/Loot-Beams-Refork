@@ -3,7 +3,7 @@ package com.clefal.lootbeams.compat;
 import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
 

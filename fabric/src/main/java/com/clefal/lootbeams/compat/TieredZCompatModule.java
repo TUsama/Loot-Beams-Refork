@@ -8,7 +8,7 @@ import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.io.vavr.collection.List;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import draylar.tiered.Tiered;
 import draylar.tiered.api.PotentialAttribute;
 import net.fabricmc.loader.api.FabricLoader;

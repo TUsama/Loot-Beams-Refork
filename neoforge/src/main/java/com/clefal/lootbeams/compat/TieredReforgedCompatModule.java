@@ -7,7 +7,7 @@ import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import com.stereowalker.tiered.Reforged;
 import com.stereowalker.tiered.api.PotentialAttribute;
 import net.minecraft.Util;

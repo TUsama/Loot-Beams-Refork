@@ -61,7 +61,8 @@ dependencies {
 
     compileOnly group: 'me.fzzyhmstrs', name: 'fzzy_config', version: "${fzzy_config_version}+neoforge"
 
-    compileOnly "curse.maven:nirvana-library-1164411:6018351"
+    compileOnly "curse.maven:nirvana-library-1164411:6473163"
+
 }
 
 configurations {

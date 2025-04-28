@@ -8,7 +8,7 @@ import com.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import dev.shadowsoffire.apotheosis.Apotheosis;
 import dev.shadowsoffire.apotheosis.affix.AffixHelper;
 import dev.shadowsoffire.apotheosis.affix.salvaging.SalvageItem;

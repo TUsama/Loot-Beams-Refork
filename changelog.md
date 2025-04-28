@@ -1,3 +1,7 @@
+### V2.6.0
+Only compatible with Nirvana Library 1.2.1 and above!!
+This is a compatible build for Nirvana Library 1.2.1. Nothing really changes.
+
 ### V2.5.11
 (Fabric)prob fix the crash when user installs Tiered Reforged.
 (Forge)add Tiered Reforged compat

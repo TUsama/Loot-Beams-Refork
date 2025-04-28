@@ -1,6 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import me.modmuss50.mpp.ReleaseType
-
 plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev'
@@ -10,12 +7,12 @@ plugins {
 
 }
 def namePattern = "${mod_name}-neoforge-${minecraft_version}"
-
+/*
 configurations {
     shade
     libraries
     implementation.extendsFrom(libraries, shade)
-}
+}*/
 
 base {
     archivesName = namePattern
@@ -57,7 +54,6 @@ neoForge {
 }
 
 
-
 dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
@@ -66,7 +62,6 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
-
 
 
     implementation("me.fzzyhmstrs:fzzy_config:${fzzy_config_version}+neoforge")
@@ -97,13 +92,13 @@ shadowJar {
     relocate 'net.neoforged.bus', "${project.group}.relocated.net.neoforged.bus"
     finalizedBy 'jar'
 }*/
-
+/*
 tasks.named('shadowJar', ShadowJar) {
     archiveClassifier = ''
     configurations = [project.configurations.libraries]
     //relocate 'net.neoforged.bus', "${project.group}.relocated.net.neoforged.bus"
     minimize()
-}
+}*/
 
 assemble.dependsOn shadowJar
 

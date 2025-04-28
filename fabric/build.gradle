@@ -7,11 +7,11 @@ plugins {
 }
 base {
     archivesName = "${mod_name}-fabric-${minecraft_version}"
-}
+}/*
 configurations {
     shade
     implementation.extendsFrom shade
-}
+}*/
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.layered {
@@ -72,18 +72,18 @@ processResources {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     from project(":common").sourceSets.main.resources
 }
-
+/*
 shadowJar {
     configurations = [project.configurations.shade]
     archiveClassifier = "shadow"
     relocate 'net.neoforged.bus', "${project.group}.relocated.net.neoforged.bus"
-}
-
+}*/
+/*
 remapJar {
     dependsOn(shadowJar)
     mustRunAfter(shadowJar)
     inputFile = file(tasks.shadowJar.archiveFile)
-}
+}*/
 
 
 

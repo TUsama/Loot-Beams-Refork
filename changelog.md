@@ -1,3 +1,7 @@
+### V2.6.1
+Disable SubtleEffect ItemRarity feature, add a config to allow player to re-enable it.
+upgrade the neoforge and fabric version the mod used.
+
 ### V2.6.0
 **Only compatible with Nirvana Library 1.2.1 and above!!**
 This is a compatible build for Nirvana Library 1.2.1. Nothing really changes.

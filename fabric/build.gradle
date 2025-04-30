@@ -41,6 +41,8 @@ dependencies {
     modImplementation "curse.maven:unionlib-367806:5997472"
     implementation 'org.tomlj:tomlj:1.1.1'
 
+    modImplementation 'maven.modrinth:subtle-effects:J9hrPl1c'
+
 }
 
 loom {

@@ -63,6 +63,8 @@ dependencies {
 
     compileOnly "curse.maven:nirvana-library-1164411:6473163"
 
+
+
 }
 
 configurations {

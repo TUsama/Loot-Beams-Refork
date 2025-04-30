@@ -26,7 +26,7 @@ publishMods {
         }
     }}.join('\n')
     type = STABLE
-    //dryRun = true
+    dryRun = true
     // CurseForge options used by both Fabric and Forge
     def cfOptions = curseforgeOptions {
         accessToken = file("D:\\curseforge-key.txt").text
@@ -49,42 +49,35 @@ publishMods {
         requires("nirvana-library")
     }
 
+    def fileOption = 		(String projectName) -> {
+        publishOptions {
+            file = project.provider { projectName.equals("fabric") ? project(":$projectName").tasks.remapJar : project(":$projectName").tasks.jar}.flatMap { it.archiveFile }
+            displayName = file.map { it.asFile.name }
+            modLoaders.add(projectName.toLowerCase())
+        }
+    }
+
+    def fabricOptions = fileOption("fabric")
+    def neoForgeOptions = fileOption("neoforge")
+
     // Fabric specific options for CurseForge
     curseforge("curseforgeFabric") {
-        from cfOptions
-        file = project.provider { project(":fabric").tasks.remapJar }.flatMap { it.archiveFile }
-        modLoaders.add("fabric")
-        requires {
-            slug = "fabric-api"
-        }
-        displayName = file.map { it.asFile.name }
+        from (cfOptions, fabricOptions)
     }
 
     // Forge specific options for CurseForge
     curseforge("curseforgeNeoforge") {
-        from cfOptions
-        file = project.provider { project(":neoforge").tasks.shadowJar }.flatMap { it.archiveFile }
-        modLoaders.add("neoforge")
-        displayName = file.map { it.asFile.name }
+        from cfOptions, neoForgeOptions
     }
 
     // Fabric specific options for Modrinth
     modrinth("modrinthFabric") {
-        from mrOptions
-        file = project.provider { project(":fabric").tasks.remapJar }.flatMap { it.archiveFile }
-        modLoaders.add("fabric")
-        requires {
-            slug = "fabric-api"
-        }
-        displayName = file.map { it.asFile.name }
+        from mrOptions, fabricOptions
     }
 
     // Forge specific options for Modrinth
     modrinth("modrinthNeoforge") {
-        from mrOptions
-        file = project.provider { project(":neoforge").tasks.shadowJar }.flatMap { it.archiveFile }
-        modLoaders.add("neoforge")
-        displayName = file.map { it.asFile.name }
+        from mrOptions, neoForgeOptions
     }
 }
 

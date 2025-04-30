@@ -1,9 +1,6 @@
 package com.clefal.lootbeams;
 
-import com.clefal.lootbeams.compat.AccessoriesCompatModule;
-import com.clefal.lootbeams.compat.TieredReforgedCompatModule;
-import com.clefal.lootbeams.compat.TrinketCompatModule;
-import com.clefal.lootbeams.compat.TieredZCompatModule;
+import com.clefal.lootbeams.compat.*;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
 import com.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -28,7 +25,8 @@ public class LootBeamsFabricModClientEvent {
                 TrinketCompatModule.INSTANCE,
                 AccessoriesCompatModule.INSTANCE,
                 TieredZCompatModule.INSTANCE,
-                TieredReforgedCompatModule.INSTANCE
+                TieredReforgedCompatModule.INSTANCE,
+                SubtleEffectCompatModule.INSTANCE
         );
         ModulesManager.enableAll();
         ConfigHandlers.init();

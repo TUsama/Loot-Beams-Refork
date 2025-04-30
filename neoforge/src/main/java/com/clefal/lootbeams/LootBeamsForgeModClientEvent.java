@@ -1,10 +1,7 @@
 package com.clefal.lootbeams;
 
 
-import com.clefal.lootbeams.compat.AccessoriesCompatModule;
-import com.clefal.lootbeams.compat.ApotheosisCompatModule;
-import com.clefal.lootbeams.compat.CuriosContinuationAndAdornedCompatModule;
-import com.clefal.lootbeams.compat.TieredReforgedCompatModule;
+import com.clefal.lootbeams.compat.*;
 import com.clefal.lootbeams.config.ConfigHandlers;
 import com.clefal.lootbeams.modules.ModulesManager;
 import com.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -35,7 +32,8 @@ public class LootBeamsForgeModClientEvent {
                 CuriosContinuationAndAdornedCompatModule.INSTANCE,
                 AccessoriesCompatModule.INSTANCE,
                 ApotheosisCompatModule.INSTANCE,
-                TieredReforgedCompatModule.INSTANCE
+                TieredReforgedCompatModule.INSTANCE,
+                SubtleEffectCompatModule.INSTANCE
         );
         ModulesManager.enableAll();
         ConfigHandlers.init();

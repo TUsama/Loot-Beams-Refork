@@ -138,7 +138,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:ldlib-626676:6337779")
     compileOnly fg.deobf("curse.maven:photon-871522:6373238")
 
-    compileOnly fg.deobf("blank:SubtleEffects-forge-1.20.1:1.9.4-hotfix.1")
+    compileOnly "maven.modrinth:subtle-effects:lCMnqufi"
 }
 
 tasks.withType(JavaCompile).configureEach {

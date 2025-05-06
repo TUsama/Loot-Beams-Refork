@@ -45,7 +45,7 @@ dependencies {
     modImplementation "curse.maven:ldlib-626676:6417171"
 
     modImplementation "curse.maven:modmenu-308702:5162837"
-    modImplementation "blank:SubtleEffects-forge-1.20.1:1.9.4-hotfix.1"
+    modCompileOnly "maven.modrinth:subtle-effects:TdzGdTcL"
 }
 
 loom {

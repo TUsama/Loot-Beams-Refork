@@ -1,3 +1,6 @@
+### V3.1.5
+(Fabric) add Tierify compat
+
 ### V3.1.4
 fix crash
 

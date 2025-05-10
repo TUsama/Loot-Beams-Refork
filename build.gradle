@@ -97,6 +97,7 @@ subprojects {
         flatDir {
             dirs "..\\common\\libs"
         }
+        maven { url "https://maven.shedaniel.me/" }
     }
 
 

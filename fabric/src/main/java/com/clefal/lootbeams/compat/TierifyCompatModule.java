@@ -26,7 +26,6 @@ public class TierifyCompatModule implements ILBCompatModule {
     @Override
     public boolean shouldBeEnable() {
         if (!FabricLoader.getInstance().isModLoaded("tiered")) return false;
-        System.out.println(this.getClass().getName());
         try {
             Class.forName("elocindev.tierify.Tierify");
         } catch (ClassNotFoundException ignored) {
@@ -37,7 +36,6 @@ public class TierifyCompatModule implements ILBCompatModule {
 
     @Override
     public void tryEnable() {
-        System.out.println("try enable TierifyCompatModule!");
         if (shouldBeEnable()) {
             LootBeamsConstants.LOGGER.info("Detected Tierify, enable TierifyCompatModule!");
             LootBeamsConstants.EVENT_BUS.register(INSTANCE);
@@ -53,7 +51,6 @@ public class TierifyCompatModule implements ILBCompatModule {
 
     @SubscribeEvent
     public void onEnable(RegisterLBRarityEvent.Pre event) {
-        System.out.println("22222");
         event.register(itemEntity -> {
                     //copy from ItemStackClientMixin getName
                     //they don't change this part nice

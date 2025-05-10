@@ -1,17 +1,19 @@
 package com.clefal.lootbeams.modules.dynamicprovider;
 
+import com.clefal.lootbeams.config.configs.DynamicConfig;
 import com.clefal.lootbeams.events.LBClientTickEvent;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import lombok.Setter;
 
 public class DynamicProvider {
-
-    private final int halfRoundTicks;
+    @Setter
+    private int halfRoundTicks;
     private int currentTicks;
     private float alterFactor;
     private boolean shouldDecrease;
 
-    public DynamicProvider(int halfRoundTicks) {
-        this.halfRoundTicks = halfRoundTicks;
+    public DynamicProvider() {
+        this.halfRoundTicks = DynamicConfig.dynamicConfig.half_round_ticks.get();
         this.alterFactor = 0.0f;
         this.shouldDecrease = false;
     }

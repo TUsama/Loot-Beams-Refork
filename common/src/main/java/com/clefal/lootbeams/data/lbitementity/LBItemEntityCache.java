@@ -19,14 +19,12 @@ public class LBItemEntityCache implements ILBModuleRenderCache<InternalLBItemEnt
             .build();
     private final static LBItemEntityCache INSTANCE = new LBItemEntityCache();
     private final static Object lock = new Object();
-
-    private static boolean mark = false;
-
+    
     public static LBItemEntity ask(ItemEntity entity) {
         ItemStack item = entity.getItem();
         LBItemEntity ifPresent = cache.getIfPresent(item);
         if (ifPresent == null) {
-            INSTANCE.handle(InternalLBItemEntityProvider.INSTANCE, entity, mark);
+            INSTANCE.handle(InternalLBItemEntityProvider.INSTANCE, entity);
         }
         return cache.getIfPresent(item);
     }
@@ -47,7 +45,6 @@ public class LBItemEntityCache implements ILBModuleRenderCache<InternalLBItemEnt
             }
 
             provide(itemEntity, lbItemEntity);
-            mark = false;
         });
     }
 }

@@ -1,6 +1,7 @@
 package com.clefal.lootbeams.config.configs;
 
 import com.clefal.lootbeams.LootBeamsConstants;
+import com.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
 import com.clefal.lootbeams.utils.ResourceLocationHelper;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
@@ -15,6 +16,15 @@ public class DynamicConfig extends Config {
     public DynamicConfig() {
         super(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID , "dynamic_config"));
     }
+
+
+    @Override
+    public void onUpdateClient() {
+        super.onUpdateClient();
+        DynamicProviderModule.getDynamicProvider()
+                .forEach(x -> x.setHalfRoundTicks(this.half_round_ticks.get()));
+    }
+
     public static void init(){
 
     }

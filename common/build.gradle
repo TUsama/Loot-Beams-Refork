@@ -55,6 +55,8 @@ dependencies {
 
     compileOnly "maven.modrinth:subtle-effects:lCMnqufi"
 
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0-rc.1"))
+
 
 }
 

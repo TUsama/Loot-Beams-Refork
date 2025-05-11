@@ -108,9 +108,9 @@ dependencies {
 
 
 
-    implementation fg.deobf("curse.maven:library-of-exile-398780:6107923")
-    implementation fg.deobf("curse.maven:mine-and-slash-reloaded-306575:6107937")
-    implementation fg.deobf("curse.maven:orbs-of-crafting-1182250:6107927")
+    compileOnly fg.deobf("curse.maven:library-of-exile-398780:6107923")
+    compileOnly fg.deobf("curse.maven:mine-and-slash-reloaded-306575:6107937")
+    compileOnly fg.deobf("curse.maven:orbs-of-crafting-1182250:6107927")
     runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
 
     compileOnly fg.deobf("curse.maven:legendary-tooltips-532127:4662781")
@@ -135,10 +135,10 @@ dependencies {
     compileOnly fg.deobf("curse.maven:tiered-forge-453889:6109619")
     compileOnly fg.deobf("curse.maven:unionlib-367806:6012406")
 
-    compileOnly fg.deobf("curse.maven:ldlib-626676:6337779")
-    compileOnly fg.deobf("curse.maven:photon-871522:6373238")
+    implementation fg.deobf("curse.maven:ldlib-626676:6337779")
+    implementation fg.deobf("curse.maven:photon-871522:6373238")
 
-    compileOnly "maven.modrinth:subtle-effects:lCMnqufi"
+    implementation fg.deobf("maven.modrinth:subtle-effects:lCMnqufi")
 }
 
 tasks.withType(JavaCompile).configureEach {

@@ -28,7 +28,7 @@ public class SubtleEffectCompatModule implements ILBCompatModule {
     @Override
     public void tryEnable() {
         if (shouldBeEnable()) {
-            LootBeamsConstants.LOGGER.warn("Detected Subtle Effect, its Item Rarity Function will be disabled for the compatibility when you also enable the config 'enableFX'! you can disable this feature in this mod's config!");
+            LootBeamsConstants.LOGGER.warn("Detected Subtle Effect, its Item Rarity and Enable Particle Culling feature of SE will be disabled for the compatibility when you also enable the config 'enableFX'! you can disable these features in this mod's config!");
             getConfig();
             isEnabled = true;
         }
@@ -38,6 +38,7 @@ public class SubtleEffectCompatModule implements ILBCompatModule {
     public static class SubtleEffectCompatConfig extends Config {
         private static SubtleEffectCompatConfig config;
         public boolean forceDisableItemRarity = true;
+        public boolean forceDisableParticleCull = true;
 
         public SubtleEffectCompatConfig() {
             super(ResourceLocationHelper.fromNameAndPath(LootBeamsConstants.MODID, "se_compat_config"));

@@ -1,6 +1,5 @@
 package com.clefal.lootbeams.config;
 
-import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.config.impl.ModifyingConfigHandler;
 import com.clefal.lootbeams.data.lbitementity.rarity.ConfigColorOverride;
 import lombok.Getter;
@@ -17,12 +16,11 @@ public class ConfigHandlers {
 
     }
 
-    public static void init(){
-        LootBeamsConstants.EVENT_BUS.register(INSTANCE);
+    public static void init() {
     }
 
 
-    public void registerAll(){
+    public void registerAll() {
         this.handlers = List.of(
                 new ConfigColorOverride()
         );

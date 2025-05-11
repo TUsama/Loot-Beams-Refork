@@ -28,7 +28,7 @@ public class SubtleEffectCompatModule implements ILBCompatModule {
     @Override
     public void tryEnable() {
         if (shouldBeEnable()) {
-            LootBeamsConstants.LOGGER.warn("Detected Subtle Effect, its Item Rarity Function will be disabled for the compatibility when you also enable the config 'enableFX'! you can disable this feature in config!");
+            LootBeamsConstants.LOGGER.warn("Detected Subtle Effect, its Item Rarity Function will be disabled for the compatibility when you also enable the config 'enableFX'! you can disable this feature in this mod's config!");
             getConfig();
             isEnabled = true;
         }

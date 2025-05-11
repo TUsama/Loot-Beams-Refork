@@ -1,3 +1,6 @@
+### V2.6.2
+fix a spam log bug when installed with Subtle Effect
+
 ### V2.6.1
 Disable SubtleEffect ItemRarity feature, add a config to allow player to re-enable it.
 upgrade the neoforge and fabric version the mod used.

@@ -52,7 +52,7 @@ neoForge {
         }
     }
 }
-
+boolean enableApotheosis = true
 
 dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
@@ -70,11 +70,16 @@ dependencies {
     compileOnly "curse.maven:accessories-938917:5727153"
     compileOnly "curse.maven:curios-continuation-1037991:5747224"
 
-    compileOnly "curse.maven:apotheosis-313970:6023693"
-    compileOnly "curse.maven:placebo-283644:6023681"
-    /*runtimeOnly "curse.maven:apothic-spawners-986583:5826748"
-    runtimeOnly "curse.maven:apothic-enchanting-1063926:6026346"
-    runtimeOnly "curse.maven:apothic-attributes-898963:6021370"*/
+    if (enableApotheosis){
+        implementation "curse.maven:apotheosis-313970:6023693"
+        implementation "curse.maven:placebo-283644:6446766"
+        runtimeOnly "curse.maven:apothic-spawners-986583:6430294"
+        runtimeOnly "curse.maven:apothic-enchanting-1063926:6514634"
+        runtimeOnly "curse.maven:apothic-attributes-898963:6514649"
+    } else{
+        compileOnly "curse.maven:apotheosis-313970:6023693"
+    }
+
 
     implementation "curse.maven:nirvana-library-1164411:6473162"
 

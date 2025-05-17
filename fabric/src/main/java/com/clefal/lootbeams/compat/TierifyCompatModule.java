@@ -4,6 +4,7 @@ import com.clefal.lootbeams.LootBeamsConstants;
 import com.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import com.clefal.lootbeams.events.RegisterLBRarityEvent;
+import com.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.io.vavr.collection.List;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
@@ -79,5 +80,11 @@ public class TierifyCompatModule implements ILBCompatModule {
 
         );
 
+    }
+
+    @SubscribeEvent
+    public void removeRarity(TooltipsGatherNameAndRarityEvent event) {
+        ItemStack item = event.lbItemEntity.item().getItem();
+        if (item.hasTag() && item.getTagElement("display") == null && item.getTagElement("Tiered") != null) event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY);
     }
 }

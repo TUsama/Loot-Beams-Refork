@@ -47,15 +47,15 @@ dependencies {
     modImplementation "curse.maven:nirvana-library-1164411:6417546"
 
     modCompileOnly "curse.maven:tieredz-615948:5233351"
-    modImplementation "curse.maven:photon-871522:6373235"
-    modImplementation "curse.maven:ldlib-626676:6417171"
+    modCompileOnly "curse.maven:photon-871522:6373235"
+    modCompileOnly "curse.maven:ldlib-626676:6417171"
 
     modImplementation "curse.maven:modmenu-308702:5162837"
-    modImplementation "maven.modrinth:subtle-effects:TdzGdTcL"
+    modCompileOnly "maven.modrinth:subtle-effects:TdzGdTcL"
 
     modCompileOnly "curse.maven:tierify-974356:5803071"
     modCompileOnly "curse.maven:necronomicon-586157:5772682"
-    modCompileOnly include ('maven.modrinth:libz:1.0.2+1.20.1') {
+    modCompileOnly ('maven.modrinth:libz:1.0.2+1.20.1') {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }

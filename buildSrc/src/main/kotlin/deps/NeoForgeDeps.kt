@@ -2,7 +2,31 @@ package deps
 
 object NeoForgeDeps {
     fun get(minecraft: String): List<VersionedDependency> {
-        val deps = mutableListOf<VersionedDependency>()
-        return deps
+        return buildDependencies{
+            when (minecraft){
+                "1.21.1" -> {
+                    val enableApotheosis = false
+                    modstitchModCompileOnly ("curse.maven:adorned-1036809:5740650")
+                    modstitchModCompileOnly ("curse.maven:accessories-938917:5727153")
+                    modstitchModCompileOnly ("curse.maven:curios-continuation-1037991:5747224")
+
+                    if (enableApotheosis){
+                        modstitchModImplementation ("curse.maven:apotheosis-313970:6023693")
+                        modstitchModImplementation ("curse.maven:placebo-283644:6446766")
+                        modstitchModRuntimeOnly ("curse.maven:apothic-spawners-986583:6430294")
+                        modstitchModRuntimeOnly ("curse.maven:apothic-enchanting-1063926:6514634")
+                        modstitchModRuntimeOnly ("curse.maven:apothic-attributes-898963:6514649")
+                    } else{
+                        modstitchModCompileOnly ("curse.maven:apotheosis-313970:6023693")
+                        modstitchModCompileOnly ("curse.maven:placebo-283644:6446766")
+                    }
+
+                    modstitchModCompileOnly ("curse.maven:tiered-forge-453889:6206636")
+                    modstitchModCompileOnly ("curse.maven:unionlib-367806:5997453")
+
+                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:TZo5xb5m")
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
-//? if fabric && = 1.20.1 {
-/*package me.clefal.lootbeams.loaders.fabric.compat;
+//? if =1.20.1 && fabric {
+/*package me.clefal.lootbeams.compat.fabric_1_20_1;
 
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
@@ -12,7 +13,6 @@ import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import draylar.tiered.Tiered;
 import draylar.tiered.api.PotentialAttribute;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +27,7 @@ public class TieredZCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
-        if (!FabricLoader.getInstance().isModLoaded("tiered")) return false;
+        if (!ModUtils.isModLoaded("tiered")) return false;
         try {
             Class.forName("draylar.tiered.Tiered");
         } catch (ClassNotFoundException e) {

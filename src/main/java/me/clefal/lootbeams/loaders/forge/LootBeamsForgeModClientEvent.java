@@ -1,13 +1,10 @@
 //? if forge {
-package me.clefal.lootbeams.loaders.forge;
+/*package me.clefal.lootbeams.loaders.forge;
 
-import me.clefal.lootbeams.loaders.forge.compat.apothesis.ApotheosisCompatModule;
-import me.clefal.lootbeams.loaders.forge.compat.curios.CuriosCompatModule;
-import me.clefal.lootbeams.loaders.forge.compat.mine_and_slash.MineAndSlashCompatModule;
-import me.clefal.lootbeams.loaders.forge.compat.mine_and_slash.OrbOfCraftingCompatModule;
-import me.clefal.lootbeams.loaders.forge.compat.obscuretooltips.ObscureTooltipsCompatModule;
-import me.clefal.lootbeams.loaders.forge.compat.spartanweaponry.SpartanWeaponryCompatModule;
-import me.clefal.lootbeams.loaders.forge.compat.tiered_reforged.TieredReforgedCompatModule;
+
+import me.clefal.lootbeams.compat.forge_1_20_1.*;
+import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.MineAndSlashCompatModule;
+import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.OrbOfCraftingCompatModule;
 import me.clefal.lootbeams.config.ConfigHandlers;
 import me.clefal.lootbeams.modules.ModulesManager;
 import me.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -25,7 +22,7 @@ public class LootBeamsForgeModClientEvent {
 
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiOverlaysEvent event) {
-        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), LootBeamsConstants.MODID + "lb_tooltips", (gui, guiGraphics, partialTick, screenWidth, screenHeight) -> AdvanceTooltipOverlay.INSTANCE.render(guiGraphics, partialTick, screenWidth, screenHeight));
+        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), LootBeamsConstants.MODID + "lb_tooltips", (gui, guiGraphics, partialTick, screenWidth, screenHeight) -> AdvanceTooltipOverlay.INSTANCE.render(guiGraphics, partialTick));
     }
 
 
@@ -46,4 +43,4 @@ public class LootBeamsForgeModClientEvent {
     }
 
 }
-//?}
+*///?}

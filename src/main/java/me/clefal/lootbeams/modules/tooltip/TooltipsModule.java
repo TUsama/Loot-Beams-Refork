@@ -8,13 +8,17 @@ import me.clefal.lootbeams.modules.ILBModule;
 import me.clefal.lootbeams.modules.tooltip.nametag.NameTagRenderer;
 import com.clefal.nirvana_lib.relocated.io.vavr.API;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.contents.PlainTextContents;
 
+//? if !=1.20.1 {
+import net.minecraft.network.chat.contents.PlainTextContents;
+//?} else {
+/*import net.minecraft.network.chat.contents.LiteralContents;
+*///?}
 import java.util.Map;
 
 import static com.clefal.nirvana_lib.relocated.io.vavr.API.$;
@@ -36,7 +40,13 @@ public class TooltipsModule implements ILBModule {
         for (Map.Entry<TooltipsGatherNameAndRarityEvent.Case, Component> caseComponentEntry : event.gather.entrySet()) {
             Style oldStyle = caseComponentEntry.getValue().getStyle();
             if (oldStyle.equals(Style.EMPTY)) {
-                caseComponentEntry.setValue(MutableComponent.create(new PlainTextContents.LiteralContents(caseComponentEntry.getValue().getString())).withStyle(oldStyle).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(event.lbItemEntity.rarity().color().rgb()))));
+                caseComponentEntry.setValue(MutableComponent.create(
+                        //? if !=1.20.1 {
+                        new PlainTextContents.LiteralContents(caseComponentEntry.getValue().getString()))
+                         //?} else {
+                                /*new LiteralContents(caseComponentEntry.getValue().getString()))
+                                *///?}
+                        .withStyle(oldStyle).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(event.lbItemEntity.rarity().color().rgb()))));
             }
         }
     }

@@ -1,12 +1,12 @@
-//? if fabric && = 1.20.1 {
-/*package me.clefal.lootbeams.loaders.fabric.compat;
+//? if =1.20.1 && fabric {
+/*package me.clefal.lootbeams.compat.fabric_1_20_1;
 
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import me.clefal.lootbeams.modules.ILBCompatModule;
 import dev.emi.trinkets.TrinketsMain;
 import dev.emi.trinkets.api.TrinketsApi;
-import net.fabricmc.loader.api.FabricLoader;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 
 public class TrinketCompatModule implements ILBCompatModule {
@@ -14,7 +14,7 @@ public class TrinketCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
-        return FabricLoader.getInstance().isModLoaded(TrinketsMain.MOD_ID);
+        return ModUtils.isModLoaded(TrinketsMain.MOD_ID);
     }
 
     @Override

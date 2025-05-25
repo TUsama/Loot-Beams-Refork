@@ -1,46 +1,42 @@
-//? if fabric && = 1.20.1 {
-/*package me.clefal.lootbeams.loaders.fabric.compat;
+//? if =1.21.1 && fabric {
+/*package me.clefal.lootbeams.compat.fabric_1_21_1;
 
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBRarity;
 import me.clefal.lootbeams.events.RegisterLBRarityEvent;
-import me.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import me.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.io.vavr.collection.List;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
-import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import draylar.tiered.Tiered;
 import draylar.tiered.api.PotentialAttribute;
-import elocindev.tierify.Tierify;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import java.awt.*;
+public class TieredZCompatModule implements ILBCompatModule {
 
-public class TierifyCompatModule implements ILBCompatModule {
-
-    public final static TierifyCompatModule INSTANCE = new TierifyCompatModule();
+    public final static TieredZCompatModule INSTANCE = new TieredZCompatModule();
 
     private List<String> rarities;
 
     @Override
     public boolean shouldBeEnable() {
-        if (!FabricLoader.getInstance().isModLoaded("tiered")) return false;
         try {
-            Class.forName("elocindev.tierify.Tierify");
-        } catch (ClassNotFoundException ignored) {
+            Class.forName("draylar.tiered.Tiered");
+        } catch (ClassNotFoundException e) {
             return false;
         }
-        return true;
+        return ModUtils.isModLoaded("tiered");
     }
 
     @Override
     public void tryEnable() {
         if (shouldBeEnable()) {
-            LootBeamsConstants.LOGGER.info("Detected Tierify, enable TierifyCompatModule!");
+            LootBeamsConstants.LOGGER.info("Detected TieredZ, enable TieredZCompatModule!");
             LootBeamsConstants.EVENT_BUS.register(INSTANCE);
             this.rarities = List.of(
                     "common",
@@ -48,7 +44,7 @@ public class TierifyCompatModule implements ILBCompatModule {
                     "rare",
                     "epic",
                     "legendary",
-                    "mythic");
+                    "unique");
         }
     }
 
@@ -56,20 +52,17 @@ public class TierifyCompatModule implements ILBCompatModule {
     public void onEnable(RegisterLBRarityEvent.Pre event) {
         event.register(itemEntity -> {
                     //copy from ItemStackClientMixin getName
-                    //they don't change this part nice
                     ItemStack item = itemEntity.getItem();
-                    if (item.hasTag() && item.getTagElement("display") == null && item.getTagElement("Tiered") != null) {
-                        ResourceLocation tier = new ResourceLocation(item.getTagElement("Tiered").getString("Tier"));
-                        PotentialAttribute potentialAttribute = Tierify.ATTRIBUTE_DATA_LOADER.getItemAttributes().get(tier);
-
+                    if (item.get(Tiered.TIER) == null) return Option.none();
+                    ResourceLocation parse = ResourceLocation.parse(item.get(Tiered.TIER).tier());
+                    if (item.get(Tiered.TIER) != null && Tiered.ATTRIBUTE_DATA_LOADER.getItemAttributes().containsKey(parse)) {
+                        PotentialAttribute potentialAttribute = Tiered.ATTRIBUTE_DATA_LOADER.getItemAttributes().get(parse);
                         if (potentialAttribute != null) {
                             String id = potentialAttribute.getID();
-
                             Option<String> find = this.rarities.find(id::contains);
-
                             return Option.some(LBItemEntity.of(itemEntity, LBRarity.of(
                                     Component.translatable(id + ".label"),
-                                    LBColor.of(potentialAttribute.getStyle().getColor().getValue()),
+                                    LBColor.fromRGB(potentialAttribute.getStyle().getColor().getValue()),
                                     find.isEmpty() ? 0 : this.rarities.indexOf(find.get())
                             )));
                         }
@@ -83,11 +76,6 @@ public class TierifyCompatModule implements ILBCompatModule {
         );
 
     }
-
-    @SubscribeEvent
-    public void removeRarity(TooltipsGatherNameAndRarityEvent event) {
-        ItemStack item = event.lbItemEntity.item().getItem();
-        if (item.hasTag() && item.getTagElement("display") == null && item.getTagElement("Tiered") != null) event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY);
-    }
 }
+
 *///?}

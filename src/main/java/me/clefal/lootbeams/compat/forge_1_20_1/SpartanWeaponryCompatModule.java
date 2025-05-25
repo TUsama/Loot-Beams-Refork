@@ -1,7 +1,7 @@
 //? if forge {
+/*package me.clefal.lootbeams.compat.forge_1_20_1;
 
-package me.clefal.lootbeams.loaders.forge.compat.spartanweaponry;
-
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.config.configs.Checker;
 import me.clefal.lootbeams.events.RegisterConfigConditionEvent;
@@ -9,7 +9,6 @@ import me.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.google.common.collect.Sets;
 import com.oblivioussp.spartanweaponry.api.SpartanWeaponryAPI;
-import net.minecraftforge.fml.ModList;
 
 import java.util.Set;
 
@@ -48,7 +47,7 @@ public class SpartanWeaponryCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded(SpartanWeaponryAPI.MOD_ID);
+        return ModUtils.isModLoaded(SpartanWeaponryAPI.MOD_ID);
     }
 
     @Override
@@ -69,5 +68,4 @@ public class SpartanWeaponryCompatModule implements ILBCompatModule {
         });
     }
 }
-
- //?}
+*///?}

@@ -1,7 +1,7 @@
 //? if forge {
+/*package me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash;
 
-package me.clefal.lootbeams.loaders.forge.compat.mine_and_slash;
-
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
@@ -19,8 +19,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IRarityItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.GemItem;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.FastColor;
-import net.minecraftforge.fml.ModList;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -35,12 +33,12 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
     private final List<String> rarities = new ArrayList<>();
 
     public static LBRarity getNonSoulRarity() {
-        return LBRarity.of(Component.translatable("lootbeams.mod_rarity.non_soul"), LBColor.of(FastColor.ARGB32.color(255, 121, 121, 121)), -1);
+        return LBRarity.of(Component.translatable("lootbeams.mod_rarity.non_soul"), LBColor.of(new Color(121, 121, 121).getRGB()), -1);
     }
 
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded(SlashRef.MODID);
+        return ModUtils.isModLoaded(SlashRef.MODID);
     }
 
     @Override
@@ -96,10 +94,9 @@ public class MineAndSlashCompatModule implements ILBCompatModule {
 
     @SubscribeEvent
     public void registerWhitelistCondition(RegisterConfigConditionEvent.RegisterWhitelistEvent event) {
-        //currenccy, I prefer to show the currency always.
+        //currency, I prefer to show the currency always.
         event.conditions.add(lbItemEntity -> lbItemEntity.item().getItem().getItem() instanceof IItemAsCurrency);
     }
 
 }
-//?}
-
+*///?}

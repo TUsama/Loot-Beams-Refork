@@ -1,5 +1,6 @@
 package me.clefal.lootbeams.modules.beam;
 
+import me.clefal.lootbeams.CommonClass;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.config.configs.LightConfig;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -8,9 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 
 public class BeamRenderType extends RenderType {
 
-    public static final ResourceLocation LOOT_BEAM_TEXTURE = ResourceLocation.fromNamespaceAndPath(LootBeamsConstants.MODID, "textures/entity/loot_beam.png");
-    public static final ResourceLocation WHITE_TEXTURE = ResourceLocation.fromNamespaceAndPath(LootBeamsConstants.MODID, "textures/entity/white.png");
-    public static final ResourceLocation GLOW_TEXTURE = ResourceLocation.fromNamespaceAndPath(LootBeamsConstants.MODID, "textures/entity/glow.png");
+    public static final ResourceLocation LOOT_BEAM_TEXTURE = CommonClass.id("textures/entity/loot_beam.png");
+    public static final ResourceLocation WHITE_TEXTURE = CommonClass.id("textures/entity/white.png");
+    public static final ResourceLocation GLOW_TEXTURE = CommonClass.id("textures/entity/glow.png");
     public static final RenderType LOOT_BEAM_RENDERTYPE = RenderType.lightning();
     protected static final RenderType GLOW = LightConfig.lightConfig.beam.solid_beam ? RenderType.entityTranslucentEmissive(GLOW_TEXTURE) : RenderType.entityCutout(GLOW_TEXTURE);
 

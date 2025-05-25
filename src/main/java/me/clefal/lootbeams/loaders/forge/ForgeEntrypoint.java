@@ -1,5 +1,5 @@
 //? if forge {
-package me.clefal.lootbeams.loaders.forge;
+/*package me.clefal.lootbeams.loaders.forge;
 
 import com.mojang.logging.LogUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
@@ -27,4 +27,4 @@ public class ForgeEntrypoint {
         return ModLoadingContext.get();
     }
 }
-//?}
+*///?}

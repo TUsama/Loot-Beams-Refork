@@ -1,21 +1,19 @@
 //? if forge {
+/*package me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash;
 
-package me.clefal.lootbeams.loaders.forge.compat.mine_and_slash;
-
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import me.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
-import com.robertx22.addons.orbs_of_crafting.currency.IItemAsCurrency;
 import com.robertx22.orbs_of_crafting.register.ExileCurrency;
-import net.minecraftforge.fml.ModList;
 
 public class OrbOfCraftingCompatModule implements ILBCompatModule {
     public final static OrbOfCraftingCompatModule INSTANCE = new OrbOfCraftingCompatModule();
 
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded("orbs_of_crafting");
+        return ModUtils.isModLoaded("orbs_of_crafting");
     }
 
     @Override
@@ -32,5 +30,4 @@ public class OrbOfCraftingCompatModule implements ILBCompatModule {
         event.conditions.add(lbItemEntity -> ExileCurrency.get(lbItemEntity.item().getItem()).isPresent());
     }
 }
-
- //?}
+*///?}

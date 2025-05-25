@@ -1,5 +1,5 @@
 //? if forge {
-package me.clefal.lootbeams.loaders.forge;
+/*package me.clefal.lootbeams.loaders.forge;
 
 import me.clefal.lootbeams.events.LBClientTickEvent;
 import me.clefal.lootbeams.LootBeamsConstants;
@@ -18,4 +18,4 @@ public class LootBeamsForgeClientEvent {
         }
     }
 }
-//?}
+*///?}

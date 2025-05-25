@@ -1,6 +1,7 @@
-//? if fabric && = 1.20.1 {
-/*package me.clefal.lootbeams.loaders.fabric.compat;
+//? if =1.20.1 && fabric {
+/*package me.clefal.lootbeams.compat.fabric_1_20_1;
 
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
@@ -14,10 +15,8 @@ import dev.shadowsoffire.apotheosis.adventure.loot.RarityRegistry;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemInstance;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemItem;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
-import net.fabricmc.loader.api.FabricLoader;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 
-import java.awt.*;
 
 import static com.clefal.nirvana_lib.relocated.io.vavr.API.*;
 
@@ -26,7 +25,7 @@ public class ZenithCompatModule implements ILBCompatModule {
     public final static ZenithCompatModule INSTANCE = new ZenithCompatModule();
     @Override
     public boolean shouldBeEnable() {
-        return FabricLoader.getInstance().isModLoaded(Apotheosis.MODID);
+        return ModUtils.isModLoaded(Apotheosis.MODID);
     }
 
     @Override

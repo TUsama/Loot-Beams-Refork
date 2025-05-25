@@ -1,7 +1,7 @@
 //? if forge {
+/*package me.clefal.lootbeams.compat.forge_1_20_1;
 
-package me.clefal.lootbeams.loaders.forge.compat.apothesis;
-
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
@@ -17,7 +17,6 @@ import dev.shadowsoffire.apotheosis.adventure.loot.RarityRegistry;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemInstance;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemItem;
 
-import net.minecraftforge.fml.ModList;
 
 import static com.clefal.nirvana_lib.relocated.io.vavr.API.*;
 
@@ -25,7 +24,7 @@ import static com.clefal.nirvana_lib.relocated.io.vavr.API.*;
 public class ApotheosisCompatModule implements ILBCompatModule {
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded(Apotheosis.MODID);
+        return ModUtils.isModLoaded(Apotheosis.MODID);
     }
 
     @Override
@@ -59,6 +58,4 @@ public class ApotheosisCompatModule implements ILBCompatModule {
         });
     }
 }
-
- //?}
-
+*///?}

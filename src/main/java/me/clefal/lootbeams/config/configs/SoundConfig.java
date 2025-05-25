@@ -1,5 +1,6 @@
 package me.clefal.lootbeams.config.configs;
 
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.utils.ResourceLocationHelper;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
@@ -33,6 +34,6 @@ public class SoundConfig extends Config {
     public static class SoundFilter extends ConfigSection {
         public ValidatedSet<ResourceLocation> blacklist_by_name = ValidatedIdentifier.ofRegistry(BuiltInRegistries.ITEM.getDefaultKey(), BuiltInRegistries.ITEM).toSet();
         public ValidatedSet<String> blacklist_by_tag = new ValidatedString("#minecraft:air", "#.+:.+").toSet();
-        public ValidatedSet<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), ModListUtil::getModList)).toSet();
+        public ValidatedSet<String> blacklist_by_modid = new ValidatedString("lootbeams", new AllowableStrings(x -> !x.isBlank() && !x.contains("#"), ModUtils::getModList)).toSet();
     }
 }

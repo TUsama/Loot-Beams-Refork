@@ -1,5 +1,6 @@
 package me.clefal.lootbeams.modules.sound;
 
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.config.configs.SoundConfig;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
@@ -11,7 +12,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
+
 
 public class SoundModule implements ILBModule {
 

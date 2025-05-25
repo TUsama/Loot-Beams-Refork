@@ -1,7 +1,7 @@
 //? if forge {
+/*package me.clefal.lootbeams.compat.forge_1_20_1;
 
-package me.clefal.lootbeams.loaders.forge.compat.tiered_reforged;
-
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
@@ -16,16 +16,14 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.ModList;
 
-import java.awt.*;
 
 public class TieredReforgedCompatModule implements ILBCompatModule {
     public static final TieredReforgedCompatModule INSTANCE = new TieredReforgedCompatModule();
 
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded("tiered");
+        return ModUtils.isModLoaded("tiered");
     }
 
     @Override
@@ -65,5 +63,4 @@ public class TieredReforgedCompatModule implements ILBCompatModule {
 
     }
 }
-
- //?}
+*///?}

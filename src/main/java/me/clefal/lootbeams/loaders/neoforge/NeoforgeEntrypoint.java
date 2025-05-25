@@ -1,6 +1,6 @@
 //? if neoforge {
 
-/*package me.clefal.lootbeams.loaders.neoforge;
+package me.clefal.lootbeams.loaders.neoforge;
 
 import com.mojang.logging.LogUtils;
 import me.clefal.lootbeams.LootBeamsRefork;
@@ -12,9 +12,8 @@ public class NeoforgeEntrypoint {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public NeoforgeEntrypoint() {
-        LOGGER.info("Hello from NeoforgeEntrypoint!");
         LootBeamsRefork.initialize();
     }
 }
 
-*///?}
+//?}

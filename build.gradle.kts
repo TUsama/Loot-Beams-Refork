@@ -11,7 +11,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 
-val modv = "2.0.0"
+val modv = "2.6.2"
 
 
 val loader = when {
@@ -135,7 +135,7 @@ modstitch {
         // You do not need to specify mixins in any mods.json/toml file if this is set to
         // true, it will automatically be generated.
         addMixinsToModManifest = true
-        configs.register(mid)
+        if (isModDevGradleLegacy) configs.register("${mid}-1.20.1") else configs.register("${mid}-1.21")
 
         // Most of the time you wont ever need loader specific mixins.
         // If you do, simply make the mixin file and add it like so for the respective loader:
@@ -179,6 +179,18 @@ tasks.register<Copy>("buildAndCollect") {
 // If you want to create proxy configurations for more source sets, such as client source sets,
 // use the modstitch.createProxyConfigurations(sourceSets["client"]) function.
 dependencies {
+    modstitch.moddevgradle{
+        if (modstitch.isModDevGradleLegacy) return@moddevgradle
+        "com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.2-beta.4".let {
+            annotationProcessor(it)
+            modstitchCompileOnly(it)
+
+        }
+        "com.github.bawnorton.mixinsquared:mixinsquared-neoforge:0.3.2-beta.4".let {
+            modstitchImplementation(it)
+            modstitchJiJ(it)
+        }
+    }
     val loaderEnum = when {
         modstitch.isLoom -> Loaders.LOOM
         modstitch.isModDevGradleLegacy -> Loaders.FORGE
@@ -199,7 +211,6 @@ dependencies {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${fabricApi}+${minecraft}")
         modstitchModImplementation("me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}")
     }
-
     modstitch.moddevgradle {
 
         if (modstitch.isModDevGradleLegacy) {
@@ -214,6 +225,7 @@ dependencies {
 
     //loader-specified deps
     DependencyConfig.getDependencies(loaderEnum, minecraft).forEach { dep ->
+
         dependencies.add(dep.configuration, dep.notation, dep.options)
     }
     //lombok

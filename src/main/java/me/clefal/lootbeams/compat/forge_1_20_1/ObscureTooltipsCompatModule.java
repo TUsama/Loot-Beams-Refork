@@ -1,6 +1,5 @@
 //? if forge {
-
-package me.clefal.lootbeams.loaders.forge.compat.obscuretooltips;
+/*package me.clefal.lootbeams.compat.forge_1_20_1;
 
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.modules.ILBCompatModule;
@@ -9,8 +8,8 @@ import me.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import me.clefal.lootbeams.modules.tooltip.LootInformationEnableStatus;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.EventPriority;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
+import com.clefal.nirvana_lib.utils.ModUtils;
 import com.obscuria.tooltips.ObscureTooltips;
-import net.minecraftforge.fml.ModList;
 
 
 public class ObscureTooltipsCompatModule implements ILBCompatModule {
@@ -25,7 +24,7 @@ public class ObscureTooltipsCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded(ObscureTooltips.MODID);
+        return ModUtils.isModLoaded(ObscureTooltips.MODID);
     }
 
     @Override
@@ -36,5 +35,4 @@ public class ObscureTooltipsCompatModule implements ILBCompatModule {
         }
     }
 }
-
- //?}
+*///?}

@@ -1,12 +1,11 @@
 //? if forge {
+/*package me.clefal.lootbeams.compat.forge_1_20_1;
 
-package me.clefal.lootbeams.loaders.forge.compat.curios;
-
+import com.clefal.nirvana_lib.utils.ModUtils;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.modules.ILBCompatModule;
 import me.clefal.lootbeams.events.RegisterConfigConditionEvent;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
 
 public class CuriosCompatModule implements ILBCompatModule {
@@ -14,7 +13,7 @@ public class CuriosCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
-        return ModList.get().isLoaded(CuriosApi.MODID);
+        return ModUtils.isModLoaded(CuriosApi.MODID);
     }
 
     @Override
@@ -30,5 +29,4 @@ public class CuriosCompatModule implements ILBCompatModule {
         event.conditions.add(lbItemEntity -> CuriosApi.getCurio(lbItemEntity.item().getItem()).isPresent());
     }
 }
-
- //?}
+*///?}

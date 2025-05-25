@@ -6,7 +6,7 @@ import me.clefal.lootbeams.config.impl.IConfigReloadable;
 import me.clefal.lootbeams.events.ConfigReloadEvent;
 import me.clefal.lootbeams.modules.ILBModule;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
-import net.neoforged.bus.api.SubscribeEvent;
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 
 public class DynamicProviderModule implements ILBModule, IConfigReloadable {
 

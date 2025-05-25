@@ -41,5 +41,6 @@ allprojects {
         maven("https://maven.theillusivec4.top/")
 
         maven ("https://maven.shedaniel.me/")
+        maven("https://maven.bawnorton.com/releases")
     }
 }

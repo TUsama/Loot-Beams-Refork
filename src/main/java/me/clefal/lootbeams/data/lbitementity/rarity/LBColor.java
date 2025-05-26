@@ -1,7 +1,6 @@
 package me.clefal.lootbeams.data.lbitementity.rarity;
 
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.util.FastColor;
 
 public class LBColor {
 
@@ -46,6 +45,22 @@ public class LBColor {
 
     public int argb() {
         return argb;
+    }
+
+    public int alpha() {
+        return argb >>> 24;
+    }
+
+    public int red() {
+        return argb >> 16 & 255;
+    }
+
+    public int green() {
+        return argb >> 8 & 255;
+    }
+
+    public int blue() {
+        return argb & 255;
     }
 
     public static class Mutable extends LBColor{

@@ -9,7 +9,18 @@
     "main": [
     ],
     "client": [
-      "me.clefal.lootbeams.loaders.fabric.LootBeamsClient"
+      "me.clefal.lootbeams.loaders.fabric.FabricEntryPoint"
     ]
+  },
+  "custom": {
+    "fzzy_config": [
+      "${mod_id}"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${target_fabricloader}",
+    "fabric": "*",
+    "nirvana_lib": ">=${lib_version}",
+    "minecraft": "=${target_minecraft}"
   }
 }

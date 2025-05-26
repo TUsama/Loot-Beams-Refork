@@ -7,7 +7,7 @@ import me.clefal.lootbeams.data.lbitementity.LBItemEntityCache;
 import me.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import me.clefal.lootbeams.modules.tooltip.LootInformationEnableStatus;
 import com.mojang.blaze3d.platform.Window;
-//? if = 1.21.1
+//? if ~ 1.21
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -96,7 +96,7 @@ public class AdvanceTooltipOverlay {
         Window window = mc.getWindow();
         return new Vector2f(window.getGuiScaledWidth() / 2f, window.getGuiScaledHeight() / 2f);
     }
-//? if = 1.21.1 {
+//? if ~1.21 {
     
     public void render(GuiGraphics guiGraphics, DeltaTracker tracker) {
         //cannot request this when register overlay, so I have to put it at here.

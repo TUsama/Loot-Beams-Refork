@@ -14,7 +14,6 @@ object LoomDeps {
                     modstitchModCompileOnly ("curse.maven:zenith-attributes-910078:5918684")
                     modstitchModCompileOnly ("curse.maven:fakerlib-853197:5503724")
 
-                    modstitchModImplementation ("curse.maven:nirvana-library-1164411:6417546")
 
                     modstitchModCompileOnly ("curse.maven:tieredz-615948:5233351")
                     modstitchModCompileOnly ("curse.maven:photon-871522:6373235")
@@ -35,8 +34,6 @@ object LoomDeps {
                     modstitchModCompileOnly ("curse.maven:accessories-938917:5727156")
                     //modImplementation ("curse.maven:charm-of-undying-316873:5159191")
 
-                    modstitchModImplementation ("curse.maven:nirvana-library-1164411:6473163")
-
                     modstitchModCompileOnly ("curse.maven:tieredz-615948:5934487")
 
                     modstitchModCompileOnly ("curse.maven:tiered-forge-453889:6206677")
@@ -46,6 +43,9 @@ object LoomDeps {
                     modstitchModImplementation ("maven.modrinth:subtle-effects:J9hrPl1c")
                 }
 
+                ("1.21.4") -> {
+                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:J9hrPl1c")
+                }
             }
         }
     }

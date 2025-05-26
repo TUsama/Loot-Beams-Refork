@@ -4,7 +4,7 @@
 import me.clefal.lootbeams.config.configs.ConfigManager;
 import net.fabricmc.api.ClientModInitializer;
 
-public class LootBeamsClient implements ClientModInitializer {
+public class FabricEntryPoint implements ClientModInitializer {
 
 
     @Override

@@ -11,11 +11,20 @@ license = "${mod_license}"
     authors = "${mod_author}"
 
 [[dependencies.${mod_id}]]
-    modId = "neoforge"
-    mandatory = true
-    ordering = "NONE"
-    side = "BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[47.3.5,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.${mod_id}]]
-    modId = "minecraft"
-    mandatory = true
+modId = "minecraft"
+versionRange = "${target_minecraft}"
+mandatory = true
+
+[[dependencies.${mod_id}]]
+modId = "nirvana_lib"
+mandatory = true
+versionRange = "[${lib_version},)"
+ordering = "AFTER"
+side = "CLIENT"

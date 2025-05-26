@@ -12,11 +12,16 @@ import me.clefal.lootbeams.compat.common_1_21_1.SubtleEffectCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.TieredReforgedCompatModule;
 ^///?}
 //? if =1.20.1 {
-import me.clefal.lootbeams.compat.fabric_1_20_1.TieredZCompatModule;
+/^import me.clefal.lootbeams.compat.fabric_1_20_1.TieredZCompatModule;
 import me.clefal.lootbeams.compat.fabric_1_20_1.TierifyCompatModule;
 import me.clefal.lootbeams.compat.fabric_1_20_1.TrinketCompatModule;
 import me.clefal.lootbeams.compat.fabric_1_20_1.ZenithCompatModule;
+^///?}
+
+//? if =1.21.4 {
+import me.clefal.lootbeams.compat.common_1_21_4.SubtleEffectCompatModule;
 //?}
+
 import me.clefal.lootbeams.config.ConfigHandlers;
 import me.clefal.lootbeams.modules.ModulesManager;
 import me.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -47,10 +52,15 @@ public class LootBeamsFabricModClientEvent {
                 TrinketCompatModule.INSTANCE
                 ^///?}
                 //? if =1.20.1 {
-                TrinketCompatModule.INSTANCE,
+                /^TrinketCompatModule.INSTANCE,
                 ZenithCompatModule.INSTANCE,
                 TieredZCompatModule.INSTANCE,
                 TierifyCompatModule.INSTANCE
+                ^///?}
+
+                //? if =1.21.4 {
+                SubtleEffectCompatModule.INSTANCE
+
                 //?}
 
         );

@@ -88,6 +88,7 @@ modstitch {
                 }
             )
             put("fzzy_config_version", property("deps.fzzy_config_version") as String)
+            put("lib_version", property("deps.lib_version") as String)
         }
     }
 

@@ -3,6 +3,7 @@ package me.clefal.lootbeams.config.configs;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import lombok.experimental.UtilityClass;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedSet;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -10,12 +11,20 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Optional;
+
 @UtilityClass
 public class Checker {
 
     public boolean checkItemEquality(ItemStack itemStack, ResourceLocation resourceLocation) {
-        Item registryItem = BuiltInRegistries.ITEM.get(resourceLocation);
+        //? if <=1.21.1 {
+        /*Item registryItem = BuiltInRegistries.ITEM.get(resourceLocation);
         return itemStack.is(registryItem.asItem());
+        *///?} else {
+        Optional<Holder.Reference<Item>> registryItem = BuiltInRegistries.ITEM.get(resourceLocation);
+        return registryItem.isPresent() && registryItem.get().is(itemStack.getItemHolder());
+        //?}
+
     }
 
     public boolean checkTagContainItem(ItemStack itemStack, ResourceLocation resourceLocation) {

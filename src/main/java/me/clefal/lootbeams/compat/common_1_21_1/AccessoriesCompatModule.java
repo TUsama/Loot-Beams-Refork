@@ -1,5 +1,5 @@
 //? if =1.21.1 {
-package me.clefal.lootbeams.compat.common_1_21_1;
+/*package me.clefal.lootbeams.compat.common_1_21_1;
 
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.clefal.nirvana_lib.utils.ModUtils;
@@ -33,4 +33,4 @@ public class AccessoriesCompatModule implements ILBCompatModule {
         event.conditions.add(itemStack -> AccessoriesAPI.isValidAccessory(itemStack.item().getItem(), Minecraft.getInstance().level));
     }
 }
-//?}
+*///?}

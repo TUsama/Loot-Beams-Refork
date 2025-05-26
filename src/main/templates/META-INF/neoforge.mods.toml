@@ -13,9 +13,18 @@ license = "${mod_license}"
 [[dependencies.${mod_id}]]
     modId = "neoforge"
     type = "required"
+versionRange = "[21,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.${mod_id}]]
     modId = "minecraft"
+versionRange = "${target_minecraft}"
     type = "required"
+
+[[dependencies.${mod_id}]]
+modId = "nirvana_lib"
+mandatory = true
+versionRange = "[${lib_version},)"
+ordering = "AFTER"
+side = "CLIENT"

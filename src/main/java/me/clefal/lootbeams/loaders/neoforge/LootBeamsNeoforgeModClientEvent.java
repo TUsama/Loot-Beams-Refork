@@ -3,11 +3,17 @@ package me.clefal.lootbeams.loaders.neoforge;
 
 
 import me.clefal.lootbeams.LootBeamsConstants;
-import me.clefal.lootbeams.compat.common_1_21_1.AccessoriesCompatModule;
+//? if =1.21.1 {
+/*import me.clefal.lootbeams.compat.common_1_21_1.AccessoriesCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.SubtleEffectCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.TieredReforgedCompatModule;
 import me.clefal.lootbeams.compat.neoforged_1_21_1.ApotheosisCompatModule;
 import me.clefal.lootbeams.compat.neoforged_1_21_1.CuriosContinuationAndAdornedCompatModule;
+*///?}
+
+//? if =1.21.4 {
+import me.clefal.lootbeams.compat.common_1_21_4.SubtleEffectCompatModule;
+//?}
 import me.clefal.lootbeams.config.ConfigHandlers;
 import me.clefal.lootbeams.modules.ModulesManager;
 import me.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -34,10 +40,14 @@ public class LootBeamsNeoforgeModClientEvent {
         LootBeamsConstants.LOGGER.info("register all modules");
         ModulesManager.registerModules(
                 //? if =1.21.1 {
-                CuriosContinuationAndAdornedCompatModule.INSTANCE,
+                /*CuriosContinuationAndAdornedCompatModule.INSTANCE,
                 AccessoriesCompatModule.INSTANCE,
                 ApotheosisCompatModule.INSTANCE,
                 TieredReforgedCompatModule.INSTANCE,
+                SubtleEffectCompatModule.INSTANCE
+                *///?}
+
+                //? if =1.21.4 {
                 SubtleEffectCompatModule.INSTANCE
                 //?}
         );

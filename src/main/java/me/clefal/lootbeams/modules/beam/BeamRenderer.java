@@ -13,13 +13,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.item.ItemEntity;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-
-import java.awt.*;
 
 public class BeamRenderer {
 
@@ -36,9 +33,9 @@ public class BeamRenderer {
         int fadeInTime = beamConfig.beam_fade_in_time.get();
         var fadeInFactor = 1.0f * lifeTime / fadeInTime;
         int argb = color.argb();
-        int R = FastColor.ARGB32.red(argb);
-        int G = FastColor.ARGB32.green(argb);
-        int B = FastColor.ARGB32.blue(argb);
+        int R = color.red();
+        int G = color.green();
+        int B = color.blue();
 
         float preBeamAlpha = beamConfig.beam_alpha.get();
 

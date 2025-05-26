@@ -1,5 +1,5 @@
 //? if =1.21.1 && neoforge {
-package me.clefal.lootbeams.compat.neoforged_1_21_1;
+/*package me.clefal.lootbeams.compat.neoforged_1_21_1;
 
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import me.clefal.lootbeams.LootBeamsConstants;
@@ -81,4 +81,4 @@ public class ApotheosisCompatModule implements ILBCompatModule {
         event.conditions.add(x -> x.item().getItem().getItem() instanceof GemItem || x.item().getItem().getItem() instanceof SalvageItem ||AffixHelper.hasAffixes(x.item().getItem()));
     }
 }
-//?}
+*///?}

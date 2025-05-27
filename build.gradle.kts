@@ -11,7 +11,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 
-val modv = "2.6.2"
+val modv = "2.7.0"
 
 
 val loader = when {
@@ -136,7 +136,12 @@ modstitch {
         // You do not need to specify mixins in any mods.json/toml file if this is set to
         // true, it will automatically be generated.
         addMixinsToModManifest = true
-        if (isModDevGradleLegacy) configs.register("${mid}-1.20.1") else configs.register("${mid}-1.21")
+        when {
+            isModDevGradleLegacy -> configs.register("${mid}-1.20.1")
+            minecraft == "1.21.1" -> configs.register("${mid}-1.21")
+            else -> configs.register("${mid}-1.21.4")
+        }
+
 
         // Most of the time you wont ever need loader specific mixins.
         // If you do, simply make the mixin file and add it like so for the respective loader:
@@ -180,18 +185,6 @@ tasks.register<Copy>("buildAndCollect") {
 // If you want to create proxy configurations for more source sets, such as client source sets,
 // use the modstitch.createProxyConfigurations(sourceSets["client"]) function.
 dependencies {
-    modstitch.moddevgradle{
-        if (modstitch.isModDevGradleLegacy) return@moddevgradle
-        "com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.2-beta.4".let {
-            annotationProcessor(it)
-            modstitchCompileOnly(it)
-
-        }
-        "com.github.bawnorton.mixinsquared:mixinsquared-neoforge:0.3.2-beta.4".let {
-            modstitchImplementation(it)
-            modstitchJiJ(it)
-        }
-    }
     val loaderEnum = when {
         modstitch.isLoom -> Loaders.LOOM
         modstitch.isModDevGradleLegacy -> Loaders.FORGE
@@ -223,7 +216,7 @@ dependencies {
     }
 
     modstitchModImplementation("maven.modrinth:nirvana-library:${loader}-${minecraft}-${libVersion}")
-
+    modstitchModRuntimeOnly("maven.modrinth:common-network:${property("deps.common_network")}")
     //loader-specified deps
     DependencyConfig.getDependencies(loaderEnum, minecraft).forEach { dep ->
 

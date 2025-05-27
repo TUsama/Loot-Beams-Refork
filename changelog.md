@@ -1,3 +1,7 @@
+### V2.7.0
+update to multiversion. If you experience any bugs, please report on GitHub!
+add 1.21.4 support
+
 ### V2.6.2
 fix a spam log bug when installed with Subtle Effect
 

@@ -26,9 +26,13 @@ public class EquipmentConditions extends PersistentConfigData<RegisterConfigCond
         Set<? extends ResourceLocation> resourceLocations = CustomConfig.customConfig.equipmentRegister.blacklist_by_name.get();
         var item = lbItemEntity.item().getItem().getItem();
         //? if <=1.21.1
-        /*boolean b = item instanceof TieredItem;*/
+        boolean b = item instanceof TieredItem;
         //? if >1.21.1
-        boolean b = false;
+        /*boolean b = false;*/
+        // Mace was added since 1.20.5
+
+        //? if >=1.20.5
+        b = b || item instanceof MaceItem;
         return !resourceLocations.contains(lbItemEntity.resourceLocation())
                 && (b || item instanceof ArmorItem || item instanceof ShieldItem || item instanceof BowItem || item instanceof CrossbowItem || item instanceof TridentItem || (INSTANCE.conditions
                 .stream()

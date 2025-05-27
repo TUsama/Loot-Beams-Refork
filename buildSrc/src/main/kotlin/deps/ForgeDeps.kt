@@ -28,12 +28,12 @@ object ForgeDeps {
 
             modstitchModRuntimeOnly ("top.theillusivec4.curios:curios-forge:5.11.0+1.20.1")
             modstitchModCompileOnly ("top.theillusivec4.curios:curios-forge:5.11.0+1.20.1:api")
-
+/*
             modstitchModRuntimeOnly ("curse.maven:balkons-weaponmod-legacy-1033985:5853414")
             modstitchModRuntimeOnly ("curse.maven:architectury-api-419699:5137938")
             modstitchModRuntimeOnly ("curse.maven:cloth-config-348521:5729105")
             modstitchModRuntimeOnly ("curse.maven:crafttweaker-239197:5880672")
-
+*/
             modstitchModCompileOnly ("curse.maven:tiered-forge-453889:6109619")
             modstitchModCompileOnly ("curse.maven:unionlib-367806:6012406")
 

@@ -3,7 +3,6 @@
   "minVersion": "0.8",
   "package": "me.clefal.lootbeams.mixin",
   "refmap": "lootbeams.refmap.json",
-  "plugin": "me.clefal.lootbeams.LBMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ParticleCullDisabler",

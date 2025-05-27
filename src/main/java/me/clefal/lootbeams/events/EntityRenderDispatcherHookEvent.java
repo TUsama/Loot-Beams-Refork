@@ -1,10 +1,10 @@
 package me.clefal.lootbeams.events;
 
+import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.ICancellableEvent;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.Event;
-import net.neoforged.bus.api.ICancellableEvent;
 
 public abstract class EntityRenderDispatcherHookEvent extends Event {
     public LBItemEntity LBItemEntity;

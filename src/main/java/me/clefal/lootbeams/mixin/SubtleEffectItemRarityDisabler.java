@@ -5,10 +5,10 @@ import einstein.subtle_effects.tickers.ItemRarityTicker;
 /*import me.clefal.lootbeams.compat.common_1_20_1.SubtleEffectCompatModule;
 
 *///?} else if 1.21.1 {
-/*import me.clefal.lootbeams.compat.common_1_21_1.SubtleEffectCompatModule;
-*///?} else if 1.21.4 {
-import me.clefal.lootbeams.compat.common_1_21_4.SubtleEffectCompatModule;
-//?}
+import me.clefal.lootbeams.compat.common_1_21_1.SubtleEffectCompatModule;
+//?} else if 1.21.4 {
+/*import me.clefal.lootbeams.compat.common_1_21_4.SubtleEffectCompatModule;
+*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

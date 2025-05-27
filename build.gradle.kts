@@ -236,7 +236,7 @@ dependencies {
 
     // Anything else in the dependencies block will be used for all platforms.
 }
-/*
+
 msPublishing {
     val finalFileTree = rootProject.layout.buildDirectory.files("libs/${modv}").asFileTree.files
 
@@ -260,7 +260,7 @@ msPublishing {
         //dryRun = true
         val cfOptions = curseforgeOptions {
             accessToken = file("D:\\curseforge-key.txt").readText()
-            projectId = "1164411"
+            projectId = "1150640"
             minecraftVersions.add(minecraft)
             requires("nirvana-library")
         }
@@ -268,8 +268,8 @@ msPublishing {
         // Modrinth options used by both Fabric and Forge
         val mrOptions = modrinthOptions {
             accessToken = file("D:\\modrinth-key.txt").readText()
-            version = "${loader}-${modstitch.metadata.modVersion.get()}"
-            projectId = "6gKEW2ql"
+            version = "${loader}-${minecraft}-${modstitch.metadata.modVersion.get()}"
+            projectId = "rp7ooqvq"
             minecraftVersions.add(minecraft)
             requires("nirvana-library")
         }
@@ -286,4 +286,4 @@ msPublishing {
 
     }
 
-}*/
+}

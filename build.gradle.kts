@@ -2,8 +2,8 @@ import deps.DependencyConfig
 import deps.Loaders
 
 plugins {
-    id("dev.isxander.modstitch.base") version "0.5.12"
-    id("dev.isxander.modstitch.publishing") version "0.5.12"
+    id("dev.isxander.modstitch.base") version "0.5.+"
+    id("dev.isxander.modstitch.publishing") version "0.5.+"
 }
 
 fun prop(name: String, consumer: (prop: String) -> Unit) {
@@ -208,7 +208,7 @@ dependencies {
     modstitch.moddevgradle {
 
         if (modstitch.isModDevGradleLegacy) {
-            modstitchModImplementation(("me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}+forge"))
+            modstitchModImplementation("me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}+forge")
         } else {
             modstitchModImplementation(("me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}+neoforge"))
         }
@@ -229,9 +229,6 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:1.18.34")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
 
-    //shadow dep
-    modstitchImplementation("io.vavr:vavr:0.10.6")
-    modstitchImplementation("net.neoforged:bus:8.0.2")
 
 
     // Anything else in the dependencies block will be used for all platforms.

@@ -11,7 +11,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 
-val modv = "2.7.0"
+val modv = "3.2.0"
 
 
 val loader = when {
@@ -96,7 +96,7 @@ modstitch {
     loom {
         // It's not recommended to store the Fabric Loader version in properties.
         // Make sure its up to date.
-        fabricLoaderVersion = "0.16.10"
+        fabricLoaderVersion = "0.16.11"
         configureLoom {
             runs {
                 all {
@@ -249,11 +249,9 @@ msPublishing {
             }
         type = STABLE
         //I think this is provided by modstich or stonecutter. So we can't add this otherwise the upload will fail.
-        //modLoaders.add(loader)
-        val finalFile = finalFileTree.filter { it.name.contains(minecraft) && it.name.contains(loader) }.first()
+        val finalFile = finalFileTree.filter { it.name.contains(minecraft) && it.name.contains(loader) }.firstOrNull()
         file.set(finalFile)
         displayName = file.map { it.asFile.name }
-        println(displayName.get())
         //dryRun = true
         val cfOptions = curseforgeOptions {
             accessToken = file("D:\\curseforge-key.txt").readText()

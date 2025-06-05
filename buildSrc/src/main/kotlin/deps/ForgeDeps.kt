@@ -40,7 +40,7 @@ object ForgeDeps {
             modstitchModImplementation ("curse.maven:ldlib-626676:6337779")
             modstitchModImplementation ("curse.maven:photon-871522:6373238")
 
-            modstitchModImplementation ("maven.modrinth:subtle-effects:lCMnqufi")
+            modstitchModImplementation ("maven.modrinth:subtle-effects:jlABeHRd")
         }
     }
 }

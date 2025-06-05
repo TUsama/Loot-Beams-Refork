@@ -25,11 +25,12 @@ object NeoForgeDeps {
                     modstitchModCompileOnly ("curse.maven:unionlib-367806:5997453")
 
                     modstitchModCompileOnly ("maven.modrinth:subtle-effects:TZo5xb5m")
+                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:bAQ7woyE")
                 }
 
                 "1.21.4" -> {
                     modstitchModCompileOnly ("maven.modrinth:curios:10.0.1+1.21.4")
-                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:Z4pLufCX")
+                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:bAQ7woyE")
                 }
             }
         }

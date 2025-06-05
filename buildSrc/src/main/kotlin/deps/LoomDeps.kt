@@ -21,6 +21,7 @@ object LoomDeps {
 
                     modstitchModImplementation ("curse.maven:modmenu-308702:5162837")
                     modstitchModCompileOnly ("maven.modrinth:subtle-effects:TdzGdTcL")
+                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:XhsIpffA")
 
                     modstitchModCompileOnly ("curse.maven:tierify-974356:5803071")
                     modstitchModCompileOnly ("curse.maven:necronomicon-586157:5772682")
@@ -40,11 +41,11 @@ object LoomDeps {
                     modstitchModCompileOnly ("curse.maven:unionlib-367806:5997472")
                     modstitchImplementation ("org.tomlj:tomlj:1.1.1")
 
-                    modstitchModImplementation ("maven.modrinth:subtle-effects:J9hrPl1c")
+                    modstitchModImplementation ("maven.modrinth:subtle-effects:1.10.1")
                 }
 
                 ("1.21.4") -> {
-                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:J9hrPl1c")
+                    modstitchModCompileOnly ("maven.modrinth:subtle-effects:1.10.1")
                 }
             }
         }

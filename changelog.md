@@ -1,3 +1,6 @@
+### V3.2.1
+fix reforged compat
+
 ### V3.2.0
 change the version for the consistency
 

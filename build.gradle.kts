@@ -1,5 +1,6 @@
 import deps.DependencyConfig
 import deps.Loaders
+import kotlin.text.uppercaseChar
 
 plugins {
     id("dev.isxander.modstitch.base") version "clefal-version"
@@ -34,7 +35,7 @@ modstitch {
         "1.20.1" -> 17
         "1.21.1" -> 21
         "1.21.4" -> 21
-        else -> throw IllegalArgumentException("Please store the java version for ${property("deps.minecraft")} in build.gradle.kts!")
+        else -> throw IllegalArgumentException("Please store the java version for $minecraft in build.gradle.kts!")
     }
 
     // If parchment doesnt exist for a version yet you can safely
@@ -127,10 +128,24 @@ modstitch {
         configureNeoforge {
             //setAccessTransformers("../../src/main/resources/META-INF/accesstransformer.cfg")
             validateAccessTransformers = false
+
             runs.all {
+                val upperName = name.replaceFirstChar {
+                    it.uppercaseChar()
+                }
+                tasks.named<JavaExec>("run$upperName"){
+                    javaLauncher.set(
+                        javaToolchains.launcherFor {
+                            languageVersion = JavaLanguageVersion.of(project.modstitch.javaTarget.get())
+                            vendor = JvmVendorSpec.JETBRAINS
+                        }
+                    )
+                }
                 disableIdeRun()
+                jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
                 //gameDirectory = file("run")
             }
+
         }
     }
 

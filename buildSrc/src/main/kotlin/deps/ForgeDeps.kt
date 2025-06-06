@@ -34,8 +34,8 @@ object ForgeDeps {
             modstitchModRuntimeOnly ("curse.maven:cloth-config-348521:5729105")
             modstitchModRuntimeOnly ("curse.maven:crafttweaker-239197:5880672")
 */
-            modstitchModImplementation ("curse.maven:tiered-forge-453889:6549635")
-            modstitchModImplementation ("curse.maven:unionlib-367806:6585053")
+            modstitchModCompileOnly ("curse.maven:tiered-forge-453889:6549635")
+            modstitchModCompileOnly ("curse.maven:unionlib-367806:6585053")
 
             modstitchModImplementation ("curse.maven:ldlib-626676:6337779")
             modstitchModImplementation ("curse.maven:photon-871522:6373238")

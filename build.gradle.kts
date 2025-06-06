@@ -2,8 +2,10 @@ import deps.DependencyConfig
 import deps.Loaders
 
 plugins {
-    id("dev.isxander.modstitch.base") version "0.5.+"
-    id("dev.isxander.modstitch.publishing") version "0.5.+"
+    id("dev.isxander.modstitch.base") version "clefal-version"
+    id("dev.isxander.modstitch.publishing") version "clefal-version"
+    id ("org.jetbrains.kotlin.jvm") version "2.1.10"
+    id ("org.jetbrains.kotlin.plugin.serialization") version "2.1.10"
 }
 
 fun prop(name: String, consumer: (prop: String) -> Unit) {
@@ -127,7 +129,7 @@ modstitch {
             validateAccessTransformers = false
             runs.all {
                 disableIdeRun()
-                gameDirectory = file("../../run")
+                //gameDirectory = file("run")
             }
         }
     }

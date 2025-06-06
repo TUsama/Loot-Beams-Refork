@@ -1,0 +1,3 @@
+[submodule "modstitch"]
+	path = modstitch
+	url = https://github.com/TUsama/modstitch

@@ -20,7 +20,7 @@ import net.minecraft.world.item.ItemStack;
 
 
 public class TieredReforgedCompatModule implements ILBCompatModule {
-    public static final TieredReforgedCompatModule INSTANCE  = new TieredReforgedCompatModule();
+    public static final TieredReforgedCompatModule INSTANCE = new TieredReforgedCompatModule();
     @Override
     public boolean shouldBeEnable() {
         try {

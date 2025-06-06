@@ -10,7 +10,7 @@ import me.clefal.lootbeams.events.RegisterLBRarityEvent;
 import me.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
-import com.stereowalker.tiered.Tiered;
+import com.stereowalker.tiered.Reforged;
 import com.stereowalker.tiered.api.PotentialAttribute;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
@@ -23,6 +23,11 @@ public class TieredReforgedCompatModule implements ILBCompatModule {
 
     @Override
     public boolean shouldBeEnable() {
+        try {
+            Class.forName("com.stereowalker.tiered.Reforged");
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
         return ModUtils.isModLoaded("tiered");
     }
 
@@ -39,15 +44,13 @@ public class TieredReforgedCompatModule implements ILBCompatModule {
         event.register(itemEntity -> {
                     //copy from ItemStackClientMixin getName
                     ItemStack item = itemEntity.getItem();
-                    if (item.hasTag() && item.getTagElement("display") == null && item.getTagElement("Tiered") != null) {
-                        ResourceLocation tier = new ResourceLocation(item.getTagElement("Tiered").getString("Tier"));
-                        PotentialAttribute attribute = Tiered.TIER_DATA.getTiers().get(tier);
+                    if (item.hasTag() && item.getTagElement("display") == null && item.getTagElement("Reforged") != null) {
+                        ResourceLocation tier = new ResourceLocation(item.getTagElement("Reforged").getString("Tier"));
+                        PotentialAttribute attribute = Reforged.TIER_DATA.getTiers().get(tier);
                         if (attribute != null) {
-                            String id = attribute.getLiteralName();
-
 
                             return Option.some(LBItemEntity.of(itemEntity, LBRarity.of(
-                                    attribute.getLiteralName() != null ? Component.literal(attribute.getLiteralName()) : Component.translatable(Util.makeDescriptionId("tier", Tiered.getKey(attribute))),
+                                    attribute.getLiteralName() != null ? Component.literal(attribute.getLiteralName()) : Component.translatable(Util.makeDescriptionId("tier", Reforged.getKey(attribute))),
                                     LBColor.of(attribute.getStyle().getColor().getValue()),
                                     -1
                             )));

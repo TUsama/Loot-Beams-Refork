@@ -8,7 +8,6 @@ import me.clefal.lootbeams.modules.ILBCompatModule;
 import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import me.fzzyhmstrs.fzzy_config.util.EnumTranslatable;
 import me.fzzyhmstrs.fzzy_config.util.Walkable;
-import org.jetbrains.annotations.NotNull;
 
 public class PhotonCompatModule implements ILBCompatModule {
     public static PhotonCompatModule INSTANCE = new PhotonCompatModule();
@@ -47,7 +46,7 @@ public class PhotonCompatModule implements ILBCompatModule {
         Merge;
 
         @Override
-        public @NotNull String prefix() {
+        public String prefix() {
             return LootBeamsConstants.MODID + ".affect_strategy";
         }
     }

@@ -103,7 +103,6 @@ modstitch {
         configureLoom {
             runs {
                 all {
-                    runDir = "../../run"
                     ideConfigGenerated(true)
                 }
                 //accessWidenerPath.set(file("../../src/main/resources/${mid}.accesswidener"))
@@ -208,7 +207,6 @@ dependencies {
         modstitch.isModDevGradleRegular -> Loaders.NEOFORGE
         else -> throw IllegalArgumentException("unknown loader")
     }
-
     val fzzyConfigVersion = findProperty("deps.fzzy_config_version")
     val fzzyMinecraftVersion = when (minecraft) {
         "1.21.1" -> "1.21"

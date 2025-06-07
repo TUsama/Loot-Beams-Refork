@@ -30,6 +30,7 @@ object LoomDeps {
                     }
 
                     modstitchModCompileOnly ("curse.maven:malum-484064:5718977")
+                    modstitchModCompileOnly ("curse.maven:lodestone-616457:6070172")
                 }
 
                 ("1.21.1") -> {

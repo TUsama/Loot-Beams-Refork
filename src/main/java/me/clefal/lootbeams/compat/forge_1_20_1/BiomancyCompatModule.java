@@ -1,4 +1,4 @@
-//? if 1.20.1 {
+//? if 1.20.1 && forge {
 /*package me.clefal.lootbeams.compat.forge_1_20_1;
 
 import com.clefal.nirvana_lib.relocated.io.vavr.control.Option;

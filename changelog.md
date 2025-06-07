@@ -1,3 +1,8 @@
+### V3.2.2
+(all) fix a bug that the loot information can't render properly
+(1.20.1, 1.21.1 Neoforge) add Malum compat
+(1.20.1 Forge) add Biomancy compat
+
 ### V3.2.1
 fix reforged compat
 

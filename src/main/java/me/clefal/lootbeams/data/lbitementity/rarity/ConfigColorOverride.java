@@ -52,7 +52,7 @@ public class ConfigColorOverride extends ModifyingConfigHandler {
                 .map(Optional::get)
                 .findFirst()
                 .ifPresent(x -> {
-                    result.set(lbItemEntity.to(lbItemEntity.rarity().configModifyColor(LBColor.of(x.argb()))));
+                    result.set(lbItemEntity.to(lbItemEntity.rarity().modifyColor(LBColor.of(x.argb()))));
                 });
 
         return result.get();

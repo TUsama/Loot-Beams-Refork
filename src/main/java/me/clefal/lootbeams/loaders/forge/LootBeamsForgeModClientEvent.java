@@ -5,6 +5,7 @@
 import me.clefal.lootbeams.compat.forge_1_20_1.*;
 import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.MineAndSlashCompatModule;
 import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.OrbOfCraftingCompatModule;
+import me.clefal.lootbeams.compat.multiversion_compat.MalumCompatModule;
 import me.clefal.lootbeams.config.ConfigHandlers;
 import me.clefal.lootbeams.modules.ModulesManager;
 import me.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -36,7 +37,9 @@ public class LootBeamsForgeModClientEvent {
                 CuriosCompatModule.INSTANCE,
                 SpartanWeaponryCompatModule.INSTANCE,
                 OrbOfCraftingCompatModule.INSTANCE,
-                TieredReforgedCompatModule.INSTANCE
+                TieredReforgedCompatModule.INSTANCE,
+                MalumCompatModule.INSTANCE,
+                BiomancyCompatModule.INSTANCE
         );
         ModulesManager.enableAll();
         ConfigHandlers.init();

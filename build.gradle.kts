@@ -129,22 +129,24 @@ modstitch {
             validateAccessTransformers = false
 
             runs.all {
-                val upperName = name.replaceFirstChar {
+                /*val upperName = name.replaceFirstChar {
                     it.uppercaseChar()
-                }
-                tasks.named<JavaExec>("run$upperName"){
+                }*/
+                /*tasks.named<JavaExec>("run$upperName"){
                     javaLauncher.set(
                         javaToolchains.launcherFor {
                             languageVersion = JavaLanguageVersion.of(project.modstitch.javaTarget.get())
                             vendor = JvmVendorSpec.JETBRAINS
                         }
                     )
-                }
+                }*/
                 disableIdeRun()
-                jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
+
+                //jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
                 //gameDirectory = file("run")
             }
-
+            runOnJBR(project)
+            //runOnJBR()
         }
     }
 

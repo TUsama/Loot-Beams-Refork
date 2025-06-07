@@ -41,6 +41,12 @@ object ForgeDeps {
             modstitchModImplementation ("curse.maven:photon-871522:6373238")
 
             modstitchModImplementation ("maven.modrinth:subtle-effects:jlABeHRd")
+
+            modstitchModImplementation("curse.maven:malum-484064:6213791")
+            modstitchModImplementation("curse.maven:lodestone-616457:6213794")
+
+            modstitchModImplementation ("maven.modrinth:biomancy:2.8.19.0")
+            modstitchModImplementation ("maven.modrinth:geckolib:g4k8xf2k")
         }
     }
 }

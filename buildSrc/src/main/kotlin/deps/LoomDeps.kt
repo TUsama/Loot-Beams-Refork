@@ -28,6 +28,8 @@ object LoomDeps {
                     modstitchModCompileOnly (("maven.modrinth:libz:1.0.2+1.20.1")) {
                         exclude(mapOf<String, String>("group" to "net.fabricmc.fabric-api"))
                     }
+
+                    modstitchModCompileOnly ("curse.maven:malum-484064:5718977")
                 }
 
                 ("1.21.1") -> {

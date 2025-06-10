@@ -1,3 +1,6 @@
+### V3.2.3
+(all Fabric)fix versioned code
+
 ### V3.2.2
 (all) fix a bug that the loot information can't render properly
 (1.20.1, 1.21.1 Neoforge) add Malum compat

@@ -10,9 +10,6 @@ import me.clefal.lootbeams.compat.fabric_1_21_1.TrinketCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.AccessoriesCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.SubtleEffectCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.TieredReforgedCompatModule;
-//? if =1.21.1 && neoforge
-import me.clefal.lootbeams.compat.multiversion_compat.MalumCompatModule;
-//?}
 //? if =1.21.1 {
 
 //?}
@@ -57,9 +54,7 @@ public class LootBeamsFabricModClientEvent {
                 TieredReforgedCompatModule.INSTANCE,
                 TieredZCompatModule.INSTANCE,
                 TrinketCompatModule.INSTANCE
-                //? if neoforge
-                ,MalumCompatModule.INSTANCE
-                //?}
+                //? }
                 //? if =1.20.1 {
                 /^TrinketCompatModule.INSTANCE,
                 ZenithCompatModule.INSTANCE,

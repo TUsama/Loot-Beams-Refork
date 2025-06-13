@@ -1,0 +1,9 @@
+{
+  "lootbeams.vanilla_rarity.common": "コモン",
+  "lootbeams.vanilla_rarity.uncommon": "アンコモン",
+  "lootbeams.vanilla_rarity.rare": "レア",
+  "lootbeams.vanilla_rarity.epic": "エピック",
+  "lootbeams.mod_rarity.non_soul": "魂なし",
+  "lootbeams.lightconfig.lighteffectfilter.whitelist_by_tag.desc": "フォーマットはデータパックのフォーマットと同じで、「#」で始まります。",
+  "lootbeams.light_config.lightEffectFilter.blacklist_by_tag.desc": "フォーマットはデータパックのフォーマットと同じで、「#」で始まります。"
+}

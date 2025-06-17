@@ -1,3 +1,6 @@
+### V3.2.4
+fix mixin crash on production build
+
 ### V3.2.3
 (all Fabric)fix versioned code
 

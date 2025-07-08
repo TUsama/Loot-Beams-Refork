@@ -1,3 +1,9 @@
+### V3.2.6
+(1.21.1 Neoforge) fix malum compat
+
+### V3.2.5
+(all 1.20.1)fix mixin crash on production build
+
 ### V3.2.4
 (all Fabric)fix mixin crash on production build
 

@@ -7,7 +7,7 @@ import com.clefal.nirvana_lib.relocated.net.neoforged.bus.api.SubscribeEvent;
 import com.clefal.nirvana_lib.utils.ModUtils;
 import com.sammy.malum.MalumMod;
 
-import com.sammy.malum.common.item.spirit.RitualShardItem;
+
 
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
@@ -17,9 +17,10 @@ import me.clefal.lootbeams.events.RegisterLBRarityEvent;
 import me.clefal.lootbeams.modules.ILBCompatModule;
 
 //? if 1.21.1 {
-import com.sammy.malum.common.data.component.RitualDataComponent;
 import com.sammy.malum.registry.common.item.MalumDataComponents;
-//?}
+//?} else {
+/*import com.sammy.malum.common.item.spirit.RitualShardItem;
+*///?}
 
 public class MalumCompatModule implements ILBCompatModule {
     public static final MalumCompatModule INSTANCE = new MalumCompatModule();
@@ -46,9 +47,9 @@ public class MalumCompatModule implements ILBCompatModule {
                         .map(x -> x.spirit)
                         *///?} else {
                         .flatMap(x -> {
-                            RitualDataComponent data = x.get(MalumDataComponents.RITUAL_DATA);
+                            var data = x.get(MalumDataComponents.SPIRIT_JAR_CONTENTS);
                             if (data != null) {
-                                return Option.some(data.ritualType().spirit);
+                                return Option.some(data.spirit());
                             }
                             return Option.none();
                         })

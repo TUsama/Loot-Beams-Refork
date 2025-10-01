@@ -55,6 +55,8 @@ public class LightConfig extends Config {
 
         public boolean require_on_ground = true;
 
+        public boolean allow_use_name_color_as_beam_color = true;
+
     }
 
     public static class Glow extends ConfigSection {

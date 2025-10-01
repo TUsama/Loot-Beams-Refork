@@ -42,7 +42,7 @@ public class LBItemEntityCache implements ILBModuleRenderCache<InternalLBItemEnt
     public BiConsumer<InternalLBItemEntityProvider, ItemEntity> getDataHandler() {
         return ((internalLbItemEntityProvider, itemEntity) -> {
             LBItemEntity lbItemEntity = InternalLBItemEntityProvider.getLBItemEntity(itemEntity);
-            //override by config
+            //override by config and name
             for (ModifyingConfigHandler handler : ConfigHandlers.INSTANCE.getHandlers()) {
                 lbItemEntity = handler.modify(lbItemEntity);
             }

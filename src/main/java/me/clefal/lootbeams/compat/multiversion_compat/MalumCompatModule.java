@@ -1,4 +1,4 @@
-//? if 1.20.1 || (1.21.1 && neoforge) {
+//? malum {
 package me.clefal.lootbeams.compat.multiversion_compat;
 
 import com.clefal.nirvana_lib.relocated.io.vavr.API;

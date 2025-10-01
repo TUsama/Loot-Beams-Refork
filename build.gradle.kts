@@ -1,6 +1,5 @@
 import deps.DependencyConfig
 import deps.Loaders
-import kotlin.text.uppercaseChar
 
 plugins {
     id("dev.isxander.modstitch.base") version "clefal-version"
@@ -181,7 +180,8 @@ stonecutter {
         "fabric" to constraint.equals("fabric"),
         "neoforge" to constraint.equals("neoforge"),
         "forge" to constraint.equals("forge"),
-        "vanilla" to constraint.equals("vanilla")
+        "vanilla" to constraint.equals("vanilla"),
+        "malum" to (constraint.equals("forge") || (constraint.equals("neoforge") && modstitch.minecraftVersion.equals("1.21.1"))),
     )
 }
 

@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
+import org.jetbrains.annotations.Contract;
 
 @Getter
 @Accessors(fluent = true)
@@ -30,6 +31,7 @@ public class LBItemEntity {
         return new LBItemEntity(item, rarity, false, 0);
     }
 
+    @Contract("_ -> new")
     public LBItemEntity to(LBRarity rarity) {
         return LBItemEntity.of(item, rarity);
     }

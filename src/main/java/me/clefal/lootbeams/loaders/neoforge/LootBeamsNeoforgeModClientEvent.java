@@ -45,9 +45,12 @@ public class LootBeamsNeoforgeModClientEvent {
                 AccessoriesCompatModule.INSTANCE,
                 ApotheosisCompatModule.INSTANCE,
                 TieredReforgedCompatModule.INSTANCE,
-                SubtleEffectCompatModule.INSTANCE,
-                MalumCompatModule.INSTANCE
+                SubtleEffectCompatModule.INSTANCE
+
                 //?}
+
+                //? malum
+                ,MalumCompatModule.INSTANCE
 
                 //? if =1.21.4 {
                 /*SubtleEffectCompatModule.INSTANCE

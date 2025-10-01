@@ -13,7 +13,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 
-val modv = "3.2.6"
+val modv = "3.2.7"
 
 
 val loader = when {
@@ -181,8 +181,9 @@ stonecutter {
         "neoforge" to constraint.equals("neoforge"),
         "forge" to constraint.equals("forge"),
         "vanilla" to constraint.equals("vanilla"),
-        "malum" to (constraint.equals("forge") || (constraint.equals("neoforge") && modstitch.minecraftVersion.equals("1.21.1"))),
+        "malum" to (modstitch.minecraftVersion.get() == "1.20.1" || (constraint.equals("neoforge") && modstitch.minecraftVersion.get() == "1.21.1")),
     )
+
 }
 
 tasks.named<Copy>("processResources") {

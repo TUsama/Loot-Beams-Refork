@@ -1,3 +1,6 @@
+### V3.2.7
+add a config that allows player to use item name color as beam color, when the beam can't find any color provided by internal providers. This can prevent the situations that the beam becomes fully invisible.
+
 ### V3.2.6
 (1.21.1 Neoforge) fix malum compat
 

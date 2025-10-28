@@ -1,3 +1,6 @@
+### V3.2.8
+downgrade forge(1.20.1 forge), upgrade nirvana lib
+
 ### V3.2.7
 add a config that allows player to use item name color as beam color, when the beam can't find any color provided by internal providers. This can prevent the situations that the beam becomes fully invisible.
 

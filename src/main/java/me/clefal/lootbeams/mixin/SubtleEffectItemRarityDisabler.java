@@ -1,6 +1,6 @@
 package me.clefal.lootbeams.mixin;
 
-import einstein.subtle_effects.tickers.entity_tickers.ItemRarityTicker;
+import einstein.subtle_effects.ticking.tickers.entity.ItemRarityTicker;
 
 //? if 1.20.1 {
 /*import me.clefal.lootbeams.compat.common_1_20_1.SubtleEffectCompatModule;

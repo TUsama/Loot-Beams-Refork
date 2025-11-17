@@ -3,9 +3,7 @@ package me.clefal.lootbeams.data.lbitementity.rarity;
 import net.minecraft.network.chat.TextColor;
 
 public class LBColor {
-    public
-
-    int argb;
+    public int argb;
 
     public LBColor(int argb) {
         this.argb = argb;

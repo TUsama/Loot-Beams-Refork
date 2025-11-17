@@ -1,6 +1,8 @@
 package me.clefal.lootbeams.data.lbitementity.rarity;
 
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.Rarity;
 
@@ -12,8 +14,13 @@ public record LBRarity(Component name, LBColor color, int absoluteOrdinal, Modif
     }
 
     public static LBRarity ofVanillaRarity(Rarity rarity){
-        Component translatable = Component.translatable(vanillaRarityKeFormat + rarity.name().toLowerCase());
-        return new LBRarity(translatable, LBColor.of(TextColor.fromLegacyFormat(rarity.color/*? !=1.20.1 {*/ () /*} else {*//*  *//*?}*/).getValue()), rarity.ordinal(), new ModifyContext(false));
+        Component name;
+        if (I18n.exists(vanillaRarityKeFormat + rarity.name().toLowerCase())) {
+            name = Component.translatable(vanillaRarityKeFormat + rarity.name().toLowerCase());
+        } else {
+            name = Component.literal(rarity.name().toLowerCase());
+        }
+        return new LBRarity(name, LBColor.of(rarity.getStyleModifier().apply(Style.EMPTY).getColor().getValue()), rarity.ordinal(), new ModifyContext(false));
     }
 
     public LBRarity modifyColor(LBColor color){

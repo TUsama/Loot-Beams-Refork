@@ -38,8 +38,8 @@ public class LootBeamsForgeModClientEvent {
                 SpartanWeaponryCompatModule.INSTANCE,
                 OrbOfCraftingCompatModule.INSTANCE,
                 TieredReforgedCompatModule.INSTANCE,
-                MalumCompatModule.INSTANCE,
-                BiomancyCompatModule.INSTANCE
+                MalumCompatModule.INSTANCE
+                //,BiomancyCompatModule.INSTANCE
         );
         ModulesManager.enableAll();
         ConfigHandlers.init();

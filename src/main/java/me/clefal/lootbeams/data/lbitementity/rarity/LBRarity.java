@@ -25,7 +25,7 @@ public record LBRarity(Component name, LBColor color, int absoluteOrdinal, Modif
                 //? !fabric {
                 rarity.getStyleModifier().apply(Style.EMPTY).getColor().getValue()
                 //?} else {
-                /*rarity.color.getColor()
+                /*grabColorWhenOnStupidFabric(rarity)
                 *///?}
 
         ), rarity.ordinal(), new ModifyContext(false));
@@ -35,5 +35,13 @@ public record LBRarity(Component name, LBColor color, int absoluteOrdinal, Modif
         return new LBRarity(name, color, absoluteOrdinal, new ModifyContext(true));
     }
 
-
+    //? fabric {
+    /*private static int grabColorWhenOnStupidFabric(Rarity rarity){
+        //? 1.20.1 {
+        /^return rarity.color.getColor();
+        ^///?} else {
+        return rarity.color().getColor();
+        //?}
+    }
+    *///?}
 }

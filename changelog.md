@@ -1,3 +1,6 @@
+### V3.2.9
+fix compat with Subtle Effect and Biomancy
+
 ### V3.2.8
 downgrade forge(1.20.1 forge), upgrade nirvana lib
 

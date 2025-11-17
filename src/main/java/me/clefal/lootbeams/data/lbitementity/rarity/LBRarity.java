@@ -20,7 +20,15 @@ public record LBRarity(Component name, LBColor color, int absoluteOrdinal, Modif
         } else {
             name = Component.literal(rarity.name().toLowerCase());
         }
-        return new LBRarity(name, LBColor.of(rarity.getStyleModifier().apply(Style.EMPTY).getColor().getValue()), rarity.ordinal(), new ModifyContext(false));
+        return new LBRarity(name, LBColor.of(
+                //this is so horrible
+                //? !fabric {
+                rarity.getStyleModifier().apply(Style.EMPTY).getColor().getValue()
+                //?} else {
+                /*rarity.color.getColor()
+                *///?}
+
+        ), rarity.ordinal(), new ModifyContext(false));
     }
 
     public LBRarity modifyColor(LBColor color){

@@ -22,7 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
@@ -37,7 +37,7 @@ public class LootBeamsNeoforgeModClientEvent {
 
 
     @SubscribeEvent
-    public static void registerModules(FMLClientSetupEvent event) {
+    public static void registerModules(FMLLoadCompleteEvent event) {
         LootBeamsConstants.LOGGER.info("register all modules");
         ModulesManager.registerModules(
                 //? if =1.21.1 {

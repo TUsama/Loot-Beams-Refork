@@ -6,7 +6,7 @@ object NeoForgeDeps {
             when (minecraft){
                 "1.21.1" -> {
                     val enableApotheosis = false
-                    val enableMalum = false
+                    val enableMalum = true
 
                     modstitchModCompileOnly ("curse.maven:adorned-1036809:5740650")
                     modstitchModCompileOnly ("curse.maven:accessories-938917:5727153")
@@ -31,8 +31,8 @@ object NeoForgeDeps {
 
 
                     if (enableMalum){
-                        modstitchModImplementation ("curse.maven:lodestone-616457:6630047")
-                        modstitchModImplementation ("curse.maven:malum-484064:6655805")
+                        modstitchModImplementation ("curse.maven:lodestone-616457:7251636")
+                        modstitchModImplementation ("curse.maven:malum-484064:7250754")
                     } else{
                         modstitchModCompileOnly ("curse.maven:malum-484064:6655805")
                     }

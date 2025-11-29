@@ -16,6 +16,7 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 @Mod.EventBusSubscriber(modid = LootBeamsConstants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class LootBeamsForgeModClientEvent {
@@ -28,7 +29,7 @@ public class LootBeamsForgeModClientEvent {
 
 
     @SubscribeEvent
-    public static void registerModules(FMLClientSetupEvent event) {
+    public static void registerModules(FMLLoadCompleteEvent event) {
         LootBeamsConstants.LOGGER.info("register all modules");
         ModulesManager.registerModules(
                 new ApotheosisCompatModule(),

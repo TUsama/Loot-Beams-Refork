@@ -1,3 +1,6 @@
+### V3.2.10
+delay init time, fix a crash with Malum
+
 ### V3.2.9
 fix compat with Subtle Effect and Biomancy
 

@@ -34,6 +34,7 @@ modstitch {
         "1.20.1" -> 17
         "1.21.1" -> 21
         "1.21.4" -> 21
+        "1.21.8", "1.21.10", "1.21.11" -> 21
         else -> throw IllegalArgumentException("Please store the java version for $minecraft in build.gradle.kts!")
     }
 
@@ -70,6 +71,9 @@ modstitch {
                     "1.20.1" -> 15
                     "1.21.1" -> 34
                     "1.21.4" -> 46
+                    "1.21.8" -> 64
+                    "1.21.10" -> 69
+                    "1.21.11" -> 70.0
                     else -> throw IllegalArgumentException("Please store the resource pack version for ${property("deps.minecraft")} in build.gradle.kts! https://minecraft.wiki/w/Pack_format")
                 }.toString()
             )
@@ -214,24 +218,36 @@ dependencies {
     val fzzyMinecraftVersion = when (minecraft) {
         "1.21.1" -> "1.21"
         "1.21.4" -> "1.21.3"
+        "1.21.8" -> "1.21.6"
+        "1.21.10" -> "1.21.9"
         else -> minecraft
     }
+    var fzzyString : String = "";
     val libVersion = property("deps.lib_version") as String
     //fzzy
     modstitch.loom {
         val fabricApi = property("deps.fabric_api") as String
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${fabricApi}+${minecraft}")
-        modstitchModImplementation("me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}")
-    }
-    modstitch.moddevgradle {
+        fzzyString = "me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}";
 
-        if (modstitch.isModDevGradleLegacy) {
-            modstitchModImplementation("me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}+forge")
+    }
+
+    modstitch.moddevgradle {
+        if (modstitch.isModDevGradleLegacy){
+            fzzyString = "me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}+forge";
         } else {
-            modstitchModImplementation(("me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}+neoforge"))
+            if (minecraft == "1.21.8"){
+                fzzyString = "me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+1.21.7+neoforge";
+            } else {
+                fzzyString = "me.fzzyhmstrs:fzzy_config:${fzzyConfigVersion}+${fzzyMinecraftVersion}+neoforge"
+            }
+
         }
 
     }
+
+    modstitchModCompileOnly(fzzyString)
+    modstitchModRuntimeOnly(fzzyString)
 
     modstitchModImplementation("maven.modrinth:nirvana-library:${loader}-${minecraft}-${libVersion}")
     modstitchModRuntimeOnly("maven.modrinth:common-network:${property("deps.common_network")}")
@@ -241,11 +257,11 @@ dependencies {
         dependencies.add(dep.configuration, dep.notation, dep.options)
     }
     //lombok
-    modstitchCompileOnly("org.projectlombok:lombok:1.18.34")
-    annotationProcessor("org.projectlombok:lombok:1.18.34")
+    modstitchCompileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
 
-    testCompileOnly("org.projectlombok:lombok:1.18.34")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
+    testCompileOnly("org.projectlombok:lombok:1.18.38")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
 
 
 

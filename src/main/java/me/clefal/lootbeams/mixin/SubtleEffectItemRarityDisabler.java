@@ -1,3 +1,4 @@
+//? <= 1.21.4 {
 package me.clefal.lootbeams.mixin;
 
 
@@ -33,3 +34,4 @@ public class SubtleEffectItemRarityDisabler {
         if (SubtleEffectCompatModule.isEnabled && SubtleEffectCompatModule.getConfig().forceDisableItemRarity) ci.cancel();
     }
 }
+//?}

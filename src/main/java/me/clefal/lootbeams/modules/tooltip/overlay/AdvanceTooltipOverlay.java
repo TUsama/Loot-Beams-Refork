@@ -111,13 +111,20 @@ public class AdvanceTooltipOverlay {
         Vector2f vector2f = this.transformToScreenCoordinate(itemEntity.position().toVector3f(), tracker.getGameTimeDeltaTicks());
 
         if (checkCrouch()) {
+            //? <1.21.8 {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, itemEntity.getItem(), (int) vector2f.x, (int) vector2f.y);
+        //?} else {
+            /*guiGraphics.setTooltipForNextFrame(Minecraft.getInstance().font, itemEntity.getItem(), (int) vector2f.x, (int) vector2f.y);
+        *///?}
         } else {
             TooltipsGatherNameAndRarityEvent tooltipsGatherNameAndRarityEvent = new TooltipsGatherNameAndRarityEvent(ask);
             LootBeamsConstants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
             List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
-
+//? < 1.21.8 {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, nameAndRarity, itemEntity.getItem().getTooltipImage(), (int) vector2f.x, (int) vector2f.y);
+//?} else {
+            /*guiGraphics.setTooltipForNextFrame(Minecraft.getInstance().font, nameAndRarity, itemEntity.getItem().getTooltipImage(), (int) vector2f.x, (int) vector2f.y);
+            *///?}
         }
 
     }

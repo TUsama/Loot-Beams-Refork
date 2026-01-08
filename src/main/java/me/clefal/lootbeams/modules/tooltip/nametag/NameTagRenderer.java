@@ -38,7 +38,11 @@ public class NameTagRenderer {
             stack.pushPose();
             //Render nametags at heights based on player distance
             stack.translate(0.0D, Math.min(1D, Minecraft.getInstance().player.distanceToSqr(item) * 0.025D) + yOffset, 0.0D);
+            //? < 1.21.10 {
             stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+            //? } else {
+            /*stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation());
+            *///? }
             //? if > 1.20.1
             stack.mulPose(Axis.YP.rotationDegrees(180));
 

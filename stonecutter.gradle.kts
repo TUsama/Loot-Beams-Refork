@@ -3,15 +3,6 @@ plugins {
 }
 stonecutter active "1.21.1-neoforge"
 
-stonecutter registerChiseled tasks.register("chiseledBuild", stonecutter.chiseled) { 
-    group = "project"
-    ofTask("build")
-}
-
-stonecutter registerChiseled tasks.register("chiseledBuildAndCollect", stonecutter.chiseled) {
-    group = "project"
-    ofTask("buildAndCollect")
-}
 
 allprojects {
     repositories {

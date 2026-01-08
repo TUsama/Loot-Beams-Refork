@@ -30,7 +30,7 @@ modstitch {
 
     // Alternatively use stonecutter.eval if you have a lot of versions to target.
     // https://stonecutter.kikugie.dev/stonecutter/guide/setup#checking-versions
-    javaTarget = when (minecraft) {
+    javaVersion = when (minecraft) {
         "1.20.1" -> 17
         "1.21.1" -> 21
         "1.21.4" -> 21
@@ -59,7 +59,7 @@ modstitch {
         modDescription =
             "Loot items, guided by light!"
         modLicense = "MIT"
-        fun <K, V> MapProperty<K, V>.populate(block: MapProperty<K, V>.() -> Unit) {
+        fun <K : Any, V : Any> MapProperty<K, V>.populate(block: MapProperty<K, V>.() -> Unit) {
             block()
         }
         replacementProperties.populate {
@@ -115,19 +115,19 @@ modstitch {
 
     // ModDevGradle (NeoForge, Forge, Forgelike)
     moddevgradle {
-        enable {
-            prop("deps.forge") { forgeVersion = it }
-            prop("deps.neoform") { neoFormVersion = it }
-            prop("deps.neoforge") { neoForgeVersion = it }
-            prop("deps.mcp") { mcpVersion = it }
-        }
+
+        prop("deps.forge") { forgeVersion = it }
+        prop("deps.neoform") { neoFormVersion = it }
+        prop("deps.neoforge") { neoForgeVersion = it }
+        prop("deps.mcp") { mcpVersion = it }
+
 
         // Configures client and server runs for MDG, it is not done by default
         defaultRuns()
 
         // This block configures the `neoforge` extension that MDG exposes by default,
         // you can configure MDG like normal from here
-        configureNeoforge {
+        configureNeoForge {
             //setAccessTransformers("../../src/main/resources/META-INF/accesstransformer.cfg")
             validateAccessTransformers = false
 
@@ -148,7 +148,6 @@ modstitch {
                 //jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
                 //gameDirectory = file("run")
             }
-            runOnJBR(project)
             //runOnJBR()
         }
     }
@@ -160,7 +159,8 @@ modstitch {
         when {
             isModDevGradleLegacy -> configs.register("${mid}-1.20.1")
             minecraft == "1.21.1" -> configs.register("${mid}-1.21")
-            else -> configs.register("${mid}-1.21.4")
+            minecraft == "1.21.4" -> configs.register("${mid}-1.21.4")
+            else -> configs.register("${mid}-default")
         }
 
 
@@ -178,15 +178,16 @@ base {
 
 // Stonecutter constants for mod loaders.
 // See https://stonecutter.kikugie.dev/stonecutter/guide/comments#condition-constants
-var constraint: String = name.split("-")[1]
 stonecutter {
-    consts(
-        "fabric" to constraint.equals("fabric"),
-        "neoforge" to constraint.equals("neoforge"),
-        "forge" to constraint.equals("forge"),
-        "vanilla" to constraint.equals("vanilla"),
-        "malum" to (modstitch.minecraftVersion.get() == "1.20.1" || (constraint.equals("neoforge") && modstitch.minecraftVersion.get() == "1.21.1")),
-    )
+    constants.putAll(mapOf<String, Boolean>(
+        "fabric" to loader.equals("fabric"),
+        "neoforge" to loader.equals("neoforge"),
+        "forge" to loader.equals("forge"),
+        "vanilla" to loader.equals("vanilla"),
+        "legacy" to (minecraft == "1.20.1"),
+        "malum" to (modstitch.minecraftVersion.get() == "1.20.1" || (loader.equals("neoforge") && modstitch.minecraftVersion.get() == "1.21.1"))
+
+    ))
 
 }
 
@@ -195,12 +196,6 @@ tasks.named<Copy>("processResources") {
 }
 
 
-tasks.register<Copy>("buildAndCollect") {
-    dependsOn("build")
-    group = "build"
-    from(modstitch.finalJarTask.map { it.archiveFile }.get())
-    into(rootProject.layout.buildDirectory.file("libs/${modv}"))
-}
 
 
 // All dependencies should be specified through modstitch's proxy configuration.

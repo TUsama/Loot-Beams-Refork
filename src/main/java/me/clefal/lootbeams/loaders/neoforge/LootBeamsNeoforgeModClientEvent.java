@@ -26,7 +26,10 @@ import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-@EventBusSubscriber(modid = LootBeamsConstants.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = LootBeamsConstants.MODID,
+        //? < 1.21.8
+        bus = EventBusSubscriber.Bus.MOD,
+        value = Dist.CLIENT)
 public class LootBeamsNeoforgeModClientEvent {
 
 

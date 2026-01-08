@@ -1,5 +1,6 @@
 package me.clefal.lootbeams.modules;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.config.configs.LightConfig;
 import me.clefal.lootbeams.config.configs.LootInfomationConfig;
@@ -12,8 +13,11 @@ import me.clefal.lootbeams.modules.beam.LightConfigHandler;
 import me.clefal.lootbeams.modules.tooltip.LootInformationEnableStatus;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class Hooker {
@@ -47,6 +51,17 @@ public class Hooker {
             if (OnGroundCondition) lbItemEntity1.rejectThis();
         }
     }
+    public static <E extends Entity, S extends EntityRenderState> void lootBeamEntityDispatcherHookWithOffset(E entity, double offsetX, double offsetY, double offsetZ, float entityYRot, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int light, EntityRenderer<? super E, S> renderer, CallbackInfo ci, @Local S s){
+        Vec3 vec3 = renderer.getRenderOffset(s);
+        double d3 = offsetX + vec3.x();
+        double d0 = offsetY + vec3.y();
+        double d1 = offsetZ + vec3.z();
+        poseStack.pushPose();
+        poseStack.translate(d3, d0, d1);
+        lootBeamEntityDispatcherHook(entity, d3, d0, d1, entityYRot, partialTicks, poseStack, buffers, light, ci);
+        poseStack.popPose();
+    }
+
 
     private static void renderLootInformation(double worldX, double worldY, double worldZ, float entityYRot, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int light, LBItemEntity lbItemEntity1) {
         var tooltipsConfig = LootInfomationConfig.lootInfomationConfig.lootInformationControl.loot_information_status;

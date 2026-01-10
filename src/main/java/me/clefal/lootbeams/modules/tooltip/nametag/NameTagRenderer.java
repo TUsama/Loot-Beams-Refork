@@ -4,6 +4,7 @@ import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.config.configs.LootInfomationConfig;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
+import me.clefal.lootbeams.data.new_render.LootBeamRenderState;
 import me.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -22,14 +23,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NameTagRenderer {
+    public static void renderNameTag(PoseStack stack, MultiBufferSource buffer, LBItemEntity LBItemEntity){
+        renderNameTag(buffer, LootBeamRenderState.NameTagRenderState.fromLBEntity(LBItemEntity, stack.last().copy()));
+    }
 
-    public static void renderNameTag(PoseStack stack, MultiBufferSource buffer, LBItemEntity LBItemEntity) {
-        ItemEntity item = LBItemEntity.item();
+    public static void renderNameTag(MultiBufferSource buffer, LootBeamRenderState.NameTagRenderState renderState) {
         LootInfomationConfig.nameTagSection nameTagSection = LootInfomationConfig.lootInfomationConfig.nameTag;
-
+        PoseStack.Pose pose = renderState.poseStack;
+        PoseStack stack = new PoseStack();
+        stack.last().pose().set(pose.pose());
+        stack.last().normal().set(pose.normal());
         //If player is crouching or looking at the item
-        if (Minecraft.getInstance().player.isCrouching() || ((nameTagSection.render_name_tag_on_look && isLookingAt(Minecraft.getInstance().player, item, nameTagSection.name_tag_look_sensitivity.get())))) {
-            LBColor color = LBItemEntity.rarity().color();
+        if (Minecraft.getInstance().player.isCrouching() || ((nameTagSection.render_name_tag_on_look && renderState.isLookingAtThis))) {
+            LBColor color = renderState.rarity.color();
             float foregroundAlpha = nameTagSection.name_tag_text_alpha.get();
             float backgroundAlpha = nameTagSection.name_tag_background_alpha.get();
             double yOffset = nameTagSection.name_tag_y_offset.get();
@@ -37,7 +43,7 @@ public class NameTagRenderer {
             int backgroundColor = color.changeA(((int) (foregroundAlpha * 255))).argb();
             stack.pushPose();
             //Render nametags at heights based on player distance
-            stack.translate(0.0D, Math.min(1D, Minecraft.getInstance().player.distanceToSqr(item) * 0.025D) + yOffset, 0.0D);
+            stack.translate(0.0D, Math.min(1D, Minecraft.getInstance().player.distanceToSqr(renderState.location) * 0.025D) + yOffset, 0.0D);
             //? < 1.21.10 {
             stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
             //? } else {
@@ -50,11 +56,8 @@ public class NameTagRenderer {
             stack.scale(-0.02F * nametagScale, -0.02F * nametagScale, 0.02F * nametagScale);
 
             //Render stack counts on nametag
+            List<Component> nameAndRarity = renderState.nameAndRarity;
             Font fontrenderer = Minecraft.getInstance().font;
-            TooltipsGatherNameAndRarityEvent tooltipsGatherNameAndRarityEvent = new TooltipsGatherNameAndRarityEvent(LBItemEntity);
-            LootBeamsConstants.EVENT_BUS.post(tooltipsGatherNameAndRarityEvent);
-            List<Component> nameAndRarity = new ArrayList<>(tooltipsGatherNameAndRarityEvent.gather.values());
-
             stack.translate(0, 2, -10);
 
             for (Component c : nameAndRarity) {
@@ -87,14 +90,5 @@ public class NameTagRenderer {
     }
 
 
-    /**
-     * Checks if the player is looking at the given entity, accuracy determines how close the player has to look.
-     */
-    public static boolean isLookingAt(LocalPlayer player, Entity target, double accuracy) {
-        Vec3 difference = new Vec3(target.getX() - player.getX(), target.getEyeY() - player.getEyeY(), target.getZ() - player.getZ());
-        double length = difference.length();
-//        double dot = player.getViewVector(1.0F).normalize().dot(difference.normalize());
-        double dot = Minecraft.getInstance().getCameraEntity().getLookAngle().normalize().dot(difference.normalize());
-        return dot > 1.0D - accuracy / length && !target.isInvisible();
-    }
+
 }

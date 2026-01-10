@@ -3,6 +3,7 @@ package me.clefal.lootbeams.modules.beam;
 import me.clefal.lootbeams.config.configs.LightConfig;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
+import me.clefal.lootbeams.data.new_render.LootBeamRenderState;
 import me.clefal.lootbeams.modules.dynamicprovider.DynamicProvider;
 import me.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,26 +14,32 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.entity.item.ItemEntity;
-import org.joml.Matrix3f;
+import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class BeamRenderer {
 
+    public static void renderLootBeam(PoseStack stack, MultiBufferSource buffer, float partialTick, LBItemEntity LBItemEntity){
+        renderLootBeam(buffer, LootBeamRenderState.BeamRenderState.fromLBEntity(LBItemEntity, stack.last().copy(), partialTick));
+    }
+
+    public static void renderLootBeam(MultiBufferSource buffer, LootBeamRenderState.BeamRenderState renderState) {
+        LBColor color = renderState.rarity.color();
+        int lifeTime = renderState.fadeIn;
+
+        PoseStack.Pose pose = renderState.poseStack;
+        PoseStack stack = new PoseStack();
+        stack.last().pose().set(pose.pose());
+        stack.last().normal().set(pose.normal());
 
 
-    public static void renderLootBeam(PoseStack stack, MultiBufferSource buffer, float partialTick, LBItemEntity LBItemEntity) {
-        ItemEntity itemEntity = LBItemEntity.item();
-        LBColor color = LBItemEntity.rarity().color();
-        int lifeTime = LBItemEntity.fadeIn();
 
         LightConfig.Beam beamConfig = LightConfig.lightConfig.beam;
         LightConfig.Glow glowConfig = LightConfig.lightConfig.glow;
-
         int fadeInTime = beamConfig.beam_fade_in_time.get();
+
         var fadeInFactor = 1.0f * lifeTime / fadeInTime;
-        int argb = color.argb();
         int R = color.red();
         int G = color.green();
         int B = color.blue();
@@ -40,7 +47,7 @@ public class BeamRenderer {
         float preBeamAlpha = beamConfig.beam_alpha.get();
 
         LocalPlayer player = Minecraft.getInstance().player;
-        double distance = player.distanceTo(itemEntity);
+        double distance = Mth.sqrt((float) player.distanceToSqr(renderState.location));
         float fadeDistance = beamConfig.beam_fade_in_distance.get();
         //Clefal: we don't actually need that much beamAlpha gimmick.
         //We should never cancel the beam, just make it hard to see.
@@ -55,7 +62,7 @@ public class BeamRenderer {
         float beamHeight = beamConfig.beam_height.get();
         float yOffset = beamConfig.beam_y_offset.get();
         if (beamConfig.common_shorter_beam) {
-            if (LBItemEntity.isCommon()) {
+            if (renderState.rarity.absoluteOrdinal() <= 0) {
                 beamHeight *= 0.65f;
                 yOffset -= yOffset;
             }
@@ -71,9 +78,11 @@ public class BeamRenderer {
         }
 
         beamAlpha *= fadeInFactor;
-        Vector3f playerPos = player.getPosition(partialTick).toVector3f();
-        Vector3f targetPos = itemEntity.getPosition(partialTick).toVector3f();
-        Vector3f direction = targetPos.sub(playerPos).normalize();
+        beamHeight *= fadeInFactor;
+        Vector3f playerPos = player.getPosition(renderState.partialTick).toVector3f();
+        Vector3f targetPos = renderState.location.toVector3f();
+        Vector3f sub = targetPos.sub(playerPos);
+        Vector3f direction = sub.normalize();
         double v = Math.atan2(direction.x(), direction.z());
 
         stack.pushPose();
@@ -140,7 +149,7 @@ public class BeamRenderer {
 
         {
 
-            if (glowConfig.enable_glow && itemEntity.onGround()) {
+            if (glowConfig.enable_glow && renderState.onGround) {
 
                 stack.pushPose();
                 stack.translate(0, 0.01, 0);
@@ -149,9 +158,6 @@ public class BeamRenderer {
                 stack.popPose();
             }
 
-        }
-        if (lifeTime < fadeInTime) {
-            LBItemEntity.updateFade();
         }
 
     }

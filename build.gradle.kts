@@ -160,6 +160,7 @@ modstitch {
             isModDevGradleLegacy -> configs.register("${mid}-1.20.1")
             minecraft == "1.21.1" -> configs.register("${mid}-1.21")
             minecraft == "1.21.4" -> configs.register("${mid}-1.21.4")
+            minecraft == "1.21.10" -> configs.register("${mid}-1.21.10")
             else -> configs.register("${mid}-default")
         }
 

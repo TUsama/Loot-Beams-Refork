@@ -2,6 +2,8 @@ package me.clefal.lootbeams.modules.tooltip;
 
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.config.configs.LootInfomationConfig;
+import me.clefal.lootbeams.data.new_render.LootBeamRenderState;
+import me.clefal.lootbeams.duck.LootBeamRenderStateSubmitter;
 import me.clefal.lootbeams.events.EntityRenderDispatcherHookEvent;
 import me.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import me.clefal.lootbeams.modules.ILBModule;
@@ -32,7 +34,14 @@ public class TooltipsModule implements ILBModule {
     public void renderNameTag(EntityRenderDispatcherHookEvent.RenderLBTooltipsEvent event) {
         if (LootInfomationConfig.lootInfomationConfig.lootInformationControl.loot_information_status == LootInformationEnableStatus.LootInformationStatus.NAME_AND_RARITY_IN_TOOLTIPS)
             return;
-        NameTagRenderer.renderNameTag(event.poseStack, event.buffers, event.LBItemEntity);
+        //? <1.21.10 {
+        NameTagRenderer.renderNameTag(event.poseStack, event.holder.get(), event.LBItemEntity);
+        //? } else {
+        /*LootBeamRenderStateSubmitter lootBeamRenderStateSubmitter = (LootBeamRenderStateSubmitter) event.holder.get();
+        lootBeamRenderStateSubmitter.loot_Beams_Refork$submitNameTag(LootBeamRenderState.NameTagRenderState.fromLBEntity(event.LBItemEntity, event.poseStack.last().copy()));
+        *///? }
+
+
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

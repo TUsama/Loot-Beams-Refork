@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.clefal.lootbeams.mixin",
+  "refmap": "lootbeams.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "refactor.FeatureRenderDispatcherMixin",
+    "refactor.LevelRendererMixin",
+    "refactor.SubmitNodeCollectionMixin",
+    "refactor.SubmitNodeStorageMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

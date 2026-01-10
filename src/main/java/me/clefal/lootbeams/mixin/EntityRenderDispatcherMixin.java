@@ -1,13 +1,14 @@
 package me.clefal.lootbeams.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import me.clefal.lootbeams.modules.Holder;
 import me.clefal.lootbeams.modules.Hooker;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-//? if =1.21.4
-/*import net.minecraft.client.renderer.entity.state.EntityRenderState;*/
+//? if >=1.21.4
+//import net.minecraft.client.renderer.entity.state.EntityRenderState;
 
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -46,7 +47,7 @@ public abstract class EntityRenderDispatcherMixin {
             EntityRenderer<? super Entity, EntityRenderState> renderer,
             CallbackInfo ci
     ) {
-        Hooker.lootBeamEntityDispatcherHook(entity, xOffset, yOffset, zOffset, 0.0f, partialTick, poseStack, bufferSource, packedLight, ci);
+        Hooker.lootBeamEntityDispatcherHook(entity, xOffset, yOffset, zOffset, 0.0f, partialTick, poseStack, new Holder(bufferSource), packedLight, ci);
     }
     *///?}
     //? if <1.21.4 {
@@ -63,7 +64,7 @@ public abstract class EntityRenderDispatcherMixin {
     )
 
     private void lootBeamHook(Entity entity, double worldX, double worldY, double worldZ, float entityYRot, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int light, CallbackInfo ci) {
-        Hooker.lootBeamEntityDispatcherHook(entity, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, buffers, light, ci);
+        Hooker.lootBeamEntityDispatcherHook(entity, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, new Holder(buffers), light, ci);
 
 
     }
@@ -80,7 +81,7 @@ public abstract class EntityRenderDispatcherMixin {
     public void render(
             Entity entity, double xOffset, double yOffset, double zOffset, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, EntityRenderer<? super Entity, EntityRenderState> renderer, CallbackInfo ci, @Local EntityRenderState s
     ) {
-        Hooker.lootBeamEntityDispatcherHookWithOffset(entity, xOffset, yOffset, zOffset, 0.0f, partialTick, poseStack, bufferSource, packedLight, renderer, ci, s);
+        Hooker.lootBeamEntityDispatcherHookWithOffset(entity, xOffset, yOffset, zOffset, 0.0f, partialTick, poseStack, new Holder(bufferSource), packedLight, renderer, ci, s);
     }
     *///?}
 }

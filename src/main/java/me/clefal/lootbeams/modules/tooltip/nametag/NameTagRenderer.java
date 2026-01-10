@@ -5,6 +5,7 @@ import me.clefal.lootbeams.config.configs.LootInfomationConfig;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
 import me.clefal.lootbeams.data.new_render.LootBeamRenderState;
+import me.clefal.lootbeams.duck.PoseCopy;
 import me.clefal.lootbeams.events.TooltipsGatherNameAndRarityEvent;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -24,7 +25,8 @@ import java.util.List;
 
 public class NameTagRenderer {
     public static void renderNameTag(PoseStack stack, MultiBufferSource buffer, LBItemEntity LBItemEntity){
-        renderNameTag(buffer, LootBeamRenderState.NameTagRenderState.fromLBEntity(LBItemEntity, stack.last().copy()));
+        PoseCopy last = (PoseCopy) ((Object) stack.last());
+        renderNameTag(buffer, LootBeamRenderState.NameTagRenderState.fromLBEntity(LBItemEntity, last.copy()));
     }
 
     public static void renderNameTag(MultiBufferSource buffer, LootBeamRenderState.NameTagRenderState renderState) {

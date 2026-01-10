@@ -4,6 +4,7 @@ import me.clefal.lootbeams.config.configs.LightConfig;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
 import me.clefal.lootbeams.data.new_render.LootBeamRenderState;
+import me.clefal.lootbeams.duck.PoseCopy;
 import me.clefal.lootbeams.modules.dynamicprovider.DynamicProvider;
 import me.clefal.lootbeams.modules.dynamicprovider.DynamicProviderModule;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,13 +16,15 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
+import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class BeamRenderer {
 
     public static void renderLootBeam(PoseStack stack, MultiBufferSource buffer, float partialTick, LBItemEntity LBItemEntity){
-        renderLootBeam(buffer, LootBeamRenderState.BeamRenderState.fromLBEntity(LBItemEntity, stack.last().copy(), partialTick));
+        PoseCopy last = (PoseCopy) ((Object) stack.last());
+        renderLootBeam(buffer, LootBeamRenderState.BeamRenderState.fromLBEntity(LBItemEntity, last.copy(), partialTick));
     }
 
     public static void renderLootBeam(MultiBufferSource buffer, LootBeamRenderState.BeamRenderState renderState) {

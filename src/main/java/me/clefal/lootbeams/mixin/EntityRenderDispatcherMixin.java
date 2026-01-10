@@ -1,6 +1,7 @@
 package me.clefal.lootbeams.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
+//? if =1.21.8
+//import com.llamalad7.mixinextras.sugar.Local;
 import me.clefal.lootbeams.modules.Holder;
 import me.clefal.lootbeams.modules.Hooker;
 import com.mojang.blaze3d.vertex.PoseStack;

@@ -186,8 +186,8 @@ stonecutter {
         "forge" to loader.equals("forge"),
         "vanilla" to loader.equals("vanilla"),
         "legacy" to (minecraft == "1.20.1"),
-        "malum" to (modstitch.minecraftVersion.get() == "1.20.1" || (loader.equals("neoforge") && modstitch.minecraftVersion.get() == "1.21.1"))
-
+        "malum" to (modstitch.minecraftVersion.get() == "1.20.1" || (loader.equals("neoforge") && modstitch.minecraftVersion.get() == "1.21.1")),
+        "biomancy" to (loader.equals("forge") && (minecraft == "1.20.1"))
     ))
 
 }
@@ -220,6 +220,17 @@ dependencies {
     }
     var fzzyString : String = "";
     val libVersion = property("deps.lib_version") as String
+    fun Dependency?.jij() = this?.also(::modstitchJiJ)
+    fun String.implementation() = if (modstitch.isModDevGradleLegacy){
+        add("modImplementation", this)
+    } else {
+        modstitchModImplementation(this)
+    }
+    fun String.runtimeOnly() = if (modstitch.isModDevGradleLegacy) {
+        add("modRuntimeOnly", this)
+    } else {
+        modstitchModRuntimeOnly(this)
+    }
     //fzzy
     modstitch.loom {
         val fabricApi = property("deps.fabric_api") as String
@@ -243,13 +254,12 @@ dependencies {
     }
 
     modstitchModCompileOnly(fzzyString)
-    modstitchModRuntimeOnly(fzzyString)
+    (fzzyString).runtimeOnly()
 
-    modstitchModImplementation("maven.modrinth:nirvana-library:${loader}-${minecraft}-${libVersion}")
-    modstitchModRuntimeOnly("maven.modrinth:common-network:${property("deps.common_network")}")
+    ("maven.modrinth:nirvana-library:${loader}-${minecraft}-${libVersion}").implementation()
+    ("maven.modrinth:common-network:${property("deps.common_network")}").runtimeOnly()
     //loader-specified deps
     DependencyConfig.getDependencies(loaderEnum, minecraft).forEach { dep ->
-
         dependencies.add(dep.configuration, dep.notation, dep.options)
     }
     //lombok

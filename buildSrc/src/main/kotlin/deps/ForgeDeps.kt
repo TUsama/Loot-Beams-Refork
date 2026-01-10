@@ -14,7 +14,7 @@ object ForgeDeps {
             modstitchModCompileOnly ("curse.maven:library-of-exile-398780:6107923")
             modstitchModCompileOnly ("curse.maven:mine-and-slash-reloaded-306575:6107937")
             modstitchModCompileOnly ("curse.maven:orbs-of-crafting-1182250:6107927")
-            modstitchModRuntimeOnly ("curse.maven:playeranimator-658587:4587214")
+            modstitchLegacyModRuntimeOnly ("curse.maven:playeranimator-658587:4587214")
 
             modstitchModCompileOnly ("curse.maven:legendary-tooltips-532127:4662781")
             /*modstitchModRuntimeOnly ("curse.maven:prism-lib-638111:4650325")
@@ -24,9 +24,9 @@ object ForgeDeps {
 
             modstitchModCompileOnly ("curse.maven:spartan-weaponry-278141:5597663")
 
-            modstitchModImplementation("thedarkcolour:kotlinforforge:4.11.0")
+            modstitchLegacyModImplementation("thedarkcolour:kotlinforforge:4.11.0")
 
-            modstitchModRuntimeOnly ("top.theillusivec4.curios:curios-forge:5.14.1+1.20.1")
+            modstitchLegacyModRuntimeOnly ("top.theillusivec4.curios:curios-forge:5.14.1+1.20.1")
             modstitchModCompileOnly ("top.theillusivec4.curios:curios-forge:5.14.1+1.20.1:api")
 /*
             modstitchModRuntimeOnly ("curse.maven:balkons-weaponmod-legacy-1033985:5853414")
@@ -37,16 +37,30 @@ object ForgeDeps {
             modstitchModCompileOnly ("curse.maven:tiered-forge-453889:6549635")
             modstitchModCompileOnly ("curse.maven:unionlib-367806:6585053")
 
-            modstitchModImplementation ("curse.maven:ldlib-626676:6337779")
-            modstitchModImplementation ("curse.maven:photon-871522:6373238")
+            modstitchLegacyModImplementation ("curse.maven:ldlib-626676:6337779")
+            modstitchLegacyModImplementation ("curse.maven:photon-871522:6373238")
 
-            modstitchModImplementation ("maven.modrinth:subtle-effects:y1lCS0Hd")
+            modstitchLegacyModImplementation ("maven.modrinth:subtle-effects:y1lCS0Hd")
 
-            modstitchModImplementation("curse.maven:malum-484064:6213791")
-            modstitchModImplementation("curse.maven:lodestone-616457:6213794")
+            val enableMalum = false
+            val enableBio =false
+            if (enableMalum){
+                modstitchLegacyModImplementation("curse.maven:malum-484064:6213791")
+                modstitchLegacyModImplementation("curse.maven:lodestone-616457:6213794")
+            } else {
+                modstitchModCompileOnly("curse.maven:malum-484064:6213791")
+                modstitchModCompileOnly("curse.maven:lodestone-616457:6213794")
+            }
 
-            modstitchModImplementation ("maven.modrinth:biomancy:2.8.19.0")
-            modstitchModImplementation ("maven.modrinth:geckolib:g4k8xf2k")
+
+            if (enableBio){
+                modstitchLegacyModImplementation ("maven.modrinth:biomancy:2.8.19.0")
+                modstitchLegacyModImplementation ("maven.modrinth:geckolib:g4k8xf2k")
+            } else {
+                modstitchModCompileOnly ("maven.modrinth:biomancy:2.8.19.0")
+                modstitchModCompileOnly ("maven.modrinth:geckolib:g4k8xf2k")
+            }
+
         }
     }
 }

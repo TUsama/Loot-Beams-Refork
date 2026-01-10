@@ -8,7 +8,9 @@
     "SubtleEffectItemRarityDisabler"
   ],
   "client": [
-    "EntityRenderDispatcherMixin"
+    "EntityRenderDispatcherMixin",
+    "PoseMixin",
+    "PoseInvoker"
   ],
   "server": [
   ],

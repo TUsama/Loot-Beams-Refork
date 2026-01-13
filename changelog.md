@@ -1,3 +1,7 @@
+### V3.3.2
+add three configs that allow players to control the tooltips style, In Custom style, players can modify the Tooltips position
+lower the fzzy config dep version
+
 ### V3.3.1
 fix multiversion
 

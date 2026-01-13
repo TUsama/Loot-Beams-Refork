@@ -13,7 +13,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 
-val modv = "3.3.1"
+val modv = "3.3.2"
 
 
 val loader = when {
@@ -298,6 +298,9 @@ msPublishing {
             accessToken = file("D:\\curseforge-key.txt").readText()
             projectId = "1150640"
             minecraftVersions.add(minecraft)
+            clientRequired = true
+            serverRequired = false
+            javaVersions.set(listOf(JavaVersion.toVersion(modstitch.javaVersion.get())))
             requires("nirvana-library")
         }
 

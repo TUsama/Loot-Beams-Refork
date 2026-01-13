@@ -2,6 +2,7 @@ package me.clefal.lootbeams.config.configs;
 
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.modules.tooltip.LootInformationEnableStatus;
+import me.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
 import me.clefal.lootbeams.utils.ResourceLocationHelper;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.api.RegisterType;
@@ -9,6 +10,7 @@ import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
+import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt;
 
 public class LootInfomationConfig extends Config {
 
@@ -56,6 +58,9 @@ public class LootInfomationConfig extends Config {
 
     public static class TooltipsSection extends ConfigSection{
         public boolean render_tooltips_on_crouch = true;
+        public ValidatedEnum<AdvanceTooltipOverlay.Style> TooltipsAtCenter = new ValidatedEnum<>(AdvanceTooltipOverlay.Style.Custom);
+        public ValidatedInt offsetXFromLeft = new ValidatedInt(10);
+        public ValidatedInt offsetYFromBottom = new ValidatedInt(72);
     }
 
 }

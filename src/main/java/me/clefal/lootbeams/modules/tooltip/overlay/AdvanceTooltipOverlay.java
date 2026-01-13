@@ -62,6 +62,10 @@ public class AdvanceTooltipOverlay {
     public static boolean checkCrouch() {
         return !LootInfomationConfig.lootInfomationConfig.tooltips.render_tooltips_on_crouch || Minecraft.getInstance().player.isCrouching();
     }
+    public enum Style {
+        Center,
+        Custom
+    }
 
     public Vector2f transformToScreenCoordinate(Vector3f worldCoordinate, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
@@ -94,7 +98,15 @@ public class AdvanceTooltipOverlay {
         position.mul(-screenSize, -screenSize, 1f);
         position.add(window.getGuiScaledWidth() / 2f, window.getGuiScaledHeight() / 2f, 0f);*/
         Window window = mc.getWindow();
-        return new Vector2f(window.getGuiScaledWidth() / 2f, window.getGuiScaledHeight() / 2f);
+        int guiScaledWidth = window.getGuiScaledWidth();
+        int guiScaledHeight = window.getGuiScaledHeight();
+        LootInfomationConfig.TooltipsSection tooltips = LootInfomationConfig.lootInfomationConfig.tooltips;
+        if (tooltips.TooltipsAtCenter.get().equals(Style.Center)){
+            return new Vector2f(guiScaledWidth / 2f, guiScaledHeight / 2f);
+        } else {
+            return new Vector2f(guiScaledWidth - tooltips.offsetXFromLeft.get() , guiScaledHeight - tooltips.offsetYFromBottom.get());
+        }
+
     }
 //? if ~1.21 {
     

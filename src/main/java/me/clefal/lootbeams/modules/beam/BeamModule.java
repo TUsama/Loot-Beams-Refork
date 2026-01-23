@@ -16,10 +16,10 @@ public class BeamModule implements ILBModule {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onEnableModule(EntityRenderDispatcherHookEvent.RenderLootBeamEvent event) {
         //? <1.21.10 {
-        BeamRenderer.renderLootBeam(event.poseStack, event.holder.get(), event.partialTicks, event.LBItemEntity);
+        BeamRenderer.INSTANCE.renderLootBeam(event.poseStack, event.holder.get(), event.partialTicks, event.LBItemEntity, event.isShaderOn);
         //? } else {
         /*LootBeamRenderStateSubmitter lootBeamRenderStateSubmitter = (LootBeamRenderStateSubmitter) event.holder.get();
-        lootBeamRenderStateSubmitter.loot_Beams_Refork$submitBeam(LootBeamRenderState.BeamRenderState.fromLBEntity(event.LBItemEntity, event.poseStack.last().copy(), event.partialTicks));
+        lootBeamRenderStateSubmitter.loot_Beams_Refork$submitBeam(LootBeamRenderState.BeamRenderState.make(event.LBItemEntity, event.poseStack.last().copy(), event.partialTicks, event.isShaderOn));
         *///? }
 
     }

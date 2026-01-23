@@ -2,11 +2,15 @@
 package me.clefal.lootbeams.loaders.neoforge;
 
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import me.clefal.lootbeams.LootBeamsConstants;
+import me.clefal.lootbeams.compat.multiversion_compat.IrisCompatModule;
 //? if =1.21.1 {
 import me.clefal.lootbeams.compat.common_1_21_1.AccessoriesCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.SubtleEffectCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.TieredReforgedCompatModule;
+
 import me.clefal.lootbeams.compat.multiversion_compat.MalumCompatModule;
 import me.clefal.lootbeams.compat.neoforged_1_21_1.ApotheosisCompatModule;
 import me.clefal.lootbeams.compat.neoforged_1_21_1.CuriosContinuationAndAdornedCompatModule;
@@ -25,6 +29,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+
+import java.io.IOException;
+import java.util.function.Consumer;
 
 @EventBusSubscriber(modid = LootBeamsConstants.MODID,
         //? < 1.21.8
@@ -59,6 +66,7 @@ public class LootBeamsNeoforgeModClientEvent {
                 /*SubtleEffectCompatModule.INSTANCE
                 *///?}
         );
+        ModulesManager.registerModules(IrisCompatModule.INSTANCE);
         ModulesManager.enableAll();
         ConfigHandlers.init();
     }

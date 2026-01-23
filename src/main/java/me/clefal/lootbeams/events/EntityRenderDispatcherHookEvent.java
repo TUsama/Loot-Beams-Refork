@@ -40,6 +40,8 @@ public abstract class EntityRenderDispatcherHookEvent extends Event {
     }
 
     public static class RenderLootBeamEvent extends EntityRenderDispatcherHookEvent implements ICancellableEvent {
+        public boolean isShaderOn = false;
+
         public RenderLootBeamEvent(LBItemEntity LBItemEntity, double worldX, double worldY, double worldZ, float entityYRot, float partialTicks, PoseStack poseStack, Holder holder, int light) {
             super(LBItemEntity, worldX, worldY, worldZ, entityYRot, partialTicks, poseStack, holder, light);
         }

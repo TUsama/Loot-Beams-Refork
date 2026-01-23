@@ -1,5 +1,6 @@
 package me.clefal.lootbeams.modules.beam;
 
+import me.clefal.lootbeams.CommonClass;
 import me.clefal.lootbeams.config.configs.LightConfig;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
 import me.clefal.lootbeams.data.lbitementity.rarity.LBColor;
@@ -15,19 +16,33 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
+import java.util.function.Function;
+
 public class BeamRenderer {
 
-    public static void renderLootBeam(PoseStack stack, MultiBufferSource buffer, float partialTick, LBItemEntity LBItemEntity){
-        PoseCopy last = (PoseCopy) ((Object) stack.last());
-        renderLootBeam(buffer, LootBeamRenderState.BeamRenderState.fromLBEntity(LBItemEntity, last.copy(), partialTick));
+    private static final ResourceLocation MAIN_BEAM = CommonClass.id("textures/entity/main_beam.png");
+    private static final ResourceLocation BEAM_TOP = CommonClass.id("textures/entity/beam_top.png");
+    public static final BeamRenderer INSTANCE = new BeamRenderer();
+
+    private boolean isShaderOn = false;
+
+    public BeamRenderer() {
     }
 
-    public static void renderLootBeam(MultiBufferSource buffer, LootBeamRenderState.BeamRenderState renderState) {
+
+    public void renderLootBeam(PoseStack stack, MultiBufferSource buffer, float partialTick, LBItemEntity LBItemEntity, boolean isShaderOn){
+        PoseCopy last = (PoseCopy) ((Object) stack.last());
+        this.isShaderOn = isShaderOn;
+        renderLootBeam(buffer, LootBeamRenderState.BeamRenderState.make(LBItemEntity, last.copy(), partialTick, isShaderOn));
+    }
+
+    public void renderLootBeam(MultiBufferSource buffer, LootBeamRenderState.BeamRenderState renderState) {
+
         LBColor color = renderState.rarity.color();
         int lifeTime = renderState.fadeIn;
 
@@ -61,7 +76,7 @@ public class BeamRenderer {
         }
 
 
-        float beamRadius = 0.05f * beamConfig.beam_radius.get();
+        float beamRadius = 0.08f * beamConfig.beam_radius.get();
         float beamHeight = beamConfig.beam_height.get();
         float yOffset = beamConfig.beam_y_offset.get();
         if (beamConfig.common_shorter_beam) {
@@ -88,61 +103,39 @@ public class BeamRenderer {
         Vector3f direction = sub.normalize();
         double v = Math.atan2(direction.x(), direction.z());
 
+        float bloomRadius = beamRadius * 1.35f;
+        int bloomAlpha = (int) (beamAlpha * 0.4f);
+
         stack.pushPose();
         stack.mulPose(Axis.YP.rotation((float) v));
         //Render main beam
+        Function<ResourceLocation, VertexConsumer> getBeam = location -> buffer.getBuffer(BeamRenderType.getBeamRendertype(location, isShaderOn));
         {
             stack.pushPose();
             stack.translate(0, yOffset + 1, 0);
-            VertexConsumer buffer1 = buffer.getBuffer(BeamRenderType.LOOT_BEAM_RENDERTYPE);
-
-            //beam
+            VertexConsumer buffer1 = getBeam.apply(MAIN_BEAM);
+            //main beam
             {
-                //? if !=1.20.1 {
-                buffer1.addVertex(stack.last().pose(), -beamRadius, -beamHeight, 0.01f).setColor(R, G, B, beamAlpha).setUv(0, 0).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
 
-                buffer1.addVertex(stack.last().pose(), -beamRadius, beamHeight, 0.01f).setColor(R, G, B, 0).setUv(0, 1).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
-
-                buffer1.addVertex(stack.last().pose(), beamRadius, beamHeight, 0.01f).setColor(R, G, B, 0).setUv(1, 1).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
-
-                buffer1.addVertex(stack.last().pose(), beamRadius, -beamHeight, 0.01f).setColor(R, G, B, beamAlpha).setUv(1, 0).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
-                //?} else {
-
-                /*buffer1.vertex(stack.last().pose(), -beamRadius, -beamHeight, 0.01f).color(R, G, B, beamAlpha).uv(0, 0).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                buffer1.vertex(stack.last().pose(), -beamRadius, beamHeight, 0.01f).color(R, G, B, 0).uv(0, 1).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                buffer1.vertex(stack.last().pose(), beamRadius, beamHeight, 0.01f).color(R, G, B, 0).uv(1, 1).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                buffer1.vertex(stack.last().pose(), beamRadius, -beamHeight, 0.01f).color(R, G, B, beamAlpha).uv(1, 0).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                *///?}
+                draw(stack, buffer1, R, G, B, beamAlpha, -beamRadius, beamRadius, -beamHeight, beamHeight, 0.001f);
+                //main beam bloom
+                {
+                    draw(stack, buffer1, R, G, B, bloomAlpha, -bloomRadius, bloomRadius, -beamHeight, beamHeight, 0.001f);
+                }
             }
-            //shadow
+            //main beam bloom
+
+            //beam top
             {
-                float glowRadius = beamRadius * 1.35f;
-                int glowAlpha = ((int) (beamAlpha * 0.55f));
-                //? if !=1.20.1 {
-                
-                buffer1.addVertex(stack.last().pose(), -glowRadius, -beamHeight, 0.001f).setColor(R, G, B, glowAlpha).setUv(0, 0).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
-
-                buffer1.addVertex(stack.last().pose(), -glowRadius, beamHeight, 0.001f).setColor(R, G, B, 0).setUv(0, 1).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
-
-                buffer1.addVertex(stack.last().pose(), glowRadius, beamHeight, 0.001f).setColor(R, G, B, 0).setUv(1, 1).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
-
-                buffer1.addVertex(stack.last().pose(), glowRadius, -beamHeight, 0.001f).setColor(R, G, B, glowAlpha).setUv(1, 0).setLight(15728880).setNormal(stack.last(), 0.0F, 1.0F, 0.0F);
-                //?} else {
-
-                /*buffer1.vertex(stack.last().pose(), -glowRadius, -beamHeight, 0.001f).color(R, G, B, glowAlpha).uv(0, 0).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                buffer1.vertex(stack.last().pose(), -glowRadius, beamHeight, 0.001f).color(R, G, B, 0).uv(0, 1).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                buffer1.vertex(stack.last().pose(), glowRadius, beamHeight, 0.001f).color(R, G, B, 0).uv(1, 1).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                buffer1.vertex(stack.last().pose(), glowRadius, -beamHeight, 0.001f).color(R, G, B, glowAlpha).uv(1, 0).uv2(15728880).normal(stack.last().normal(), 0.0F, 1.0F, 0.0F).endVertex();
-
-                *///?}
+                VertexConsumer buffer2 = buffer.getBuffer(BeamRenderType.getBeamRendertype(BEAM_TOP, isShaderOn));
+                draw(stack, buffer2, R, G, B, beamAlpha, beamRadius, -beamRadius, beamHeight * 3 / 2, beamHeight, 0.001f);
+                //beam top bloom
+                {
+                    draw(stack, buffer2, R, G, B, bloomAlpha, bloomRadius, -bloomRadius, beamHeight * 3 / 2, beamHeight, 0.001f);
+                }
             }
+
+
 
 
             stack.popPose();
@@ -155,9 +148,11 @@ public class BeamRenderer {
             if (glowConfig.enable_glow && renderState.onGround) {
 
                 stack.pushPose();
-                stack.translate(0, 0.01, 0);
+                //stack.translate(0, 0.01, 0);
+                stack.mulPose(Axis.XP.rotationDegrees(90));
                 float radius = glowConfig.glow_effect_radius.get();
-                renderGlow(stack, buffer.getBuffer(BeamRenderType.GLOW), R, G, B, ((int) (beamAlpha * 0.4f)), radius);
+                stack.translate(0, -radius, -0.01f);
+                renderGlow(stack, getBeam.apply(BeamRenderType.GLOW_TEXTURE), R, G, B, ((int) (beamAlpha * 0.4f)), radius);
                 stack.popPose();
             }
 
@@ -166,25 +161,51 @@ public class BeamRenderer {
     }
 
 
-    private static void renderGlow(PoseStack stack, VertexConsumer builder, int red, int green, int blue, int alpha, float radius) {
-        PoseStack.Pose matrixentry = stack.last();
-        Matrix4f matrixpose = matrixentry.pose();
+    private void renderGlow(PoseStack stack, VertexConsumer builder, int red, int green, int blue, int alpha, float radius) {
         // draw a quad on the xz plane facing up with a radius of 0.5
-        //? if !=1.20.1 {
-        builder.addVertex(matrixpose, -radius, (float) 0, -radius).setColor(red, green, blue, alpha).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
-        builder.addVertex(matrixpose, -radius, (float) 0, radius).setColor(red, green, blue, alpha).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
-        builder.addVertex(matrixpose, radius, (float) 0, radius).setColor(red, green, blue, alpha).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
-        builder.addVertex(matrixpose, radius, (float) 0, -radius).setColor(red, green, blue, alpha).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
-        //?} else {
-
-        /*Matrix3f matrixnormal = matrixentry.normal();
-        builder.vertex(matrixpose, -radius, (float) 0, -radius).color(red, green, blue, alpha).uv(0, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixnormal, 0.0F, 1.0F, 0.0F).endVertex();
-        builder.vertex(matrixpose, -radius, (float) 0, radius).color(red, green, blue, alpha).uv(0, 1).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixnormal, 0.0F, 1.0F, 0.0F).endVertex();
-        builder.vertex(matrixpose, radius, (float) 0, radius).color(red, green, blue, alpha).uv(1, 1).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixnormal, 0.0F, 1.0F, 0.0F).endVertex();
-        builder.vertex(matrixpose, radius, (float) 0, -radius).color(red, green, blue, alpha).uv(1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixnormal, 0.0F, 1.0F, 0.0F).endVertex();
-
-        *///?}
+        draw(stack, builder, red, green, blue, alpha, -radius, radius, 0, 1, 0);
     }
 
+    private void draw(PoseStack stack, VertexConsumer builder, int red, int green, int blue, int alpha, float minX, float maxX, float minY, float maxY, float z){
+        if (isShaderOn) {
+            drawOnShader(stack, builder, red, green, blue, alpha, minX, maxX, minY, maxY, z);
+        } else {
+            drawWithoutShader(stack, builder, red, green, blue, alpha, minX, maxX, minY, maxY, z);
+        }
 
+    }
+
+    private void drawWithoutShader(PoseStack stack, VertexConsumer builder, int red, int green, int blue, int alpha, float minX, float maxX, float minY, float maxY, float z){
+        PoseStack.Pose matrixentry = stack.last();
+        Matrix4f matrixpose = matrixentry.pose();
+        //? legacy {
+        /*builder.vertex(matrixpose, minX, minY, z).color(red, green, blue, alpha).uv(0, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixentry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
+        builder.vertex(matrixpose, minX, maxY, z).color(red, green, blue, alpha).uv(0, 1).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixentry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
+        builder.vertex(matrixpose, maxX, maxY, z).color(red, green, blue, alpha).uv(1, 1).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixentry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
+        builder.vertex(matrixpose, maxX, minY, z).color(red, green, blue, alpha).uv(1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrixentry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
+        *///? } else {
+        builder.addVertex(matrixpose, minX, minY, z).setColor(red, green, blue, alpha).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
+        builder.addVertex(matrixpose, minX, maxY, z).setColor(red, green, blue, alpha).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
+        builder.addVertex(matrixpose, maxX, maxY, z).setColor(red, green, blue, alpha).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
+        builder.addVertex(matrixpose, maxX, minY, z).setColor(red, green, blue, alpha).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(matrixentry, 0.0F, 1.0F, 0.0F);
+        //? }
+
+    }
+
+    private void drawOnShader(PoseStack stack, VertexConsumer builder, int red, int green, int blue, int alpha, float minX, float maxX, float minY, float maxY, float z){
+        PoseStack.Pose matrixentry = stack.last();
+        Matrix4f matrixpose = matrixentry.pose();
+        //? legacy {
+        /*builder.vertex(matrixpose, minX, minY, z).uv(0, 1).color(red, green, blue, alpha).uv2(15728880).endVertex();
+        builder.vertex(matrixpose, minX, maxY, z).uv(0, 0).color(red, green, blue, alpha).uv2(15728880).endVertex();
+        builder.vertex(matrixpose, maxX, maxY, z).uv(1, 0).color(red, green, blue, alpha).uv2(15728880).endVertex();
+        builder.vertex(matrixpose, maxX, minY, z).uv(1, 1).color(red, green, blue, alpha).uv2(15728880).endVertex();
+        *///? } else {
+        builder.addVertex(matrixpose, minX, minY, z).setUv(0, 1).setColor(red, green, blue, alpha).setLight(15728880);
+        builder.addVertex(matrixpose, minX, maxY, z).setUv(0, 0).setColor(red, green, blue, alpha).setLight(15728880);
+        builder.addVertex(matrixpose, maxX, maxY, z).setUv(1, 0).setColor(red, green, blue, alpha).setLight(15728880);
+        builder.addVertex(matrixpose, maxX, minY, z).setUv(1, 1).setColor(red, green, blue, alpha).setLight(15728880);
+        //? }
+
+    }
 }

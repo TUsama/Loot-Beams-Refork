@@ -127,4 +127,8 @@ public class Hooker {
         poseStack.popPose();
     }
     *///?}
+
+    public static void printThing(int color, float beamRadius, float glowRadius){
+        System.out.println(color);
+    }
 }

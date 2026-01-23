@@ -1,11 +1,21 @@
 package me.clefal.lootbeams.modules.beam;
 
+//? <1.21.4
+import com.clefal.nirvana_lib.client.render.rendertype.RenderTypeCreator;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import me.clefal.lootbeams.CommonClass;
-import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.config.configs.LightConfig;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.Util;
+import net.minecraft.client.renderer.GameRenderer;
+//? >=1.21.10
+//import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.function.Function;
+
 //? <1.21.8 {
 public class BeamRenderType extends RenderType {
 //?} else {
@@ -17,7 +27,27 @@ public class BeamRenderType extends RenderType {
     public static final ResourceLocation GLOW_TEXTURE = CommonClass.id("textures/entity/glow.png");
     public static final RenderType LOOT_BEAM_RENDERTYPE = RenderType.lightning();
     protected static final RenderType GLOW = LightConfig.lightConfig.beam.solid_beam ? RenderType.entityTranslucentEmissive(GLOW_TEXTURE) : RenderType.entityCutout(GLOW_TEXTURE);
+    //? <1.21.4 {
+    private static final Function<ResourceLocation, RenderType> beamOnShader = Util.memoize(location -> RenderTypeCreator.createRenderType("lb_beam", DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, CompositeState.builder()
+            .setShaderState(new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader))
+            .setTextureState(new RenderStateShard.TextureStateShard(location, false, false))
+            .setTransparencyState(TransparencyStateShard.TRANSLUCENT_TRANSPARENCY)
+            .setDepthTestState(new RenderStateShard.DepthTestStateShard("lb_depth", 515)).createCompositeState(false)));
+    //?}
+
+    //? >=1.21.10 {
+    /*private static final Function<ResourceLocation, RenderType> beamOnShader = Util.memoize(location -> {
+        CompositeState compositeState = CompositeState.builder()
+                .setTextureState(new TextureStateShard(location, false))
+                .setLightmapState(LIGHTMAP)
+                .setOverlayState(OVERLAY)
+                .setLayeringState(VIEW_OFFSET_Z_LAYERING).createCompositeState(true);
+        return create("translucent_beam", 1536, true, true, RenderPipelines.TRANSLUCENT_PARTICLE, compositeState);
+    });
+    *///?}
+
     //? <1.21.8 {
+    
     public BeamRenderType(String $$0, VertexFormat $$1, VertexFormat.Mode $$2, int $$3, boolean $$4, boolean $$5, Runnable $$6, Runnable $$7) {
         super($$0, $$1, $$2, $$3, $$4, $$5, $$6, $$7);
     }
@@ -28,4 +58,18 @@ public class BeamRenderType extends RenderType {
     }
 
 *///?}
+
+
+    public static RenderType getBeamRendertype(ResourceLocation location, boolean isShaderOn){
+        if (isShaderOn){
+            //? <1.21.4 || 1.21.10{
+            return beamOnShader.apply(location);
+            //? } else {
+            /*return RenderType.translucentParticle(location);
+            *///?}
+        } else {
+            return RenderType.beaconBeam(location, true);
+        }
+
+    }
 }

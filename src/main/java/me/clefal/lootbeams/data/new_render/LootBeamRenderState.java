@@ -71,17 +71,19 @@ public abstract class LootBeamRenderState {
         public final int fadeIn;
         public final float partialTick;
         public final boolean onGround;
+        public final boolean isShaderOn;
 
-        public BeamRenderState(LBRarity rarity, Vec3 location, PoseStack.Pose poseStack, int fadeIn, float partialTick, boolean onGround) {
+        public BeamRenderState(LBRarity rarity, Vec3 location, PoseStack.Pose poseStack, int fadeIn, float partialTick, boolean onGround, boolean isShaderOn) {
             super(rarity, location, poseStack);
             this.fadeIn = fadeIn;
             this.partialTick = partialTick;
             this.onGround = onGround;
+            this.isShaderOn = isShaderOn;
         }
 
-        public static BeamRenderState fromLBEntity(LBItemEntity lbItemEntity, PoseStack.Pose stack, float partialTick){
+        public static BeamRenderState make(LBItemEntity lbItemEntity, PoseStack.Pose stack, float partialTick, boolean isShaderOn){
             ItemEntity item = lbItemEntity.item();
-            BeamRenderState beamRenderState = new BeamRenderState(lbItemEntity.rarity(), new Vec3(item.getX(), item.getY(), item.getZ()), stack, lbItemEntity.fadeIn(), partialTick, lbItemEntity.item().onGround());
+            BeamRenderState beamRenderState = new BeamRenderState(lbItemEntity.rarity(), new Vec3(item.getX(), item.getY(), item.getZ()), stack, lbItemEntity.fadeIn(), partialTick, lbItemEntity.item().onGround(), isShaderOn);
             if (lbItemEntity.fadeIn() < LightConfig.lightConfig.beam.beam_fade_in_time.get()) lbItemEntity.updateFade();
             return beamRenderState;
         }

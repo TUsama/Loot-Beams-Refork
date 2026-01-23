@@ -35,7 +35,7 @@ public class FeatureRenderDispatcherMixin {
     private void doLBRender(CallbackInfo ci, @Local SubmitNodeCollection submitnodecollection){
         LootBeamRenderStateStorage lbSubmitter = (LootBeamRenderStateStorage) submitnodecollection;
         for (LootBeamRenderState.BeamRenderState lootBeamRenderState : lbSubmitter.loot_Beams_Refork$getBeamRenderStates()) {
-            BeamRenderer.renderLootBeam(this.bufferSource, lootBeamRenderState);
+            BeamRenderer.INSTANCE.renderLootBeam(this.bufferSource, lootBeamRenderState);
         }
 
         for (LootBeamRenderState.NameTagRenderState lootBeamsRefork$getNameTagRenderState : lbSubmitter.loot_Beams_Refork$getNameTagRenderStates()) {

@@ -37,15 +37,33 @@ object NeoForgeDeps {
                         modstitchModCompileOnly ("curse.maven:malum-484064:6655805")
                     }
 
+                    //modstitchModRuntimeOnly ("curse.maven:monocle-1007288:6803201")
+                    //modstitchModRuntimeOnly ("curse.maven:embeddium-908741:6118392")
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:6661598")
+                    modstitchModRuntimeOnly ("curse.maven:irisshaders-455508:6661598")
+                    modstitchModRuntimeOnly ("curse.maven:sodium-394468:6382651")
+
+                    modstitchModCompileOnly ("curse.maven:simply-swords-659887:6958145")
+
                 }
 
                 "1.21.4" -> {
                     modstitchModCompileOnly ("maven.modrinth:curios:10.0.1+1.21.4")
                     modstitchModCompileOnly ("maven.modrinth:subtle-effects:Z4pLufCX")
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:6213645")
+                    modstitchModRuntimeOnly ("curse.maven:irisshaders-455508:6213645")
+                    modstitchModRuntimeOnly ("curse.maven:sodium-394468:6382663")
+                }
+
+                "1.21.8" ->{
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:7088025")
                 }
 
                 "1.21.10" -> {
                     modstitchModRuntimeOnly("maven.modrinth:kotlin-for-forge:6.0.0")
+                    modstitchModCompileOnly("curse.maven:irisshaders-455508:7351307")
+                    //modstitchModRuntimeOnly("curse.maven:irisshaders-455508:7351307")
+                    //modstitchModRuntimeOnly("curse.maven:sodium-394468:7207595")
                 }
             }
         }

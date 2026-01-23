@@ -31,6 +31,7 @@ object LoomDeps {
 
                     modstitchModCompileOnly ("curse.maven:malum-484064:5718977")
                     modstitchModCompileOnly ("curse.maven:lodestone-616457:6070172")
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:6258195")
                 }
 
                 ("1.21.1") -> {
@@ -45,10 +46,24 @@ object LoomDeps {
                     modstitchImplementation ("org.tomlj:tomlj:1.1.1")
 
                     modstitchModImplementation ("maven.modrinth:subtle-effects:1.13.1")
+
+                    modstitchModRuntimeOnly("curse.maven:irisshaders-455508:6213635")
+                    modstitchModRuntimeOnly("curse.maven:sodium-394468:6382649")
+
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:6213635")
                 }
 
                 ("1.21.4") -> {
                     modstitchModCompileOnly ("maven.modrinth:subtle-effects:NA1rBYFJ")
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:6213644")
+                }
+
+                "1.21.8" -> {
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:7088024")
+                }
+
+                "1.21.10" ->{
+                    modstitchModCompileOnly ("curse.maven:irisshaders-455508:7351304")
                 }
             }
         }

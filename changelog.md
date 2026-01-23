@@ -1,3 +1,8 @@
+### V3.4.0
+refactor beam render, add Iris compat
+now beam will look a bit different because beam now use texture, the old beam is just a gradient color.
+render beam as particle when shader is enabled.
+
 ### V3.3.2
 add three configs that allow players to control the tooltips style, In Custom style, players can modify the Tooltips position
 lower the fzzy config dep version

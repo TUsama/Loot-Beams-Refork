@@ -61,6 +61,8 @@ object ForgeDeps {
                 modstitchModCompileOnly ("maven.modrinth:geckolib:g4k8xf2k")
             }
 
+            modstitchLegacyModImplementation("curse.maven:embeddium-908741:5681725")
+            modstitchLegacyModImplementation("curse.maven:oculus-581495:6020952")
         }
     }
 }

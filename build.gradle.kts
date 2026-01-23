@@ -13,7 +13,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 
-val modv = "3.3.2"
+val modv = "3.4.0"
 
 
 val loader = when {
@@ -130,25 +130,25 @@ modstitch {
         configureNeoForge {
             //setAccessTransformers("../../src/main/resources/META-INF/accesstransformer.cfg")
             validateAccessTransformers = false
+            afterEvaluate {
+                runs.all {
+                    val upperName = name.replaceFirstChar {
+                        it.uppercaseChar()
+                    }
+                    tasks.named<JavaExec>("run$upperName") {
+                        javaLauncher.set(
+                            javaToolchains.launcherFor {
+                                languageVersion = JavaLanguageVersion.of(project.modstitch.javaVersion.get())
+                                vendor = JvmVendorSpec.JETBRAINS
+                            }
+                        )
+                    }
+                    jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
+                    disableIdeRun()
 
-            runs.all {
-                /*val upperName = name.replaceFirstChar {
-                    it.uppercaseChar()
-                }*/
-                /*tasks.named<JavaExec>("run$upperName"){
-                    javaLauncher.set(
-                        javaToolchains.launcherFor {
-                            languageVersion = JavaLanguageVersion.of(project.modstitch.javaTarget.get())
-                            vendor = JvmVendorSpec.JETBRAINS
-                        }
-                    )
-                }*/
-                disableIdeRun()
-
-                //jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
+            }
                 //gameDirectory = file("run")
             }
-            //runOnJBR()
         }
     }
 
@@ -263,15 +263,12 @@ dependencies {
         dependencies.add(dep.configuration, dep.notation, dep.options)
     }
     //lombok
-    modstitchCompileOnly("org.projectlombok:lombok:1.18.38")
-    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    modstitchCompileOnly("org.projectlombok:lombok:1.18.42")
+    annotationProcessor("org.projectlombok:lombok:1.18.42")
 
-    testCompileOnly("org.projectlombok:lombok:1.18.38")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+    testCompileOnly("org.projectlombok:lombok:1.18.42")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
 
-
-
-    // Anything else in the dependencies block will be used for all platforms.
 }
 
 msPublishing {

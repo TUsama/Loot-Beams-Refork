@@ -31,10 +31,10 @@ object NeoForgeDeps {
 
 
                     if (enableMalum){
-                        modstitchModImplementation ("curse.maven:lodestone-616457:7251636")
-                        modstitchModImplementation ("curse.maven:malum-484064:7250754")
+                        modstitchModImplementation ("curse.maven:lodestone-616457:7264731")
+                        modstitchModImplementation ("curse.maven:malum-484064:7307339")
                     } else{
-                        modstitchModCompileOnly ("curse.maven:malum-484064:6655805")
+                        modstitchModCompileOnly ("curse.maven:malum-484064:7307339")
                     }
 
                     //modstitchModRuntimeOnly ("curse.maven:monocle-1007288:6803201")

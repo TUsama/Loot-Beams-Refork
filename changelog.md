@@ -1,4 +1,12 @@
+### V3.4.2
+fix beam top direction render issue when shader is enabled
+
+### V3.4.1
+fix an upload bug that will crash the game when install with Malum
+upgrade to 3.4.1 cuz curseforge won't allow same version appeared.
+
 ### V3.4.0
+**Expected bugs!!!!**
 refactor beam render, add Iris compat
 now beam will look a bit different because beam now use texture, the old beam is just a gradient color.
 render beam as particle when shader is enabled.

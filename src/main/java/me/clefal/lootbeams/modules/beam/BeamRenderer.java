@@ -127,11 +127,22 @@ public class BeamRenderer {
 
             //beam top
             {
-                VertexConsumer buffer2 = buffer.getBuffer(BeamRenderType.getBeamRendertype(BEAM_TOP, isShaderOn));
-                draw(stack, buffer2, R, G, B, beamAlpha, beamRadius, -beamRadius, beamHeight * 3 / 2, beamHeight, 0.001f);
+                VertexConsumer buffer2 = getBeam.apply(BEAM_TOP);
+                beamHeight = beamHeight - 0.25f;
+                if (!isShaderOn){
+                    draw(stack, buffer2, R, G, B, beamAlpha, beamRadius, -beamRadius, beamHeight * 3 / 2, beamHeight, 0.001f);
+                } else {
+                    draw(stack, buffer2, R, G, B, beamAlpha, -beamRadius, beamRadius, beamHeight, beamHeight * 3 / 2, 0.001f);
+                }
+
                 //beam top bloom
                 {
-                    draw(stack, buffer2, R, G, B, bloomAlpha, bloomRadius, -bloomRadius, beamHeight * 3 / 2, beamHeight, 0.001f);
+                    if (!isShaderOn){
+                        draw(stack, buffer2, R, G, B, bloomAlpha, bloomRadius, -bloomRadius, beamHeight * 3 / 2, beamHeight, 0.001f);
+                    } else {
+                        draw(stack, buffer2, R, G, B, bloomAlpha, -bloomRadius, bloomRadius, beamHeight, beamHeight * 3 / 2, 0.001f);
+                    }
+
                 }
             }
 

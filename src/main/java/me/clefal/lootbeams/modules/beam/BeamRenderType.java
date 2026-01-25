@@ -28,7 +28,7 @@ public class BeamRenderType extends RenderType {
     public static final RenderType LOOT_BEAM_RENDERTYPE = RenderType.lightning();
     protected static final RenderType GLOW = LightConfig.lightConfig.beam.solid_beam ? RenderType.entityTranslucentEmissive(GLOW_TEXTURE) : RenderType.entityCutout(GLOW_TEXTURE);
     //? <1.21.4 {
-    private static final Function<ResourceLocation, RenderType> beamOnShader = Util.memoize(location -> RenderTypeCreator.createRenderType("lb_beam", DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, CompositeState.builder()
+    public static final Function<ResourceLocation, RenderType> beamOnShader = Util.memoize(location -> RenderTypeCreator.createRenderType("lb_beam", DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, CompositeState.builder()
             .setShaderState(new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader))
             .setTextureState(new RenderStateShard.TextureStateShard(location, false, false))
             .setTransparencyState(TransparencyStateShard.TRANSLUCENT_TRANSPARENCY)

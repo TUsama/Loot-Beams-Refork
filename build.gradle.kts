@@ -13,7 +13,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 
-val modv = "3.4.2"
+val modv = property("mod_version") as String
 
 
 val loader = when {
@@ -160,7 +160,7 @@ modstitch {
             isModDevGradleLegacy -> configs.register("${mid}-1.20.1")
             minecraft == "1.21.1" -> configs.register("${mid}-1.21")
             minecraft == "1.21.4" -> configs.register("${mid}-1.21.4")
-            minecraft == "1.21.10" -> configs.register("${mid}-1.21.10")
+            minecraft == "1.21.10" || minecraft == "1.21.11" -> configs.register("${mid}-1.21.10")
             else -> configs.register("${mid}-default")
         }
 
@@ -190,6 +190,19 @@ stonecutter {
         "biomancy" to (loader.equals("forge") && (minecraft == "1.20.1"))
     ))
 
+    replacements.string(current.version >= "1.21.10" && loader.equals("fabric")) {
+        replace("guiGraphics.peekScissorStack()", "guiGraphics.scissorStack.peek()")
+    }
+
+    replacements.string(current.parsed >= "1.21.11") {
+        replace("net.minecraft.resources.ResourceLocation", "net.minecraft.resources.Identifier")
+        replace("renderer.RenderType", "renderer.rendertype.RenderType")
+        replace("net.minecraft.Util", "net.minecraft.util.Util")
+    }
+
+    replacements.regex(current.parsed >= "1.21.11") {
+        replace("\\bResourceLocation\\b" to "Identifier", "\\bIdentifier\\b" to "ResourceLocation")
+    }
 }
 
 tasks.named<Copy>("processResources") {

@@ -1,3 +1,7 @@
+### V3.4.3
+fix beam top position
+upgrade to 1.21.11
+
 ### V3.4.2
 fix beam top direction render issue when shader is enabled
 

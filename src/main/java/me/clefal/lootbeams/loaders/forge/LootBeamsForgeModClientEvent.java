@@ -7,6 +7,7 @@ import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.MineAndSlashCompat
 import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.OrbOfCraftingCompatModule;
 import me.clefal.lootbeams.compat.multiversion_compat.MalumCompatModule;
 import me.clefal.lootbeams.compat.multiversion_compat.IrisCompatModule;
+import me.clefal.lootbeams.compat.multiversion_compat.SimpleSwordCompatModule;
 import me.clefal.lootbeams.config.ConfigHandlers;
 import me.clefal.lootbeams.modules.ModulesManager;
 import me.clefal.lootbeams.modules.tooltip.overlay.AdvanceTooltipOverlay;
@@ -40,7 +41,8 @@ public class LootBeamsForgeModClientEvent {
                 SpartanWeaponryCompatModule.INSTANCE,
                 OrbOfCraftingCompatModule.INSTANCE,
                 TieredReforgedCompatModule.INSTANCE,
-                MalumCompatModule.INSTANCE
+                MalumCompatModule.INSTANCE,
+                SimpleSwordCompatModule.INSTANCE
                 //,BiomancyCompatModule.INSTANCE
         );
         ModulesManager.registerModules(IrisCompatModule.INSTANCE);

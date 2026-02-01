@@ -4,6 +4,9 @@
   "lootbeams.vanilla_rarity.rare": "Rare",
   "lootbeams.vanilla_rarity.epic": "Epic",
   "lootbeams.mod_rarity.non_soul": "Non Soul",
+  "lootbeams.mod_rarity.simple_swords.common": "Common",
+  "lootbeams.mod_rarity.simple_swords.unique": "Unique",
+  "lootbeams.mod_rarity.simple_swords.legendary": "Legendary",
   "lootbeams.lightconfig.lighteffectfilter.whitelist_by_tag.desc": "the format is the same as the datapack format, start with \"#\".",
   "lootbeams.light_config.lightEffectFilter.blacklist_by_tag.desc": "the format is the same as the datapack format, start with \"#\".",
   "lootbeams.lightconfig.beam.allow_use_name_color_as_beam_color.desc": "when no color provided by internal providers and config, mod will use the name color as the beam color"

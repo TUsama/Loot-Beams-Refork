@@ -12,6 +12,7 @@ import me.clefal.lootbeams.compat.common_1_21_1.SubtleEffectCompatModule;
 import me.clefal.lootbeams.compat.common_1_21_1.TieredReforgedCompatModule;
 
 import me.clefal.lootbeams.compat.multiversion_compat.MalumCompatModule;
+import me.clefal.lootbeams.compat.multiversion_compat.SimpleSwordCompatModule;
 import me.clefal.lootbeams.compat.neoforged_1_21_1.ApotheosisCompatModule;
 import me.clefal.lootbeams.compat.neoforged_1_21_1.CuriosContinuationAndAdornedCompatModule;
 //?}
@@ -61,6 +62,8 @@ public class LootBeamsNeoforgeModClientEvent {
 
                 //? malum
                 ,MalumCompatModule.INSTANCE
+                //? simplesword
+                ,SimpleSwordCompatModule.INSTANCE
 
                 //? if =1.21.4 {
                 /*SubtleEffectCompatModule.INSTANCE

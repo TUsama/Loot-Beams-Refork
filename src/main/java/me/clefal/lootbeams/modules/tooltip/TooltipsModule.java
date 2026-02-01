@@ -64,7 +64,7 @@ public class TooltipsModule implements ILBModule {
     public void deleteRarityInfoWhenConfigEnable(TooltipsGatherNameAndRarityEvent event) {
         API.Match(LootInfomationConfig.lootInfomationConfig.rarity.showRarityFor).option(
                 Case($(x -> x.get() == LootInfomationConfig.ShowRarityTarget.NONE), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY)),
-                Case($(x -> x.get() == LootInfomationConfig.ShowRarityTarget.RARE && !event.lbItemEntity.isRare()), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY))
+                Case($(x -> x.get() == LootInfomationConfig.ShowRarityTarget.RARE && !event.lbItemEntity.isRare() && event.lbItemEntity.rarity().absoluteOrdinal() != -1), x -> event.gather.remove(TooltipsGatherNameAndRarityEvent.Case.RARITY))
         );
     }
 

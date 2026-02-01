@@ -5,26 +5,25 @@ import net.minecraft.client.renderer.MultiBufferSource;
 //import net.minecraft.client.renderer.SubmitNodeCollector;
 
 public class Holder {
-    private MultiBufferSource bufferSource;
-    //? 1.21.10
-    //private SubmitNodeCollector collector;
 
-    //? 1.21.10 {
-    /*public Holder(SubmitNodeCollector collector) {
+    //? >=1.21.10 {
+    /*private SubmitNodeCollector collector;
+
+    public Holder(SubmitNodeCollector collector) {
         this.collector = collector;
     }
-    *///?}
+
+    public SubmitNodeCollector get(){
+        return this.collector;
+    }
+    *///? } else {
+    private MultiBufferSource bufferSource;
     public Holder(MultiBufferSource bufferSource) {
         this.bufferSource = bufferSource;
     }
-
-    //? <1.21.10 {
     public MultiBufferSource get(){
         return this.bufferSource;
     }
-    //? } else {
-    /*public SubmitNodeCollector get(){
-        return this.collector;
-    }
-    *///? }
+    //?}
+
 }

@@ -128,10 +128,11 @@ public class BeamRenderer {
             //beam top
             {
                 VertexConsumer buffer2 = getBeam.apply(BEAM_TOP);
-                beamHeight = beamHeight - 0.25f;
+
                 if (!isShaderOn){
                     draw(stack, buffer2, R, G, B, beamAlpha, beamRadius, -beamRadius, beamHeight * 3 / 2, beamHeight, 0.001f);
                 } else {
+                    beamHeight = beamHeight - 0.25f;
                     draw(stack, buffer2, R, G, B, beamAlpha, -beamRadius, beamRadius, beamHeight, beamHeight * 3 / 2, 0.001f);
                 }
 

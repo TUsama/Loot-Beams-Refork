@@ -1,9 +1,6 @@
 //? if neoforge {
 package me.clefal.lootbeams.loaders.neoforge;
 
-
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import me.clefal.lootbeams.LootBeamsConstants;
 import me.clefal.lootbeams.compat.multiversion_compat.IrisCompatModule;
 //? if =1.21.1 {
@@ -56,7 +53,8 @@ public class LootBeamsNeoforgeModClientEvent {
                 AccessoriesCompatModule.INSTANCE,
                 ApotheosisCompatModule.INSTANCE,
                 TieredReforgedCompatModule.INSTANCE,
-                SubtleEffectCompatModule.INSTANCE
+                SubtleEffectCompatModule.INSTANCE,
+                SimpleSwordCompatModule.INSTANCE
 
                 //?}
 

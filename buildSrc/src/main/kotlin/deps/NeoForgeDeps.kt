@@ -44,7 +44,8 @@ object NeoForgeDeps {
                     modstitchModRuntimeOnly ("curse.maven:sodium-394468:6382651")
 
                     modstitchModCompileOnly ("curse.maven:simply-swords-659887:6958145")
-
+                    modstitchModRuntimeOnly ("curse.maven:simply-swords-659887:6958145")
+                    modstitchModRuntimeOnly ("curse.maven:architectury-api-419699:5786327")
                 }
 
                 "1.21.4" -> {

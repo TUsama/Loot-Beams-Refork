@@ -1,3 +1,7 @@
+### V3.4.4
+add simple swords compat
+fix crash on java 17(1.20.1)
+
 ### V3.4.3
 fix beam top position
 upgrade to 1.21.11

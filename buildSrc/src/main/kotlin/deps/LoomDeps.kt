@@ -32,6 +32,8 @@ object LoomDeps {
                     modstitchModCompileOnly ("curse.maven:malum-484064:5718977")
                     modstitchModCompileOnly ("curse.maven:lodestone-616457:6070172")
                     modstitchModCompileOnly ("curse.maven:irisshaders-455508:6258195")
+
+                    modstitchModCompileOnly ("curse.maven:simply-swords-659887:5639522")
                 }
 
                 ("1.21.1") -> {
@@ -51,6 +53,8 @@ object LoomDeps {
                     modstitchModRuntimeOnly("curse.maven:sodium-394468:6382649")
 
                     modstitchModCompileOnly ("curse.maven:irisshaders-455508:6213635")
+
+                    modstitchModCompileOnly ("curse.maven:simply-swords-659887:6958140")
                 }
 
                 ("1.21.4") -> {

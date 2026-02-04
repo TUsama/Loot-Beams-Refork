@@ -187,7 +187,8 @@ stonecutter {
         "vanilla" to loader.equals("vanilla"),
         "legacy" to (minecraft == "1.20.1"),
         "malum" to (modstitch.minecraftVersion.get() == "1.20.1" || (loader.equals("neoforge") && modstitch.minecraftVersion.get() == "1.21.1")),
-        "biomancy" to (loader.equals("forge") && (minecraft == "1.20.1"))
+        "biomancy" to (loader.equals("forge") && (minecraft == "1.20.1")),
+        "simplesword" to ((minecraft == "1.21.1") || (minecraft == "1.20.1"))
     ))
 
     replacements.string(current.version >= "1.21.10" && loader.equals("fabric")) {
@@ -202,6 +203,14 @@ stonecutter {
 
     replacements.regex(current.parsed >= "1.21.11") {
         replace("\\bResourceLocation\\b" to "Identifier", "\\bIdentifier\\b" to "ResourceLocation")
+    }
+
+    replacements.string("ss_replacement", current.version.equals("1.20.1")) {
+        replace("Styles.COMMON", "HelperMethods.getStyle(\"common\")")
+        replace("Styles.UNIQUE", "HelperMethods.getStyle(\"unique\")")
+        replace("Styles.LEGENDARY", "HelperMethods.getStyle(\"legendary\")")
+        replace("Styles.RUNIC", "HelperMethods.getStyle(\"runic\")")
+
     }
 }
 

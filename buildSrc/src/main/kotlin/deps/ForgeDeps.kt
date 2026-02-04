@@ -63,6 +63,8 @@ object ForgeDeps {
 
             modstitchLegacyModImplementation("curse.maven:embeddium-908741:5681725")
             modstitchLegacyModImplementation("curse.maven:oculus-581495:6020952")
+
+            modstitchModCompileOnly("curse.maven:simply-swords-659887:5639538")
         }
     }
 }

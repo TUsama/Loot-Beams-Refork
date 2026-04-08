@@ -1,3 +1,6 @@
+### V3.4.5
+fix a bug that the compass will be rendered incorrectly after it got enchant by Lodestone, this will affect all version below 1.21.10.
+
 ### V3.4.4
 add simple swords compat
 fix crash on java 17(1.20.1)

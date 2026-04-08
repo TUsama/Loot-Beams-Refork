@@ -70,12 +70,12 @@ public class LootBeamsFabricModClientEvent {
                 ,MalumCompatModule.INSTANCE
                 //? if simplesword
                 , SimpleSwordCompatModule.INSTANCE
-                //? if =1.21.4 {
-                /^,SubtleEffectCompatModule.INSTANCE
 
-                ^///?}
 
         );
+        //? if =1.21.4
+        ModulesManager.registerModules(SubtleEffectCompatModule.INSTANCE);
+
         ModulesManager.registerModules(IrisCompatModule.INSTANCE);
         ModulesManager.enableAll();
         ConfigHandlers.init();

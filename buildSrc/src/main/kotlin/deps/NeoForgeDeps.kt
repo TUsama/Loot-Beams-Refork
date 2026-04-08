@@ -40,8 +40,8 @@ object NeoForgeDeps {
                     //modstitchModRuntimeOnly ("curse.maven:monocle-1007288:6803201")
                     //modstitchModRuntimeOnly ("curse.maven:embeddium-908741:6118392")
                     modstitchModCompileOnly ("curse.maven:irisshaders-455508:6661598")
-                    modstitchModRuntimeOnly ("curse.maven:irisshaders-455508:6661598")
-                    modstitchModRuntimeOnly ("curse.maven:sodium-394468:6382651")
+                    //modstitchModRuntimeOnly ("curse.maven:irisshaders-455508:6661598")
+                    //modstitchModRuntimeOnly ("curse.maven:sodium-394468:6382651")
 
                     modstitchModCompileOnly ("curse.maven:simply-swords-659887:6958145")
                     modstitchModRuntimeOnly ("curse.maven:simply-swords-659887:6958145")

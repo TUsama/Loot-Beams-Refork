@@ -26,7 +26,7 @@ import java.util.List;
 public class NameTagRenderer {
     public static void renderNameTag(PoseStack stack, MultiBufferSource buffer, LBItemEntity LBItemEntity){
         PoseCopy last = (PoseCopy) ((Object) stack.last());
-        renderNameTag(buffer, LootBeamRenderState.NameTagRenderState.fromLBEntity(LBItemEntity, last.copy()));
+        renderNameTag(buffer, LootBeamRenderState.NameTagRenderState.fromLBEntity(LBItemEntity, last.loot_Beams_Refork$copy()));
     }
 
     public static void renderNameTag(MultiBufferSource buffer, LootBeamRenderState.NameTagRenderState renderState) {

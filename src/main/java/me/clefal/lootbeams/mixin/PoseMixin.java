@@ -11,14 +11,8 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class PoseMixin implements PoseCopy {
 
 
-    @Shadow
-    public abstract Matrix4f pose();
-
-    @Shadow
-    public abstract Matrix3f normal();
-
     @Override
-    public PoseStack.Pose copy() {
-        return PoseInvoker.createPose(this.pose(), this.normal());
+    public PoseStack.Pose loot_Beams_Refork$copy() {
+        return PoseInvoker.createPose(((PoseStack.Pose)((Object) this)));
     }
 }

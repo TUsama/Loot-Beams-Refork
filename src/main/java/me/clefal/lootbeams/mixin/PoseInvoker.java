@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface PoseInvoker {
 
     @Invoker("<init>")
-    static PoseStack.Pose createPose(Matrix4f pose, Matrix3f normal) {
+    static PoseStack.Pose createPose(PoseStack.Pose pose) {
         throw new RuntimeException();
     }
 }

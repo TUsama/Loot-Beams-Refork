@@ -1,5 +1,6 @@
 package me.clefal.lootbeams.modules.beam;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import me.clefal.lootbeams.CommonClass;
 import me.clefal.lootbeams.config.configs.LightConfig;
 import me.clefal.lootbeams.data.lbitementity.LBItemEntity;
@@ -20,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.lwjgl.opengl.GL11;
 
 import java.util.function.Function;
 
@@ -38,7 +40,7 @@ public class BeamRenderer {
     public void renderLootBeam(PoseStack stack, MultiBufferSource buffer, float partialTick, LBItemEntity LBItemEntity, boolean isShaderOn){
         PoseCopy last = (PoseCopy) ((Object) stack.last());
         this.isShaderOn = isShaderOn;
-        renderLootBeam(buffer, LootBeamRenderState.BeamRenderState.make(LBItemEntity, last.copy(), partialTick, isShaderOn));
+        renderLootBeam(buffer, LootBeamRenderState.BeamRenderState.make(LBItemEntity, last.loot_Beams_Refork$copy(), partialTick, isShaderOn));
     }
 
     public void renderLootBeam(MultiBufferSource buffer, LootBeamRenderState.BeamRenderState renderState) {
@@ -149,11 +151,11 @@ public class BeamRenderer {
 
 
 
-
             stack.popPose();
         }
 
         stack.popPose();
+
 
         {
 

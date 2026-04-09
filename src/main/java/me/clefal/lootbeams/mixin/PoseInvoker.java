@@ -8,9 +8,17 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(PoseStack.Pose.class)
 public interface PoseInvoker {
+    //? 1.20.1 {
+    /*@Invoker("<init>")
+    static PoseStack.Pose createPose(Matrix4f pose, Matrix3f normal) {
+        throw new RuntimeException();
+    }
 
+    *///? } else {
     @Invoker("<init>")
     static PoseStack.Pose createPose(PoseStack.Pose pose) {
         throw new RuntimeException();
     }
+    //?}
+
 }

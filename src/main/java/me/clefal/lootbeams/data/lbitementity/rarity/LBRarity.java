@@ -38,10 +38,10 @@ public record LBRarity(Component name, LBColor color, int absoluteOrdinal, Modif
     //? fabric {
     /*private static int grabColorWhenOnStupidFabric(Rarity rarity){
         //? 1.20.1 {
-        /^return rarity.color.getColor();
-        ^///?} else {
-        return rarity.color().getColor();
-        //?}
+        return rarity.color.getColor();
+        //?} else {
+        /^return rarity.color().getColor();
+        ^///?}
     }
     *///?}
 }

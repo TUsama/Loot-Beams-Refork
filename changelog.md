@@ -1,3 +1,6 @@
+### V3.4.6
+fix mixin crash on 1.20.1
+
 ### V3.4.5
 fix a bug that the compass will be rendered incorrectly after it got enchant by Lodestone, this will affect all version below 1.21.10.
 

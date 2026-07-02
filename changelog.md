@@ -1,3 +1,7 @@
+### V3.4.7
+(above 1.21.4) fix mixin crash in some versions
+(1.20.1 forge & 1.21.1 neoforge) add RarityCore Compat
+
 ### V3.4.6
 fix mixin crash on 1.20.1
 

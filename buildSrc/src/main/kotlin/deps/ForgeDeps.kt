@@ -65,6 +65,10 @@ object ForgeDeps {
             modstitchLegacyModImplementation("curse.maven:oculus-581495:6020952")
 
             modstitchModCompileOnly("curse.maven:simply-swords-659887:5639538")
+
+
+            modstitchModCompileOnly("maven.modrinth:raritycore:1201.13.7")
+            modstitchModRuntimeOnly("maven.modrinth:raritycore:1201.13.7")
         }
     }
 }

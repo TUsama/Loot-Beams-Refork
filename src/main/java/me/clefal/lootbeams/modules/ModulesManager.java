@@ -24,6 +24,8 @@ public class ModulesManager {
     }
 
     public static void registerModules(ILBModule... module) {
-        list.addAll(List.of(module));
+        for (ILBModule ilbModule : module) {
+            list.add(ilbModule);
+        }
     }
 }

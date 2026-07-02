@@ -7,6 +7,7 @@ import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.MineAndSlashCompat
 import me.clefal.lootbeams.compat.forge_1_20_1.mine_and_slash.OrbOfCraftingCompatModule;
 import me.clefal.lootbeams.compat.multiversion_compat.MalumCompatModule;
 import me.clefal.lootbeams.compat.multiversion_compat.IrisCompatModule;
+import me.clefal.lootbeams.compat.multiversion_compat.RarityCoreCompatModule;
 import me.clefal.lootbeams.compat.multiversion_compat.SimpleSwordCompatModule;
 import me.clefal.lootbeams.config.ConfigHandlers;
 import me.clefal.lootbeams.modules.ModulesManager;
@@ -17,7 +18,6 @@ import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 @Mod.EventBusSubscriber(modid = LootBeamsConstants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -46,6 +46,7 @@ public class LootBeamsForgeModClientEvent {
                 //,BiomancyCompatModule.INSTANCE
         );
         ModulesManager.registerModules(IrisCompatModule.INSTANCE);
+        ModulesManager.registerModules(RarityCoreCompatModule.INSTANCE);
         ModulesManager.enableAll();
         ConfigHandlers.init();
     }

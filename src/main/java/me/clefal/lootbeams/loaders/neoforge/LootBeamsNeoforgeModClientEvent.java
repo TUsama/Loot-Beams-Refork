@@ -2,6 +2,8 @@
 package me.clefal.lootbeams.loaders.neoforge;
 
 import me.clefal.lootbeams.LootBeamsConstants;
+//? (1.20.1 && forge) || (1.21.1 && neoforge)
+import me.clefal.lootbeams.compat.multiversion_compat.RarityCoreCompatModule;
 import me.clefal.lootbeams.compat.multiversion_compat.IrisCompatModule;
 //? if =1.21.1 {
 import me.clefal.lootbeams.compat.common_1_21_1.AccessoriesCompatModule;
@@ -27,9 +29,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-
-import java.io.IOException;
-import java.util.function.Consumer;
 
 @EventBusSubscriber(modid = LootBeamsConstants.MODID,
         //? < 1.21.8
@@ -68,6 +67,8 @@ public class LootBeamsNeoforgeModClientEvent {
                 *///?}
         );
         ModulesManager.registerModules(IrisCompatModule.INSTANCE);
+        //? 1.21.1
+        ModulesManager.registerModules(RarityCoreCompatModule.INSTANCE);
         ModulesManager.enableAll();
         ConfigHandlers.init();
     }

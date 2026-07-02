@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(PoseStack.Pose.class)
 public abstract class PoseMixin implements PoseCopy {
 
-
     //? 1.20.1 {
     /*@Shadow
     @Final
@@ -26,10 +25,20 @@ public abstract class PoseMixin implements PoseCopy {
         return PoseInvoker.createPose(this.pose, this.normal);
     }
     *///? } else {
+    //? < 1.21.8 {
     @Override
     public PoseStack.Pose loot_Beams_Refork$copy() {
         return PoseInvoker.createPose(((PoseStack.Pose)((Object) this)));
     }
+    //?} else {
+    
+    /*@Shadow
+    public abstract PoseStack.Pose copy();
+    public PoseStack.Pose loot_Beams_Refork$copy() {
+
+        return this.copy();
+    }
+    *///?}
     //?}
 
 }

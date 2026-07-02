@@ -15,10 +15,13 @@ public interface PoseInvoker {
     }
 
     *///? } else {
+    //? < 1.21.8 {
     @Invoker("<init>")
     static PoseStack.Pose createPose(PoseStack.Pose pose) {
         throw new RuntimeException();
     }
+    //?}
+
     //?}
 
 }
